@@ -1,13 +1,23 @@
 module.exports = {
   /* eslint-disable sort-keys */
   parser: '@typescript-eslint/parser',
-  plugins: ['prettier', '@typescript-eslint', 'import', 'sort-imports-es6-autofix'],
+  plugins: [
+    'prettier',
+    '@typescript-eslint',
+    'import',
+    'jest',
+    'jest-formatting',
+    'sort-imports-es6-autofix',
+  ],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:import/errors',
     'plugin:import/typescript',
+    'plugin:jest/recommended',
+    'plugin:jest/style',
+    'plugin:jest-formatting/strict',
   ],
   /* eslint-enable sort-keys */
   rules: {
@@ -35,6 +45,7 @@ module.exports = {
   /* eslint-disable sort-keys */
   env: {
     node: true,
+    jest: true,
     es6: true,
   },
 };
