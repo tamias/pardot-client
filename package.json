@@ -1,0 +1,25 @@
+{
+  "name": "pardot-client",
+  "version": "0.0.1",
+  "description": "A Pardot client for node",
+  "main": "lib/index",
+  "typings": "lib/index",
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tamias/pardot-client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tamias/pardot-client/issues"
+  },
+  "homepage": "https://github.com/tamias/pardot-client#readme",
+  "devDependencies": {
+    "typescript": "^4.1.5"
+  }
+}
