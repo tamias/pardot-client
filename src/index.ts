@@ -1,15 +1,17 @@
 import { AccessToken, AuthorizationCode } from 'simple-oauth2';
 import { AuthorizeUrlProps, PardotProps, RawAccessToken } from './types';
+import axios, { AxiosInstance } from 'axios';
 
 export default class Pardot {
   clientId: string;
   clientSecret: string;
   redirectUri: string;
-  token: AccessToken;
+  token?: AccessToken;
   businessUnitId: string;
   baseUrl: string;
   apiVersion: number;
   oauthClient: AuthorizationCode;
+  axiosInstance?: AxiosInstance;
 
   public constructor({
     clientId,
@@ -52,5 +54,29 @@ export default class Pardot {
     // simple-oauth2 defines AccessToken['token'] as { [x: string]: any; }
     // assume that Pardot will return a response containing the expected fields
     return this.token.token as RawAccessToken;
+  }
+
+  public get axios(): AxiosInstance {
+    if (!this.axiosInstance) {
+      if (!this.token) {
+        throw new Error('Cannot instantiate axios without token');
+      }
+
+      this.axiosInstance = axios.create();
+      this.axiosInstance.interceptors.request.use((config) => ({
+        ...config,
+        headers: {
+          Authorization: `Bearer ${this.token.token.access_token}`,
+          'Pardot-Business-Unit-Id': this.businessUnitId,
+          ...config.headers,
+        },
+        params: {
+          format: 'json',
+          ...config.params,
+        },
+      }));
+    }
+
+    return this.axiosInstance;
   }
 }

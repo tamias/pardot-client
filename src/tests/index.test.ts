@@ -1,11 +1,27 @@
 import { AuthorizationCode } from 'simple-oauth2';
+import { RawAccessToken } from '../types';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import Pardot from '..';
+
+const mockAxios = new MockAdapter(axios);
+const axiosCreateSpy = jest.spyOn(axios, 'create');
 
 describe('Pardot', () => {
   const clientId = 'clientId';
   const clientSecret = 'clientSecret';
   const redirectUri = 'https://www.example.com/oauth/callback';
   const businessUnitId = 'businessUnitId';
+
+  const rawToken: RawAccessToken = {
+    access_token: 'access_token',
+    refresh_token: 'refresh_token',
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockAxios.reset();
+  });
 
   describe('constructor', () => {
     it('should set baseUrl to provided value', () => {
@@ -67,7 +83,7 @@ describe('Pardot', () => {
       });
 
       expect(pardot.oauthClient).toBeInstanceOf(AuthorizationCode);
-      expect(pardot.token).not.toBeDefined();
+      expect(pardot.token).toBeUndefined();
     });
 
     it('should instantiate an AccessToken if token is present', () => {
@@ -118,28 +134,108 @@ describe('Pardot', () => {
       redirectUri,
     });
 
-    const mockTokenResponse = {
-      access_token: 'access_token',
-      refresh_token: 'refresh_token',
-    };
-
     const getTokenSpy = jest
       .spyOn(pardot.oauthClient, 'getToken')
-      .mockResolvedValue(pardot.oauthClient.createToken(mockTokenResponse));
+      .mockResolvedValue(pardot.oauthClient.createToken(rawToken));
 
     it('should get an access token', async () => {
       const code = 'code';
 
-      const rawToken = await pardot.getAccessToken(code);
+      const returnedToken = await pardot.getAccessToken(code);
 
       expect(getTokenSpy).toHaveBeenCalledWith({
         code,
         redirect_uri: redirectUri,
       });
 
-      expect(rawToken).toEqual(mockTokenResponse);
+      expect(returnedToken).toEqual(rawToken);
 
-      expect(pardot.token).toMatchObject({ token: mockTokenResponse });
+      expect(pardot.token).toMatchObject({ token: rawToken });
+    });
+  });
+
+  describe('axios getter', () => {
+    it('should create an axios instance', () => {
+      const pardot = new Pardot({
+        businessUnitId,
+        clientId,
+        clientSecret,
+        redirectUri,
+        token: rawToken,
+      });
+
+      expect(pardot.axiosInstance).toBeUndefined();
+
+      const axiosInstance = pardot.axios;
+
+      expect(axiosCreateSpy).toHaveBeenCalled();
+      expect(axiosInstance).toBeDefined();
+      expect(pardot.axiosInstance).toBe(axiosInstance);
+    });
+
+    it('should return a previously-created axios instance', () => {
+      const pardot = new Pardot({
+        businessUnitId,
+        clientId,
+        clientSecret,
+        redirectUri,
+        token: rawToken,
+      });
+
+      expect(pardot.axiosInstance).toBeUndefined();
+
+      const axiosInstance = pardot.axios;
+      const axiosInstance2 = pardot.axios;
+
+      expect(axiosCreateSpy).toHaveBeenCalledTimes(1);
+      expect(axiosInstance2).toBe(axiosInstance);
+    });
+
+    it('should throw an error if token is not present', () => {
+      const pardot = new Pardot({
+        businessUnitId,
+        clientId,
+        clientSecret,
+        redirectUri,
+      });
+
+      expect(() => {
+        pardot.axios;
+      }).toThrow('Cannot instantiate axios without token');
+
+      expect(axiosCreateSpy).not.toHaveBeenCalled();
+    });
+
+    it('should use a request interceptor that sets headers and params', async () => {
+      const pardot = new Pardot({
+        businessUnitId,
+        clientId,
+        clientSecret,
+        redirectUri,
+        token: rawToken,
+      });
+
+      mockAxios.onGet().reply(200);
+
+      const headers = { 'X-Test-Header': 1 };
+      const params = { test: 'value' };
+
+      const response = await pardot.axios.get('http://example.com', {
+        headers,
+        params,
+      });
+
+      expect(response.config).toMatchObject({
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${rawToken.access_token}`,
+          'Pardot-Business-Unit-Id': businessUnitId,
+        },
+        params: {
+          ...params,
+          format: 'json',
+        },
+      });
     });
   });
 });
