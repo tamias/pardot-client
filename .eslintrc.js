@@ -43,6 +43,7 @@ module.exports = {
     yoda: 'error',
   },
   /* eslint-disable sort-keys */
+  ignorePatterns: ['/lib'],
   env: {
     node: true,
     jest: true,

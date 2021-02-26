@@ -20,7 +20,11 @@
     "url": "https://github.com/tamias/pardot-client/issues"
   },
   "homepage": "https://github.com/tamias/pardot-client#readme",
+  "dependencies": {
+    "simple-oauth2": "^4.2.0"
+  },
   "devDependencies": {
+    "@types/simple-oauth2": "^4.1.0",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "eslint": "^7.20.0",
