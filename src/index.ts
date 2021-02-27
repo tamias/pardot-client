@@ -1,6 +1,7 @@
 import { AccessToken, AuthorizationCode } from 'simple-oauth2';
 import { AuthorizeUrlProps, PardotProps, RawAccessToken } from './types';
 import { stringify } from 'qs';
+import Accounts from './lib/accounts';
 import axios, { AxiosInstance } from 'axios';
 import Campaigns from './lib/campaigns';
 
@@ -15,6 +16,7 @@ export default class PardotClient {
   oauthClient: AuthorizationCode;
   axiosInstance?: AxiosInstance;
 
+  accounts: Accounts;
   campaigns: Campaigns;
 
   public constructor({
@@ -50,6 +52,7 @@ export default class PardotClient {
       this.token = this.oauthClient.createToken(token);
     }
 
+    this.accounts = new Accounts(this);
     this.campaigns = new Campaigns(this);
   }
 

@@ -1,5 +1,5 @@
 import { BaseSearchParameters, CampaignQueryResponse, CampaignResponse, CreateCampaign, SortOrder, UpdateCampaign } from '../types';
-import PardotClient from '..';
+import ObjectsBase from './objects-base';
 interface CampaignSearchParameters extends BaseSearchParameters {
     name?: string;
 }
@@ -11,10 +11,8 @@ interface ResultParameters {
     sort_by?: SortBy;
     sort_order?: SortOrder;
 }
-export default class Campaigns {
-    protected objectName: string;
-    protected parent: PardotClient;
-    constructor(parent: PardotClient);
+export default class Campaigns extends ObjectsBase {
+    objectName: string;
     query(params?: CampaignSearchParameters & ResultParameters): Promise<CampaignQueryResponse>;
     read(id: number): Promise<CampaignResponse>;
     update(id: number, update: UpdateCampaign): Promise<CampaignResponse>;

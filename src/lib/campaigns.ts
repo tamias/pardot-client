@@ -6,7 +6,7 @@ import {
   SortOrder,
   UpdateCampaign,
 } from '../types';
-import PardotClient from '..';
+import ObjectsBase from './objects-base';
 
 interface CampaignSearchParameters extends BaseSearchParameters {
   name?: string;
@@ -22,20 +22,15 @@ interface ResultParameters {
   sort_order?: SortOrder;
 }
 
-export default class Campaigns {
-  protected objectName = 'campaign';
-  protected parent: PardotClient;
-
-  constructor(parent: PardotClient) {
-    this.parent = parent;
-  }
+export default class Campaigns extends ObjectsBase {
+  objectName = 'campaign';
 
   public async query(
     params?: CampaignSearchParameters & ResultParameters,
   ): Promise<CampaignQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 
-    const response = await this.parent.axios.get(url, { params });
+    const response = await this.parent.axios.get<CampaignQueryResponse>(url, { params });
 
     return response.data;
   }
@@ -43,7 +38,7 @@ export default class Campaigns {
   public async read(id: number): Promise<CampaignResponse> {
     const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
 
-    const response = await this.parent.axios.get(url);
+    const response = await this.parent.axios.get<CampaignResponse>(url);
 
     return response.data;
   }
@@ -51,7 +46,7 @@ export default class Campaigns {
   public async update(id: number, update: UpdateCampaign): Promise<CampaignResponse> {
     const url = this.parent.getApiUrl(this.objectName, `update/id/${id}`);
 
-    const response = await this.parent.axios.post(url, update);
+    const response = await this.parent.axios.post<CampaignResponse>(url, update);
 
     return response.data;
   }
@@ -59,7 +54,7 @@ export default class Campaigns {
   public async create(data: CreateCampaign): Promise<CampaignResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'create');
 
-    const response = await this.parent.axios.post(url, data);
+    const response = await this.parent.axios.post<CampaignResponse>(url, data);
 
     return response.data;
   }

@@ -1,5 +1,6 @@
 import { AccessToken, AuthorizationCode } from 'simple-oauth2';
 import { AuthorizeUrlProps, PardotProps, RawAccessToken } from './types';
+import Accounts from './lib/accounts';
 import { AxiosInstance } from 'axios';
 import Campaigns from './lib/campaigns';
 export default class PardotClient {
@@ -12,6 +13,7 @@ export default class PardotClient {
     apiVersion: number;
     oauthClient: AuthorizationCode;
     axiosInstance?: AxiosInstance;
+    accounts: Accounts;
     campaigns: Campaigns;
     constructor({ clientId, clientSecret, redirectUri, token, businessUnitId, baseUrl, apiVersion, }: PardotProps);
     authorizeUrl(props?: AuthorizeUrlProps): string;

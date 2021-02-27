@@ -1,26 +1,11 @@
 import { CampaignQueryResponse, CampaignResponse } from '../../types';
 import { mockAxios, onGetSpy, onPostSpy, pardot, responseAttributes } from './lib/setup';
 import Campaigns from '../campaigns';
-import PardotClient from '../../index';
-
-class CampaignsWrapper extends Campaigns {
-  public get parentWrapper(): PardotClient {
-    return this.parent;
-  }
-}
 
 describe('Campaigns', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockAxios.reset();
-  });
-
-  describe('constructor', () => {
-    it('should set parent', () => {
-      const campaigns = new CampaignsWrapper(pardot);
-
-      expect(campaigns.parentWrapper).toBe(pardot);
-    });
   });
 
   describe('query', () => {
