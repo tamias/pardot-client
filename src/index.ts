@@ -1,8 +1,10 @@
 import { AccessToken, AuthorizationCode } from 'simple-oauth2';
 import { AuthorizeUrlProps, PardotProps, RawAccessToken } from './types';
+import { stringify } from 'qs';
 import axios, { AxiosInstance } from 'axios';
+import Campaigns from './lib/campaigns';
 
-export default class Pardot {
+export default class PardotClient {
   clientId: string;
   clientSecret: string;
   redirectUri: string;
@@ -12,6 +14,8 @@ export default class Pardot {
   apiVersion: number;
   oauthClient: AuthorizationCode;
   axiosInstance?: AxiosInstance;
+
+  campaigns: Campaigns;
 
   public constructor({
     clientId,
@@ -43,6 +47,8 @@ export default class Pardot {
     if (token) {
       this.token = this.oauthClient.createToken(token);
     }
+
+    this.campaigns = new Campaigns(this);
   }
 
   public authorizeUrl(props?: AuthorizeUrlProps): string {
@@ -63,20 +69,32 @@ export default class Pardot {
       }
 
       this.axiosInstance = axios.create();
-      this.axiosInstance.interceptors.request.use((config) => ({
-        ...config,
-        headers: {
-          Authorization: `Bearer ${this.token.token.access_token}`,
-          'Pardot-Business-Unit-Id': this.businessUnitId,
-          ...config.headers,
-        },
-        params: {
-          format: 'json',
-          ...config.params,
-        },
-      }));
+      this.axiosInstance.interceptors.request.use((config) => {
+        let { data } = config;
+
+        if (data && typeof data === 'object') {
+          data = stringify(data);
+        }
+        return {
+          ...config,
+          data,
+          headers: {
+            Authorization: `Bearer ${this.token.token.access_token}`,
+            'Pardot-Business-Unit-Id': this.businessUnitId,
+            ...config.headers,
+          },
+          params: {
+            format: 'json',
+            ...config.params,
+          },
+        };
+      });
     }
 
     return this.axiosInstance;
+  }
+
+  public getApiUrl(object: string, path: string): string {
+    return `${this.baseUrl}/api/${object}/version/${this.apiVersion}/do/${path}`;
   }
 }

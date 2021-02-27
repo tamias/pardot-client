@@ -13,6 +13,13 @@ describe('Pardot', () => {
   const redirectUri = 'https://www.example.com/oauth/callback';
   const businessUnitId = 'businessUnitId';
 
+  const basePardotProps = {
+    businessUnitId,
+    clientId,
+    clientSecret,
+    redirectUri,
+  };
+
   const rawToken: RawAccessToken = {
     access_token: 'access_token',
     refresh_token: 'refresh_token',
@@ -27,35 +34,19 @@ describe('Pardot', () => {
     it('should set baseUrl to provided value', () => {
       const baseUrl = 'https://pi.demo.pardot.com';
 
-      const pardot = new Pardot({
-        baseUrl,
-        businessUnitId,
-        clientId,
-        clientSecret,
-        redirectUri,
-      });
+      const pardot = new Pardot({ ...basePardotProps, baseUrl });
 
       expect(pardot.baseUrl).toEqual(baseUrl);
     });
 
     it('should set baseUrl to default if not provided', () => {
-      const pardot = new Pardot({
-        businessUnitId,
-        clientId,
-        clientSecret,
-        redirectUri,
-      });
+      const pardot = new Pardot(basePardotProps);
 
       expect(pardot.baseUrl).toEqual('https://pi.pardot.com');
     });
 
     it('should set apiVersion to default of 4 if not provided', () => {
-      const pardot = new Pardot({
-        businessUnitId,
-        clientId,
-        clientSecret,
-        redirectUri,
-      });
+      const pardot = new Pardot(basePardotProps);
 
       expect(pardot.apiVersion).toEqual(4);
     });
@@ -63,24 +54,13 @@ describe('Pardot', () => {
     it('should set apiVersion to provided value', () => {
       const apiVersion = 3;
 
-      const pardot = new Pardot({
-        apiVersion,
-        businessUnitId,
-        clientId,
-        clientSecret,
-        redirectUri,
-      });
+      const pardot = new Pardot({ ...basePardotProps, apiVersion });
 
       expect(pardot.apiVersion).toEqual(apiVersion);
     });
 
     it('should instantiate an AuthorizationCode client', () => {
-      const pardot = new Pardot({
-        businessUnitId,
-        clientId,
-        clientSecret,
-        redirectUri,
-      });
+      const pardot = new Pardot(basePardotProps);
 
       expect(pardot.oauthClient).toBeInstanceOf(AuthorizationCode);
       expect(pardot.token).toBeUndefined();
@@ -92,13 +72,7 @@ describe('Pardot', () => {
         refresh_token: 'refresh_token',
       };
 
-      const pardot = new Pardot({
-        businessUnitId,
-        clientId,
-        clientSecret,
-        redirectUri,
-        token,
-      });
+      const pardot = new Pardot({ ...basePardotProps, token });
 
       expect(pardot.oauthClient).toBeInstanceOf(AuthorizationCode);
       expect(pardot.token).toMatchObject({ token });
@@ -106,12 +80,7 @@ describe('Pardot', () => {
   });
 
   describe('authorizeUrl', () => {
-    const pardot = new Pardot({
-      businessUnitId,
-      clientId,
-      clientSecret,
-      redirectUri,
-    });
+    const pardot = new Pardot(basePardotProps);
 
     it('should return an authorize url', () => {
       const scope = 'scope';
@@ -127,12 +96,7 @@ describe('Pardot', () => {
   });
 
   describe('getAccessToken', () => {
-    const pardot = new Pardot({
-      businessUnitId,
-      clientId,
-      clientSecret,
-      redirectUri,
-    });
+    const pardot = new Pardot(basePardotProps);
 
     const getTokenSpy = jest
       .spyOn(pardot.oauthClient, 'getToken')
@@ -156,13 +120,7 @@ describe('Pardot', () => {
 
   describe('axios getter', () => {
     it('should create an axios instance', () => {
-      const pardot = new Pardot({
-        businessUnitId,
-        clientId,
-        clientSecret,
-        redirectUri,
-        token: rawToken,
-      });
+      const pardot = new Pardot({ ...basePardotProps, token: rawToken });
 
       expect(pardot.axiosInstance).toBeUndefined();
 
@@ -174,13 +132,7 @@ describe('Pardot', () => {
     });
 
     it('should return a previously-created axios instance', () => {
-      const pardot = new Pardot({
-        businessUnitId,
-        clientId,
-        clientSecret,
-        redirectUri,
-        token: rawToken,
-      });
+      const pardot = new Pardot({ ...basePardotProps, token: rawToken });
 
       expect(pardot.axiosInstance).toBeUndefined();
 
@@ -192,12 +144,7 @@ describe('Pardot', () => {
     });
 
     it('should throw an error if token is not present', () => {
-      const pardot = new Pardot({
-        businessUnitId,
-        clientId,
-        clientSecret,
-        redirectUri,
-      });
+      const pardot = new Pardot(basePardotProps);
 
       expect(() => {
         pardot.axios;
@@ -206,36 +153,60 @@ describe('Pardot', () => {
       expect(axiosCreateSpy).not.toHaveBeenCalled();
     });
 
-    it('should use a request interceptor that sets headers and params', async () => {
-      const pardot = new Pardot({
-        businessUnitId,
-        clientId,
-        clientSecret,
-        redirectUri,
-        token: rawToken,
+    describe('request interceptor', () => {
+      const pardot = new Pardot({ ...basePardotProps, token: rawToken });
+
+      it('should set headers and params', async () => {
+        mockAxios.onGet().reply(200);
+
+        const headers = { 'X-Test-Header': 1 };
+        const params = { test: 'value' };
+
+        const response = await pardot.axios.get('http://example.com', {
+          headers,
+          params,
+        });
+
+        expect(response.config).toMatchObject({
+          headers: {
+            ...headers,
+            Authorization: `Bearer ${rawToken.access_token}`,
+            'Pardot-Business-Unit-Id': businessUnitId,
+          },
+          params: {
+            ...params,
+            format: 'json',
+          },
+        });
       });
 
-      mockAxios.onGet().reply(200);
+      it('should stringify data', async () => {
+        mockAxios.onPost().reply(200);
 
-      const headers = { 'X-Test-Header': 1 };
-      const params = { test: 'value' };
+        const response = await pardot.axios.post('http://example.com', {
+          test1: 'value1',
+          test2: 'value2',
+        });
 
-      const response = await pardot.axios.get('http://example.com', {
-        headers,
-        params,
+        expect(response.config).toMatchObject({
+          data: 'test1=value1&test2=value2',
+        });
       });
+    });
+  });
 
-      expect(response.config).toMatchObject({
-        headers: {
-          ...headers,
-          Authorization: `Bearer ${rawToken.access_token}`,
-          'Pardot-Business-Unit-Id': businessUnitId,
-        },
-        params: {
-          ...params,
-          format: 'json',
-        },
-      });
+  describe('getApiUrl', () => {
+    it('should return an API url', () => {
+      const pardot = new Pardot(basePardotProps);
+
+      const object = 'campaign';
+      const path = 'query';
+
+      const url = pardot.getApiUrl(object, path);
+
+      expect(url).toEqual(
+        `${pardot.baseUrl}/api/${object}/version/${pardot.apiVersion}/do/${path}`,
+      );
     });
   });
 });

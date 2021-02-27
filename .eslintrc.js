@@ -29,7 +29,7 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['**/*.@(test|spec).@(js|ts)'],
+        devDependencies: ['**/*.@(test|spec).@(js|ts)', '**/tests/lib/**/*.@(js|ts)'],
       },
     ],
     'import/no-named-as-default-member': 'error',
