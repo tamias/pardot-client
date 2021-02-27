@@ -88,7 +88,7 @@ describe('Pardot', () => {
       const url = pardot.authorizeUrl({ scope, state });
 
       expect(url).toEqual(
-        'https://login.salesforce.com/oauth/authorize' +
+        'https://login.salesforce.com/services/oauth2/authorize' +
           `?response_type=code&client_id=${clientId}&scope=${scope}&state=${state}` +
           `&redirect_uri=${encodeURIComponent(redirectUri)}`,
       );

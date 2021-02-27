@@ -36,7 +36,9 @@ export default class PardotClient {
 
     this.oauthClient = new AuthorizationCode({
       auth: {
-        tokenHost: 'https://login.salesforce.com/services/',
+        authorizePath: '/services/oauth2/authorize',
+        tokenHost: 'https://login.salesforce.com',
+        tokenPath: '/services/oauth2/token',
       },
       client: {
         id: this.clientId,
