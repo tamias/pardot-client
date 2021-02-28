@@ -17,16 +17,20 @@ export interface AuthorizeUrlProps {
     scope?: string | string[];
 }
 declare type GnuDateString = string;
-declare type DateString = 'today' | 'yesterday' | 'last_7_days' | 'this_month' | 'last_month' | GnuDateString;
+export declare type DateString = 'today' | 'yesterday' | 'last_7_days' | 'this_month' | 'last_month' | GnuDateString;
 export interface BaseSearchParameters {
     created_after?: DateString;
     created_before?: DateString;
     id_greater_than?: number;
     id_less_than?: number;
-    updated_before?: DateString;
-    updated_after?: DateString;
 }
 export declare type SortOrder = 'ascending' | 'descending';
+export interface BaseResultParameters {
+    format?: 'json' | 'xml';
+    limit?: number;
+    offset?: number;
+    sort_order?: SortOrder;
+}
 export interface Account {
     id: number;
     company: string;
@@ -52,6 +56,19 @@ export interface Campaign {
     name: string;
     cost: number | null;
 }
+export interface CustomField {
+    id: number;
+    name: string | null;
+    field_id: string | null;
+    type: string | null;
+    type_id: number | null;
+    created_at: string;
+    updated_at: string;
+    is_record_multiple_responses: boolean;
+    crm_id: string | null;
+    is_use_values: boolean;
+    is_analytics_synced: boolean;
+}
 declare type Update<T> = Partial<Omit<T, 'id'>>;
 export declare type UpdateCampaign = Update<Campaign>;
 export declare type CreateCampaign = UpdateCampaign & Pick<Campaign, 'name'>;
@@ -74,4 +91,14 @@ export interface CampaignQueryResponse extends ResponseBase {
 export interface CampaignResponse extends ResponseBase {
     campaign: Campaign;
 }
+export interface CustomFieldQueryResponse extends ResponseBase {
+    result: {
+        total_results: number;
+        customField: CustomField | CustomField[];
+    };
+}
+export interface CustomFieldResponse extends ResponseBase {
+    customField: CustomField;
+}
+export declare type UpdateCustomField = Update<CustomField>;
 export {};

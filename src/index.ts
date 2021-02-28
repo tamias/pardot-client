@@ -4,6 +4,7 @@ import { stringify } from 'qs';
 import Accounts from './lib/accounts';
 import axios, { AxiosInstance } from 'axios';
 import Campaigns from './lib/campaigns';
+import CustomFields from './lib/custom-fields';
 
 export default class PardotClient {
   clientId: string;
@@ -18,6 +19,7 @@ export default class PardotClient {
 
   accounts: Accounts;
   campaigns: Campaigns;
+  customFields: CustomFields;
 
   public constructor({
     clientId,
@@ -54,6 +56,7 @@ export default class PardotClient {
 
     this.accounts = new Accounts(this);
     this.campaigns = new Campaigns(this);
+    this.customFields = new CustomFields(this);
   }
 
   public authorizeUrl(props?: AuthorizeUrlProps): string {
@@ -78,7 +81,18 @@ export default class PardotClient {
         let { data } = config;
 
         if (data && typeof data === 'object') {
-          data = stringify(data);
+          // When sending data to Pardot API, false is stored as true,
+          // presumably because it's treating the value as a string rather than a boolean
+          // As a workaround, pass booleans as 1 or 0 instead
+          const convertedData = Object.entries(data).reduce(
+            (acc, [key, value]) => ({
+              ...acc,
+              [key]: typeof value === 'boolean' ? +value : value,
+            }),
+            {},
+          );
+
+          data = stringify(convertedData);
         }
         return {
           ...config,

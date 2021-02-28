@@ -8,9 +8,9 @@ describe('Campaigns', () => {
     mockAxios.reset();
   });
 
-  describe('query', () => {
-    const campaigns = new Campaigns(pardot);
+  const campaigns = new Campaigns(pardot);
 
+  describe('query', () => {
     it('should make a get request to query campaigns', async () => {
       const mockResponse: CampaignQueryResponse = {
         ...responseAttributes,
@@ -50,8 +50,6 @@ describe('Campaigns', () => {
   });
 
   describe('read', () => {
-    const campaigns = new Campaigns(pardot);
-
     it('should make a get request to read a campaign', async () => {
       const id = 1;
 
@@ -77,8 +75,6 @@ describe('Campaigns', () => {
   });
 
   describe('update', () => {
-    const campaigns = new Campaigns(pardot);
-
     it('should make a post request to update a campaign', async () => {
       const id = 1;
       const params = {
@@ -108,8 +104,6 @@ describe('Campaigns', () => {
   });
 
   describe('create', () => {
-    const campaigns = new Campaigns(pardot);
-
     it('should make a post request to create a campaign', async () => {
       const params = {
         cost: null,

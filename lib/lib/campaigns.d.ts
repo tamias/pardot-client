@@ -1,15 +1,12 @@
-import { BaseSearchParameters, CampaignQueryResponse, CampaignResponse, CreateCampaign, SortOrder, UpdateCampaign } from '../types';
+import { BaseResultParameters, BaseSearchParameters, CampaignQueryResponse, CampaignResponse, CreateCampaign, DateString, UpdateCampaign } from '../types';
 import ObjectsBase from './objects-base';
 interface CampaignSearchParameters extends BaseSearchParameters {
     name?: string;
+    updated_before?: DateString;
+    updated_after?: DateString;
 }
-declare type SortBy = 'created_at' | 'id' | 'name' | 'updated_at' | 'cost';
-interface ResultParameters {
-    format?: 'json' | 'xml';
-    limit?: number;
-    offset?: number;
-    sort_by?: SortBy;
-    sort_order?: SortOrder;
+interface ResultParameters extends BaseResultParameters {
+    sort_by?: 'created_at' | 'id' | 'name' | 'updated_at' | 'cost';
 }
 export default class Campaigns extends ObjectsBase {
     objectName: string;

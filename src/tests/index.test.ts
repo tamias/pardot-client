@@ -192,6 +192,19 @@ describe('Pardot', () => {
           data: 'test1=value1&test2=value2',
         });
       });
+
+      it('should convert booleans in data to numbers', async () => {
+        mockAxios.onPost().reply(200);
+
+        const response = await pardot.axios.post('http://example.com', {
+          testFalse: false,
+          testTrue: true,
+        });
+
+        expect(response.config).toMatchObject({
+          data: 'testFalse=0&testTrue=1',
+        });
+      });
     });
   });
 

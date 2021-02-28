@@ -20,7 +20,7 @@ export interface AuthorizeUrlProps {
 }
 
 type GnuDateString = string; // http://www.gnu.org/software/tar/manual/html_node/Date-input-formats.html
-type DateString =
+export type DateString =
   | 'today'
   | 'yesterday'
   | 'last_7_days'
@@ -33,11 +33,17 @@ export interface BaseSearchParameters {
   created_before?: DateString;
   id_greater_than?: number;
   id_less_than?: number;
-  updated_before?: DateString;
-  updated_after?: DateString;
 }
 
 export type SortOrder = 'ascending' | 'descending';
+
+export interface BaseResultParameters {
+  format?: 'json' | 'xml';
+  limit?: number;
+  offset?: number;
+  sort_order?: SortOrder;
+  // sort_by values vary by object
+}
 
 // TODO: which of these can be null?
 export interface Account {
@@ -65,6 +71,20 @@ export interface Campaign {
   id: number;
   name: string;
   cost: number | null;
+}
+
+export interface CustomField {
+  id: number;
+  name: string | null;
+  field_id: string | null;
+  type: string | null;
+  type_id: number | null;
+  created_at: string;
+  updated_at: string;
+  is_record_multiple_responses: boolean;
+  crm_id: string | null;
+  is_use_values: boolean;
+  is_analytics_synced: boolean;
 }
 
 type Update<T> = Partial<Omit<T, 'id'>>;
@@ -96,3 +116,19 @@ export interface CampaignQueryResponse extends ResponseBase {
 export interface CampaignResponse extends ResponseBase {
   campaign: Campaign;
 }
+
+export interface CustomFieldQueryResponse extends ResponseBase {
+  result: {
+    total_results: number;
+    customField: CustomField | CustomField[];
+  };
+}
+
+export interface CustomFieldResponse extends ResponseBase {
+  customField: CustomField;
+}
+
+export type UpdateCustomField = Update<CustomField>;
+
+// TODO: determine which custom field properties are required
+// export type CreateCustomField = UpdateCustomField & Pick<CustomField, 'name' | 'field_id'>;

@@ -8,9 +8,9 @@ describe('Accounts', () => {
     mockAxios.reset();
   });
 
-  describe('read', () => {
-    const accounts = new Accounts(pardot);
+  const accounts = new Accounts(pardot);
 
+  describe('read', () => {
     it('should make a get request to read account', async () => {
       const mockResponse: AccountResponse = {
         ...responseAttributes,
