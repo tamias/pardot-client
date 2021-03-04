@@ -1,6 +1,5 @@
-import { CampaignQueryResponse, CampaignResponse } from '../../types';
 import { mockAxios, onGetSpy, onPostSpy, pardot, responseAttributes } from './lib/setup';
-import Campaigns from '../campaigns';
+import Campaigns, { CampaignQueryResponse, CampaignResponse } from '../campaigns';
 
 describe('Campaigns', () => {
   beforeEach(() => {

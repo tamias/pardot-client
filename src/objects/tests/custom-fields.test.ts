@@ -1,6 +1,5 @@
-import { CustomFieldQueryResponse, CustomFieldResponse } from '../../types';
 import { mockAxios, onGetSpy, onPostSpy, pardot, responseAttributes } from './lib/setup';
-import CustomFields from '../custom-fields';
+import CustomFields, { CustomFieldQueryResponse, CustomFieldResponse } from '../custom-fields';
 
 describe('CustomFields', () => {
   beforeEach(() => {

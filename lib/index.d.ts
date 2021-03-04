@@ -1,9 +1,9 @@
 import { AccessToken, AuthorizationCode } from 'simple-oauth2';
 import { AuthorizeUrlProps, PardotProps, RawAccessToken } from './types';
-import Accounts from './lib/accounts';
+import Accounts from './objects/accounts';
 import { AxiosInstance } from 'axios';
-import Campaigns from './lib/campaigns';
-import CustomFields from './lib/custom-fields';
+import Campaigns from './objects/campaigns';
+import CustomFields from './objects/custom-fields';
 export default class PardotClient {
     clientId: string;
     clientSecret: string;

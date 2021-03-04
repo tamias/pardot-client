@@ -1,13 +1,11 @@
 import {
   BaseResultParameters,
   BaseSearchParameters,
-  CampaignQueryResponse,
-  CampaignResponse,
-  CreateCampaign,
   DateString,
-  UpdateCampaign,
-} from '../types';
-import ObjectsBase from './objects-base';
+  ResponseBase,
+  Update,
+} from './types';
+import ObjectsBase from './base';
 
 interface CampaignSearchParameters extends BaseSearchParameters {
   name?: string;
@@ -17,6 +15,26 @@ interface CampaignSearchParameters extends BaseSearchParameters {
 
 interface ResultParameters extends BaseResultParameters {
   sort_by?: 'created_at' | 'id' | 'name' | 'updated_at' | 'cost';
+}
+
+export interface Campaign {
+  id: number;
+  name: string;
+  cost: number | null;
+}
+
+export type UpdateCampaign = Update<Campaign>;
+export type CreateCampaign = UpdateCampaign & Pick<Campaign, 'name'>;
+
+export interface CampaignQueryResponse extends ResponseBase {
+  result: {
+    total_results: number;
+    campaign: Campaign | Campaign[];
+  };
+}
+
+export interface CampaignResponse extends ResponseBase {
+  campaign: Campaign;
 }
 
 export default class Campaigns extends ObjectsBase {

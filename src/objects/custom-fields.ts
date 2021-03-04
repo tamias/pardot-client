@@ -1,12 +1,5 @@
-import {
-  BaseResultParameters,
-  BaseSearchParameters,
-  // CreateCustomField,
-  CustomFieldQueryResponse,
-  CustomFieldResponse,
-  UpdateCustomField,
-} from '../types';
-import ObjectsBase from './objects-base';
+import { BaseResultParameters, BaseSearchParameters, ResponseBase, Update } from './types';
+import ObjectsBase from './base';
 
 type CustomFieldSearchParameters = BaseSearchParameters;
 
@@ -14,6 +7,35 @@ interface ResultParameters extends BaseResultParameters {
   sort_by?: 'created_at' | 'id' | 'name';
 }
 
+export interface CustomField {
+  id: number;
+  name: string | null;
+  field_id: string | null;
+  type: string | null;
+  type_id: number | null;
+  created_at: string;
+  updated_at: string;
+  is_record_multiple_responses: boolean;
+  crm_id: string | null;
+  is_use_values: boolean;
+  is_analytics_synced: boolean;
+}
+
+export interface CustomFieldQueryResponse extends ResponseBase {
+  result: {
+    total_results: number;
+    customField: CustomField | CustomField[];
+  };
+}
+
+export interface CustomFieldResponse extends ResponseBase {
+  customField: CustomField;
+}
+
+// TODO: determine which custom field properties are required
+// export type CreateCustomField = UpdateCustomField & Pick<CustomField, 'name' | 'field_id'>;
+
+export type UpdateCustomField = Update<CustomField>;
 export default class CustomFields extends ObjectsBase {
   objectName = 'customField';
 

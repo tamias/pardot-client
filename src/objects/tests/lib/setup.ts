@@ -1,4 +1,5 @@
-import { RawAccessToken, ResponseBase } from '../../../types';
+import { RawAccessToken } from '../../../types';
+import { ResponseBase } from '../../types';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import PardotClient from '../../..';

@@ -1,5 +1,5 @@
 import { pardot } from './lib/setup';
-import ObjectsBase from '../objects-base';
+import ObjectsBase from '../base';
 import PardotClient from '../../index';
 
 class Objects extends ObjectsBase {

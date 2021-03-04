@@ -1,6 +1,5 @@
-import { Account, AccountResponse } from '../../types';
 import { mockAxios, onGetSpy, pardot, responseAttributes } from './lib/setup';
-import Accounts from '../accounts';
+import Accounts, { Account, AccountResponse } from '../accounts';
 
 describe('Accounts', () => {
   beforeEach(() => {
