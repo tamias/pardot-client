@@ -5,6 +5,7 @@ import axios from 'axios';
 import Campaigns from '../objects/campaigns';
 import CustomFields from '../objects/custom-fields';
 import CustomRedirects from '../objects/custom-redirects';
+import DynamicContent from '../objects/dynamic-content';
 import MockAdapter from 'axios-mock-adapter';
 import Pardot from '..';
 
@@ -85,11 +86,12 @@ describe('Pardot', () => {
     it('should instantiate child object classes', () => {
       const pardot = new Pardot(basePardotProps);
 
-      expect(pardot).toMatchObject({
+      expect(pardot).toMatchObject<Partial<Pardot>>({
         accounts: expect.any(Accounts),
         campaigns: expect.any(Campaigns),
         customFields: expect.any(CustomFields),
         customRedirects: expect.any(CustomRedirects),
+        dynamicContent: expect.any(DynamicContent),
       });
     });
   });
