@@ -5,6 +5,7 @@ import Accounts from './objects/accounts';
 import axios, { AxiosInstance } from 'axios';
 import Campaigns from './objects/campaigns';
 import CustomFields from './objects/custom-fields';
+import CustomRedirects from './objects/custom-redirects';
 
 export default class PardotClient {
   clientId: string;
@@ -20,6 +21,7 @@ export default class PardotClient {
   accounts: Accounts;
   campaigns: Campaigns;
   customFields: CustomFields;
+  customRedirects: CustomRedirects;
 
   public constructor({
     clientId,
@@ -57,6 +59,7 @@ export default class PardotClient {
     this.accounts = new Accounts(this);
     this.campaigns = new Campaigns(this);
     this.customFields = new CustomFields(this);
+    this.customRedirects = new CustomRedirects(this);
   }
 
   public authorizeUrl(props?: AuthorizeUrlProps): string {

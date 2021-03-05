@@ -1,6 +1,10 @@
 import { AuthorizationCode } from 'simple-oauth2';
 import { RawAccessToken } from '../types';
+import Accounts from '../objects/accounts';
 import axios from 'axios';
+import Campaigns from '../objects/campaigns';
+import CustomFields from '../objects/custom-fields';
+import CustomRedirects from '../objects/custom-redirects';
 import MockAdapter from 'axios-mock-adapter';
 import Pardot from '..';
 
@@ -76,6 +80,17 @@ describe('Pardot', () => {
 
       expect(pardot.oauthClient).toBeInstanceOf(AuthorizationCode);
       expect(pardot.token).toMatchObject({ token });
+    });
+
+    it('should instantiate child object classes', () => {
+      const pardot = new Pardot(basePardotProps);
+
+      expect(pardot).toMatchObject({
+        accounts: expect.any(Accounts),
+        campaigns: expect.any(Campaigns),
+        customFields: expect.any(CustomFields),
+        customRedirects: expect.any(CustomRedirects),
+      });
     });
   });
 

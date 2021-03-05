@@ -3,7 +3,7 @@ import ObjectsBase from './base';
 
 type CustomFieldSearchParameters = BaseSearchParameters;
 
-interface ResultParameters extends BaseResultParameters {
+interface CustomFieldResultParameters extends BaseResultParameters {
   sort_by?: 'created_at' | 'id' | 'name';
 }
 
@@ -40,7 +40,7 @@ export default class CustomFields extends ObjectsBase {
   objectName = 'customField';
 
   public async query(
-    params?: CustomFieldSearchParameters & ResultParameters,
+    params?: CustomFieldSearchParameters & CustomFieldResultParameters,
   ): Promise<CustomFieldQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 

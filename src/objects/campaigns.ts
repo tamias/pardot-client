@@ -13,7 +13,7 @@ interface CampaignSearchParameters extends BaseSearchParameters {
   updated_after?: DateString;
 }
 
-interface ResultParameters extends BaseResultParameters {
+interface CampaignResultParameters extends BaseResultParameters {
   sort_by?: 'created_at' | 'id' | 'name' | 'updated_at' | 'cost';
 }
 
@@ -41,7 +41,7 @@ export default class Campaigns extends ObjectsBase {
   objectName = 'campaign';
 
   public async query(
-    params?: CampaignSearchParameters & ResultParameters,
+    params?: CampaignSearchParameters & CampaignResultParameters,
   ): Promise<CampaignQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 

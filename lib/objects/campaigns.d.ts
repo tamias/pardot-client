@@ -5,7 +5,7 @@ interface CampaignSearchParameters extends BaseSearchParameters {
     updated_before?: DateString;
     updated_after?: DateString;
 }
-interface ResultParameters extends BaseResultParameters {
+interface CampaignResultParameters extends BaseResultParameters {
     sort_by?: 'created_at' | 'id' | 'name' | 'updated_at' | 'cost';
 }
 export interface Campaign {
@@ -26,7 +26,7 @@ export interface CampaignResponse extends ResponseBase {
 }
 export default class Campaigns extends ObjectsBase {
     objectName: string;
-    query(params?: CampaignSearchParameters & ResultParameters): Promise<CampaignQueryResponse>;
+    query(params?: CampaignSearchParameters & CampaignResultParameters): Promise<CampaignQueryResponse>;
     read(id: number): Promise<CampaignResponse>;
     update(id: number, update: UpdateCampaign): Promise<CampaignResponse>;
     create(data: CreateCampaign): Promise<CampaignResponse>;

@@ -4,6 +4,7 @@ import Accounts from './objects/accounts';
 import { AxiosInstance } from 'axios';
 import Campaigns from './objects/campaigns';
 import CustomFields from './objects/custom-fields';
+import CustomRedirects from './objects/custom-redirects';
 export default class PardotClient {
     clientId: string;
     clientSecret: string;
@@ -17,6 +18,7 @@ export default class PardotClient {
     accounts: Accounts;
     campaigns: Campaigns;
     customFields: CustomFields;
+    customRedirects: CustomRedirects;
     constructor({ clientId, clientSecret, redirectUri, token, businessUnitId, baseUrl, apiVersion, }: PardotProps);
     authorizeUrl(props?: AuthorizeUrlProps): string;
     getAccessToken(code: string): Promise<RawAccessToken>;
