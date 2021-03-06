@@ -28,6 +28,7 @@
   "homepage": "https://github.com/tamias/pardot-client#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "axios-auth-refresh": "^3.1.0",
     "qs": "^6.9.6",
     "simple-oauth2": "^4.2.0"
   },

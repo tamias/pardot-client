@@ -1,9 +1,10 @@
 import { AccessToken, AuthorizationCode } from 'simple-oauth2';
-import { AuthorizeUrlProps, PardotProps, RawAccessToken } from './types';
+import { AuthorizeUrlProps, PardotProps, RawAccessToken, RefreshCallback } from './types';
 import { stringify } from 'qs';
 import Accounts from './objects/accounts';
 import axios, { AxiosInstance } from 'axios';
 import Campaigns from './objects/campaigns';
+import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import CustomFields from './objects/custom-fields';
 import CustomRedirects from './objects/custom-redirects';
 import DynamicContent from './objects/dynamic-content';
@@ -16,6 +17,7 @@ export default class PardotClient {
   businessUnitId: string;
   baseUrl: string;
   apiVersion: number;
+  refreshCallback?: RefreshCallback;
   oauthClient: AuthorizationCode;
   axiosInstance?: AxiosInstance;
 
@@ -33,12 +35,14 @@ export default class PardotClient {
     businessUnitId,
     baseUrl,
     apiVersion,
+    refreshCallback,
   }: PardotProps) {
     this.clientId = clientId;
     this.clientSecret = clientSecret;
     this.redirectUri = redirectUri;
     this.businessUnitId = businessUnitId;
     this.baseUrl = baseUrl ?? 'https://pi.pardot.com';
+    this.refreshCallback = refreshCallback;
     // default to v4 if no version is specified
     this.apiVersion = apiVersion ?? 4;
 
@@ -83,6 +87,7 @@ export default class PardotClient {
       }
 
       this.axiosInstance = axios.create();
+
       this.axiosInstance.interceptors.request.use((config) => {
         let { data } = config;
 
@@ -113,6 +118,12 @@ export default class PardotClient {
             ...config.params,
           },
         };
+      });
+
+      createAuthRefreshInterceptor(this.axiosInstance, async (failedRequest) => {
+        this.token = await this.token.refresh();
+        await this.refreshCallback?.(this.token.token as RawAccessToken);
+        failedRequest.config.headers['Authorization'] = `Bearer ${this.token.token.access_token}`;
       });
     }
 

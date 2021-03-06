@@ -3,6 +3,7 @@ export interface RawAccessToken {
     refresh_token: string;
     [key: string]: string;
 }
+export declare type RefreshCallback = (token: RawAccessToken) => void | Promise<void>;
 export interface PardotProps {
     clientId: string;
     clientSecret: string;
@@ -11,6 +12,7 @@ export interface PardotProps {
     businessUnitId: string;
     baseUrl?: string;
     apiVersion?: number;
+    refreshCallback?: RefreshCallback;
 }
 export interface AuthorizeUrlProps {
     state?: string;

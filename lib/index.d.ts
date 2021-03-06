@@ -1,5 +1,5 @@
 import { AccessToken, AuthorizationCode } from 'simple-oauth2';
-import { AuthorizeUrlProps, PardotProps, RawAccessToken } from './types';
+import { AuthorizeUrlProps, PardotProps, RawAccessToken, RefreshCallback } from './types';
 import Accounts from './objects/accounts';
 import { AxiosInstance } from 'axios';
 import Campaigns from './objects/campaigns';
@@ -14,6 +14,7 @@ export default class PardotClient {
     businessUnitId: string;
     baseUrl: string;
     apiVersion: number;
+    refreshCallback?: RefreshCallback;
     oauthClient: AuthorizationCode;
     axiosInstance?: AxiosInstance;
     accounts: Accounts;
@@ -21,7 +22,7 @@ export default class PardotClient {
     customFields: CustomFields;
     customRedirects: CustomRedirects;
     dynamicContent: DynamicContent;
-    constructor({ clientId, clientSecret, redirectUri, token, businessUnitId, baseUrl, apiVersion, }: PardotProps);
+    constructor({ clientId, clientSecret, redirectUri, token, businessUnitId, baseUrl, apiVersion, refreshCallback, }: PardotProps);
     authorizeUrl(props?: AuthorizeUrlProps): string;
     getAccessToken(code: string): Promise<RawAccessToken>;
     get axios(): AxiosInstance;

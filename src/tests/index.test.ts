@@ -223,6 +223,59 @@ describe('Pardot', () => {
         });
       });
     });
+
+    describe('refresh interceptor', () => {
+      it('should refresh the access token and retry the request with the new token', async () => {
+        const pardot = new Pardot({ ...basePardotProps, token: rawToken });
+
+        const newToken = pardot.oauthClient.createToken({
+          ...rawToken,
+          access_token: 'new_access_token',
+        });
+
+        const refreshSpy = jest.spyOn(pardot.token, 'refresh').mockResolvedValue(newToken);
+
+        const mockResponseData = { test: 1 };
+
+        mockAxios.onGet().replyOnce(401);
+        mockAxios.onGet().replyOnce(200, mockResponseData);
+
+        const response = await pardot.axios.get('http://example.com');
+
+        expect(refreshSpy).toHaveBeenCalledWith();
+
+        expect(response.data).toEqual(mockResponseData);
+
+        expect(mockAxios.history.get).toHaveLength(2);
+        expect(mockAxios.history.get[1].headers.Authorization).toEqual(
+          `Bearer ${newToken.token.access_token}`,
+        );
+      });
+
+      it('should call refreshCallback if present', async () => {
+        const refreshCallback = jest.fn();
+
+        const pardot = new Pardot({ ...basePardotProps, refreshCallback, token: rawToken });
+
+        const newToken = pardot.oauthClient.createToken({
+          ...rawToken,
+          access_token: 'new_access_token',
+        });
+
+        const refreshSpy = jest.spyOn(pardot.token, 'refresh').mockResolvedValue(newToken);
+
+        const mockResponseData = { test: 1 };
+
+        mockAxios.onGet().replyOnce(401);
+        mockAxios.onGet().replyOnce(200, mockResponseData);
+
+        await pardot.axios.get('http://example.com');
+
+        expect(refreshSpy).toHaveBeenCalledWith();
+
+        expect(refreshCallback).toHaveBeenCalledWith(newToken.token);
+      });
+    });
   });
 
   describe('getApiUrl', () => {
