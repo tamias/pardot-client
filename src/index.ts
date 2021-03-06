@@ -8,6 +8,7 @@ import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import CustomFields from './objects/custom-fields';
 import CustomRedirects from './objects/custom-redirects';
 import DynamicContent from './objects/dynamic-content';
+import Emails from './objects/emails';
 
 export default class PardotClient {
   clientId: string;
@@ -26,6 +27,7 @@ export default class PardotClient {
   customFields: CustomFields;
   customRedirects: CustomRedirects;
   dynamicContent: DynamicContent;
+  emails: Emails;
 
   public constructor({
     clientId,
@@ -67,6 +69,7 @@ export default class PardotClient {
     this.customFields = new CustomFields(this);
     this.customRedirects = new CustomRedirects(this);
     this.dynamicContent = new DynamicContent(this);
+    this.emails = new Emails(this);
   }
 
   public authorizeUrl(props?: AuthorizeUrlProps): string {
