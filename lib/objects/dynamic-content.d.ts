@@ -1,10 +1,10 @@
-import { BaseResultParameters, BaseSearchParameters, DateString, ResponseBase } from './types';
+import { BaseResultParams, BaseSearchParams, DateString, ResponseBase } from './types';
 import ObjectsBase from './base';
-interface DynamicContentSearchParameters extends BaseSearchParameters {
+interface DynamicContentSearchParams extends BaseSearchParams {
     updated_before?: DateString;
     updated_after?: DateString;
 }
-interface DynamicContentResultParameters extends BaseResultParameters {
+interface DynamicContentResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id';
 }
 interface Variation {
@@ -33,7 +33,7 @@ export interface DynamicContentResponse extends ResponseBase {
 }
 export default class DynamicContent extends ObjectsBase {
     objectName: string;
-    query(params?: DynamicContentSearchParameters & DynamicContentResultParameters): Promise<DynamicContentQueryResponse>;
+    query(params?: DynamicContentSearchParams & DynamicContentResultParams): Promise<DynamicContentQueryResponse>;
     read(id: number): Promise<DynamicContentResponse>;
 }
 export {};

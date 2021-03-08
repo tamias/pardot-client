@@ -1,11 +1,11 @@
-import { BaseResultParameters, BaseSearchParameters, DateString, ResponseBase, Update } from './types';
+import { BaseResultParams, BaseSearchParams, DateString, ResponseBase, Update } from './types';
 import ObjectsBase from './base';
-interface CampaignSearchParameters extends BaseSearchParameters {
+interface CampaignSearchParams extends BaseSearchParams {
     name?: string;
     updated_before?: DateString;
     updated_after?: DateString;
 }
-interface CampaignResultParameters extends BaseResultParameters {
+interface CampaignResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id' | 'name' | 'updated_at' | 'cost';
 }
 export interface Campaign {
@@ -26,7 +26,7 @@ export interface CampaignResponse extends ResponseBase {
 }
 export default class Campaigns extends ObjectsBase {
     objectName: string;
-    query(params?: CampaignSearchParameters & CampaignResultParameters): Promise<CampaignQueryResponse>;
+    query(params?: CampaignSearchParams & CampaignResultParams): Promise<CampaignQueryResponse>;
     read(id: number): Promise<CampaignResponse>;
     update(id: number, update: UpdateCampaign): Promise<CampaignResponse>;
     create(data: CreateCampaign): Promise<CampaignResponse>;

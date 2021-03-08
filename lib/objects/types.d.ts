@@ -1,13 +1,13 @@
 declare type GnuDateString = string;
 export declare type DateString = 'today' | 'yesterday' | 'last_7_days' | 'this_month' | 'last_month' | GnuDateString;
-export interface BaseSearchParameters {
+export interface BaseSearchParams {
     created_after?: DateString;
     created_before?: DateString;
     id_greater_than?: number;
     id_less_than?: number;
 }
 export declare type SortOrder = 'ascending' | 'descending';
-export interface BaseResultParameters {
+export interface BaseResultParams {
     format?: 'json' | 'xml';
     limit?: number;
     offset?: number;

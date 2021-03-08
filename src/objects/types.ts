@@ -7,7 +7,7 @@ export type DateString =
   | 'last_month'
   | GnuDateString;
 
-export interface BaseSearchParameters {
+export interface BaseSearchParams {
   created_after?: DateString;
   created_before?: DateString;
   id_greater_than?: number;
@@ -16,7 +16,7 @@ export interface BaseSearchParameters {
 
 export type SortOrder = 'ascending' | 'descending';
 
-export interface BaseResultParameters {
+export interface BaseResultParams {
   format?: 'json' | 'xml';
   limit?: number;
   offset?: number;

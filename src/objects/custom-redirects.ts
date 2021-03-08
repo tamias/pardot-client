@@ -1,12 +1,12 @@
-import { BaseResultParameters, BaseSearchParameters, DateString, ResponseBase } from './types';
+import { BaseResultParams, BaseSearchParams, DateString, ResponseBase } from './types';
 import ObjectsBase from './base';
 
-interface CustomRedirectSearchParameters extends BaseSearchParameters {
+interface CustomRedirectSearchParams extends BaseSearchParams {
   updated_before?: DateString;
   updated_after?: DateString;
 }
 
-interface CustomRedirectResultParameters extends BaseResultParameters {
+interface CustomRedirectResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id';
 }
 
@@ -38,7 +38,7 @@ export default class CustomRedirects extends ObjectsBase {
   objectName = 'customRedirect';
 
   public async query(
-    params?: CustomRedirectSearchParameters & CustomRedirectResultParameters,
+    params?: CustomRedirectSearchParams & CustomRedirectResultParams,
   ): Promise<CustomRedirectQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 

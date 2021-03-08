@@ -1,9 +1,9 @@
-import { BaseResultParameters, BaseSearchParameters, ResponseBase, Update } from './types';
+import { BaseResultParams, BaseSearchParams, ResponseBase, Update } from './types';
 import ObjectsBase from './base';
 
-type CustomFieldSearchParameters = BaseSearchParameters;
+type CustomFieldSearchParams = BaseSearchParams;
 
-interface CustomFieldResultParameters extends BaseResultParameters {
+interface CustomFieldResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id' | 'name';
 }
 
@@ -40,7 +40,7 @@ export default class CustomFields extends ObjectsBase {
   objectName = 'customField';
 
   public async query(
-    params?: CustomFieldSearchParameters & CustomFieldResultParameters,
+    params?: CustomFieldSearchParams & CustomFieldResultParams,
   ): Promise<CustomFieldQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 

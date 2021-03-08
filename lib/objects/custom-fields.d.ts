@@ -1,7 +1,7 @@
-import { BaseResultParameters, BaseSearchParameters, ResponseBase, Update } from './types';
+import { BaseResultParams, BaseSearchParams, ResponseBase, Update } from './types';
 import ObjectsBase from './base';
-declare type CustomFieldSearchParameters = BaseSearchParameters;
-interface CustomFieldResultParameters extends BaseResultParameters {
+declare type CustomFieldSearchParams = BaseSearchParams;
+interface CustomFieldResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id' | 'name';
 }
 export interface CustomField {
@@ -29,7 +29,7 @@ export interface CustomFieldResponse extends ResponseBase {
 export declare type UpdateCustomField = Update<CustomField>;
 export default class CustomFields extends ObjectsBase {
     objectName: string;
-    query(params?: CustomFieldSearchParameters & CustomFieldResultParameters): Promise<CustomFieldQueryResponse>;
+    query(params?: CustomFieldSearchParams & CustomFieldResultParams): Promise<CustomFieldQueryResponse>;
     read(id: number): Promise<CustomFieldResponse>;
     update(id: number, update: UpdateCustomField): Promise<CustomFieldResponse>;
 }

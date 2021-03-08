@@ -1,10 +1,10 @@
-import { BaseResultParameters, BaseSearchParameters, DateString, ResponseBase } from './types';
+import { BaseResultParams, BaseSearchParams, DateString, ResponseBase } from './types';
 import ObjectsBase from './base';
-interface CustomRedirectSearchParameters extends BaseSearchParameters {
+interface CustomRedirectSearchParams extends BaseSearchParams {
     updated_before?: DateString;
     updated_after?: DateString;
 }
-interface CustomRedirectResultParameters extends BaseResultParameters {
+interface CustomRedirectResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id';
 }
 export interface CustomRedirect {
@@ -30,7 +30,7 @@ export interface CustomRedirectResponse extends ResponseBase {
 }
 export default class CustomRedirects extends ObjectsBase {
     objectName: string;
-    query(params?: CustomRedirectSearchParameters & CustomRedirectResultParameters): Promise<CustomRedirectQueryResponse>;
+    query(params?: CustomRedirectSearchParams & CustomRedirectResultParams): Promise<CustomRedirectQueryResponse>;
     read(id: number): Promise<CustomRedirectResponse>;
 }
 export {};
