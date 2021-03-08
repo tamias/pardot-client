@@ -6,6 +6,7 @@ import Campaigns from '../objects/campaigns';
 import CustomFields from '../objects/custom-fields';
 import CustomRedirects from '../objects/custom-redirects';
 import DynamicContent from '../objects/dynamic-content';
+import EmailClicks from '../objects/email-clicks';
 import Emails from '../objects/emails';
 import MockAdapter from 'axios-mock-adapter';
 import Pardot from '..';
@@ -93,6 +94,7 @@ describe('Pardot', () => {
         customFields: expect.any(CustomFields),
         customRedirects: expect.any(CustomRedirects),
         dynamicContent: expect.any(DynamicContent),
+        emailClicks: expect.any(EmailClicks),
         emails: expect.any(Emails),
       });
     });
