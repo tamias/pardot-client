@@ -127,7 +127,14 @@ export default class PardotClient {
       });
 
       createAuthRefreshInterceptor(this.axiosInstance, async (failedRequest) => {
-        this.token = await this.token.refresh();
+        // Pardot apparently does not include the refresh token in the refresh response,
+        // so create a new AccessToken with the refresh token included
+        const newToken = await this.token.refresh();
+        this.token = this.oauthClient.createToken({
+          refresh_token: this.token.token.refresh_token,
+          ...newToken.token,
+        });
+
         await this.refreshCallback?.(this.token.token as RawAccessToken);
         failedRequest.config.headers['Authorization'] = `Bearer ${this.token.token.access_token}`;
       });

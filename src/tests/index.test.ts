@@ -229,24 +229,54 @@ describe('Pardot', () => {
     });
 
     describe('refresh interceptor', () => {
-      it('should refresh the access token and retry the request with the new token', async () => {
+      const mockResponseData = { test: 1 };
+
+      beforeEach(() => {
+        mockAxios.onGet().replyOnce(401);
+        mockAxios.onGet().replyOnce(200, mockResponseData);
+      });
+
+      it('should refresh the access token', async () => {
         const pardot = new Pardot({ ...basePardotProps, token: rawToken });
 
         const newToken = pardot.oauthClient.createToken({
-          ...rawToken,
           access_token: 'new_access_token',
         });
 
         const refreshSpy = jest.spyOn(pardot.token, 'refresh').mockResolvedValue(newToken);
 
-        const mockResponseData = { test: 1 };
-
-        mockAxios.onGet().replyOnce(401);
-        mockAxios.onGet().replyOnce(200, mockResponseData);
-
-        const response = await pardot.axios.get('http://example.com');
+        await pardot.axios.get('http://example.com');
 
         expect(refreshSpy).toHaveBeenCalledWith();
+      });
+
+      it('should store the new token with the original refresh token', async () => {
+        const pardot = new Pardot({ ...basePardotProps, token: rawToken });
+
+        const newToken = pardot.oauthClient.createToken({
+          access_token: 'new_access_token',
+        });
+
+        jest.spyOn(pardot.token, 'refresh').mockResolvedValue(newToken);
+
+        await pardot.axios.get('http://example.com');
+
+        expect(pardot.token.token).toEqual({
+          ...newToken.token,
+          refresh_token: rawToken.refresh_token,
+        });
+      });
+
+      it('should retry the request with the new token', async () => {
+        const pardot = new Pardot({ ...basePardotProps, token: rawToken });
+
+        const newToken = pardot.oauthClient.createToken({
+          access_token: 'new_access_token',
+        });
+
+        jest.spyOn(pardot.token, 'refresh').mockResolvedValue(newToken);
+
+        const response = await pardot.axios.get('http://example.com');
 
         expect(response.data).toEqual(mockResponseData);
 
@@ -262,22 +292,17 @@ describe('Pardot', () => {
         const pardot = new Pardot({ ...basePardotProps, refreshCallback, token: rawToken });
 
         const newToken = pardot.oauthClient.createToken({
-          ...rawToken,
           access_token: 'new_access_token',
         });
 
-        const refreshSpy = jest.spyOn(pardot.token, 'refresh').mockResolvedValue(newToken);
-
-        const mockResponseData = { test: 1 };
-
-        mockAxios.onGet().replyOnce(401);
-        mockAxios.onGet().replyOnce(200, mockResponseData);
+        jest.spyOn(pardot.token, 'refresh').mockResolvedValue(newToken);
 
         await pardot.axios.get('http://example.com');
 
-        expect(refreshSpy).toHaveBeenCalledWith();
-
-        expect(refreshCallback).toHaveBeenCalledWith(newToken.token);
+        expect(refreshCallback).toHaveBeenCalledWith({
+          ...newToken.token,
+          refresh_token: rawToken.refresh_token,
+        });
       });
     });
   });
