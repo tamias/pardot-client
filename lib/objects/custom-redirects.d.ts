@@ -1,12 +1,5 @@
 import { BaseResultParams, BaseSearchParams, DateString, ResponseBase } from './types';
 import ObjectsBase from './base';
-interface CustomRedirectSearchParams extends BaseSearchParams {
-    updated_before?: DateString;
-    updated_after?: DateString;
-}
-interface CustomRedirectResultParams extends BaseResultParams {
-    sort_by?: 'created_at' | 'id';
-}
 export interface CustomRedirect {
     id: number;
     name: string;
@@ -18,6 +11,13 @@ export interface CustomRedirect {
     };
     created_at: string;
     updated_at: string;
+}
+interface CustomRedirectSearchParams extends BaseSearchParams {
+    updated_before?: DateString;
+    updated_after?: DateString;
+}
+interface CustomRedirectResultParams extends BaseResultParams {
+    sort_by?: 'created_at' | 'id';
 }
 export interface CustomRedirectQueryResponse extends ResponseBase {
     result: {

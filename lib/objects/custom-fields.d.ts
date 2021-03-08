@@ -1,9 +1,5 @@
 import { BaseResultParams, BaseSearchParams, ResponseBase, Update } from './types';
 import ObjectsBase from './base';
-declare type CustomFieldSearchParams = BaseSearchParams;
-interface CustomFieldResultParams extends BaseResultParams {
-    sort_by?: 'created_at' | 'id' | 'name';
-}
 export interface CustomField {
     id: number;
     name: string | null;
@@ -16,6 +12,10 @@ export interface CustomField {
     crm_id: string | null;
     is_use_values: boolean;
     is_analytics_synced: boolean;
+}
+declare type CustomFieldSearchParams = BaseSearchParams;
+interface CustomFieldResultParams extends BaseResultParams {
+    sort_by?: 'created_at' | 'id' | 'name';
 }
 export interface CustomFieldQueryResponse extends ResponseBase {
     result: {

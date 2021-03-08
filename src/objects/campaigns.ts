@@ -1,6 +1,12 @@
 import { BaseResultParams, BaseSearchParams, DateString, ResponseBase, Update } from './types';
 import ObjectsBase from './base';
 
+export interface Campaign {
+  id: number;
+  name: string;
+  cost: number | null;
+}
+
 interface CampaignSearchParams extends BaseSearchParams {
   name?: string;
   updated_before?: DateString;
@@ -9,12 +15,6 @@ interface CampaignSearchParams extends BaseSearchParams {
 
 interface CampaignResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id' | 'name' | 'updated_at' | 'cost';
-}
-
-export interface Campaign {
-  id: number;
-  name: string;
-  cost: number | null;
 }
 
 export type UpdateCampaign = Update<Campaign>;
