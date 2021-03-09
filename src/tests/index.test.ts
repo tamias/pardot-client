@@ -9,6 +9,7 @@ import DynamicContent from '../objects/dynamic-content';
 import EmailClicks from '../objects/email-clicks';
 import Emails from '../objects/emails';
 import EmailTemplates from '../objects/email-templates';
+import Forms from '../objects/forms';
 import MockAdapter from 'axios-mock-adapter';
 import Pardot from '..';
 
@@ -98,6 +99,7 @@ describe('Pardot', () => {
         emailClicks: expect.any(EmailClicks),
         emails: expect.any(Emails),
         emailTemplates: expect.any(EmailTemplates),
+        forms: expect.any(Forms),
       });
     });
   });

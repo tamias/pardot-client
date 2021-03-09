@@ -11,6 +11,7 @@ import DynamicContent from './objects/dynamic-content';
 import EmailClicks from './objects/email-clicks';
 import Emails from './objects/emails';
 import EmailTemplates from './objects/email-templates';
+import Forms from './objects/forms';
 
 export default class PardotClient {
   clientId: string;
@@ -32,6 +33,7 @@ export default class PardotClient {
   emails: Emails;
   emailClicks: EmailClicks;
   emailTemplates: EmailTemplates;
+  forms: Forms;
 
   public constructor({
     clientId,
@@ -76,6 +78,7 @@ export default class PardotClient {
     this.emails = new Emails(this);
     this.emailClicks = new EmailClicks(this);
     this.emailTemplates = new EmailTemplates(this);
+    this.forms = new Forms(this);
   }
 
   public authorizeUrl(props?: AuthorizeUrlProps): string {
