@@ -8,6 +8,7 @@ import CustomRedirects from '../objects/custom-redirects';
 import DynamicContent from '../objects/dynamic-content';
 import EmailClicks from '../objects/email-clicks';
 import Emails from '../objects/emails';
+import EmailTemplates from '../objects/email-templates';
 import MockAdapter from 'axios-mock-adapter';
 import Pardot from '..';
 
@@ -96,6 +97,7 @@ describe('Pardot', () => {
         dynamicContent: expect.any(DynamicContent),
         emailClicks: expect.any(EmailClicks),
         emails: expect.any(Emails),
+        emailTemplates: expect.any(EmailTemplates),
       });
     });
   });

@@ -10,6 +10,7 @@ import CustomRedirects from './objects/custom-redirects';
 import DynamicContent from './objects/dynamic-content';
 import EmailClicks from './objects/email-clicks';
 import Emails from './objects/emails';
+import EmailTemplates from './objects/email-templates';
 
 export default class PardotClient {
   clientId: string;
@@ -30,6 +31,7 @@ export default class PardotClient {
   dynamicContent: DynamicContent;
   emails: Emails;
   emailClicks: EmailClicks;
+  emailTemplates: EmailTemplates;
 
   public constructor({
     clientId,
@@ -73,6 +75,7 @@ export default class PardotClient {
     this.dynamicContent = new DynamicContent(this);
     this.emails = new Emails(this);
     this.emailClicks = new EmailClicks(this);
+    this.emailTemplates = new EmailTemplates(this);
   }
 
   public authorizeUrl(props?: AuthorizeUrlProps): string {

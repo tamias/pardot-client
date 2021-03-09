@@ -8,6 +8,7 @@ import CustomRedirects from './objects/custom-redirects';
 import DynamicContent from './objects/dynamic-content';
 import EmailClicks from './objects/email-clicks';
 import Emails from './objects/emails';
+import EmailTemplates from './objects/email-templates';
 export default class PardotClient {
     clientId: string;
     clientSecret: string;
@@ -26,6 +27,7 @@ export default class PardotClient {
     dynamicContent: DynamicContent;
     emails: Emails;
     emailClicks: EmailClicks;
+    emailTemplates: EmailTemplates;
     constructor({ clientId, clientSecret, redirectUri, token, businessUnitId, baseUrl, apiVersion, refreshCallback, }: PardotProps);
     authorizeUrl(props?: AuthorizeUrlProps): string;
     getAccessToken(code: string): Promise<RawAccessToken>;
