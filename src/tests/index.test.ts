@@ -10,6 +10,7 @@ import EmailClicks from '../objects/email-clicks';
 import Emails from '../objects/emails';
 import EmailTemplates from '../objects/email-templates';
 import Forms from '../objects/forms';
+import LifecycleHistories from '../objects/lifecycle-histories';
 import MockAdapter from 'axios-mock-adapter';
 import Pardot from '..';
 
@@ -100,6 +101,7 @@ describe('Pardot', () => {
         emails: expect.any(Emails),
         emailTemplates: expect.any(EmailTemplates),
         forms: expect.any(Forms),
+        lifecycleHistories: expect.any(LifecycleHistories),
       });
     });
   });

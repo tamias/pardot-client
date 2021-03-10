@@ -1,0 +1,29 @@
+import { BaseResultParams, BaseSearchParams, ResponseBase } from './types';
+import ObjectsBase from './base';
+export interface LifecycleHistory {
+    id: number;
+    prospect_id: number;
+    previous_stage_id: number | null;
+    next_stage_id: number | null;
+    seconds_elapsed: number | null;
+    created_at: string;
+}
+declare type LifecycleHistorySearchParams = BaseSearchParams;
+interface LifecycleHistoryResultParams extends BaseResultParams {
+    sort_by?: 'created_at' | 'id';
+}
+export interface LifecycleHistoryQueryResponse extends ResponseBase {
+    result: {
+        total_results: number;
+        lifecycleHistory: LifecycleHistory | LifecycleHistory[];
+    };
+}
+export interface LifecycleHistoryResponse extends ResponseBase {
+    lifecycleHistory: LifecycleHistory;
+}
+export default class LifecycleHistories extends ObjectsBase {
+    objectName: string;
+    query(params?: LifecycleHistorySearchParams & LifecycleHistoryResultParams): Promise<LifecycleHistoryQueryResponse>;
+    read(id: number): Promise<LifecycleHistoryResponse>;
+}
+export {};
