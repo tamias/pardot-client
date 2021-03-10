@@ -1,15 +1,13 @@
-import { BaseResultParams, BaseSearchParams, DateString, ResponseBase, Update } from './types';
+import { BaseResultParams, CreatedSearchParams, IdSearchParams, ResponseBase, Update, UpdatedSearchParams } from './types';
 import ObjectsBase from './base';
 export interface Campaign {
     id: number;
     name: string;
     cost: number | null;
 }
-interface CampaignSearchParams extends BaseSearchParams {
+declare type CampaignSearchParams = {
     name?: string;
-    updated_before?: DateString;
-    updated_after?: DateString;
-}
+} & IdSearchParams & CreatedSearchParams & UpdatedSearchParams;
 interface CampaignResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id' | 'name' | 'updated_at' | 'cost';
 }

@@ -1,4 +1,4 @@
-import { BaseResultParams, BaseSearchParams, ResponseBase, Update } from './types';
+import { BaseResultParams, CreatedSearchParams, IdSearchParams, ResponseBase, Update } from './types';
 import ObjectsBase from './base';
 export interface CustomField {
     id: number;
@@ -13,7 +13,7 @@ export interface CustomField {
     is_use_values: boolean;
     is_analytics_synced: boolean;
 }
-declare type CustomFieldSearchParams = BaseSearchParams;
+declare type CustomFieldSearchParams = IdSearchParams & CreatedSearchParams;
 interface CustomFieldResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id' | 'name';
 }

@@ -1,4 +1,4 @@
-import { BaseSearchParams, ResponseBase } from './types';
+import { CreatedSearchParams, IdSearchParams, ResponseBase } from './types';
 import ObjectsBase from './base';
 
 export interface EmailClick {
@@ -12,12 +12,15 @@ export interface EmailClick {
   created_at: string;
 }
 
-interface EmailClickSearchParams extends BaseSearchParams {
+// TODO: API doc lists id_greater_than but not id_less_than for email clicks
+// Is that accurate or an oversight?
+type EmailClickSearchParams = {
   list_email_id?: number;
   drip_program_action_id?: number;
   email_template_id?: number;
   tracker_redirect_id?: number;
-}
+} & IdSearchParams &
+  CreatedSearchParams;
 
 // does the API really not accept 'offset' when querying email clicks?
 interface EmailClickResultParams {

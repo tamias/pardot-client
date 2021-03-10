@@ -1,4 +1,4 @@
-import { BaseSearchParams, ResponseBase } from './types';
+import { CreatedSearchParams, IdSearchParams, ResponseBase } from './types';
 import ObjectsBase from './base';
 export interface EmailClick {
     id: number;
@@ -10,12 +10,12 @@ export interface EmailClick {
     tracker_redirect_id?: number;
     created_at: string;
 }
-interface EmailClickSearchParams extends BaseSearchParams {
+declare type EmailClickSearchParams = {
     list_email_id?: number;
     drip_program_action_id?: number;
     email_template_id?: number;
     tracker_redirect_id?: number;
-}
+} & IdSearchParams & CreatedSearchParams;
 interface EmailClickResultParams {
     format?: 'json' | 'xml';
     limit?: number;

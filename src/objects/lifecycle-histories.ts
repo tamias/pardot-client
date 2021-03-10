@@ -1,4 +1,4 @@
-import { BaseResultParams, BaseSearchParams, ResponseBase } from './types';
+import { BaseResultParams, CreatedSearchParams, IdSearchParams, ResponseBase } from './types';
 import ObjectsBase from './base';
 
 export interface LifecycleHistory {
@@ -10,7 +10,7 @@ export interface LifecycleHistory {
   created_at: string;
 }
 
-type LifecycleHistorySearchParams = BaseSearchParams;
+type LifecycleHistorySearchParams = IdSearchParams & CreatedSearchParams;
 
 interface LifecycleHistoryResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id';

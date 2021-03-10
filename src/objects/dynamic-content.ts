@@ -1,4 +1,10 @@
-import { BaseResultParams, BaseSearchParams, DateString, ResponseBase } from './types';
+import {
+  BaseResultParams,
+  CreatedSearchParams,
+  IdSearchParams,
+  ResponseBase,
+  UpdatedSearchParams,
+} from './types';
 import ObjectsBase from './base';
 
 interface DynamicContentVariation {
@@ -18,10 +24,7 @@ export interface DynamicContentItem {
   updated_at: string;
 }
 
-interface DynamicContentSearchParams extends BaseSearchParams {
-  updated_before?: DateString;
-  updated_after?: DateString;
-}
+type DynamicContentSearchParams = IdSearchParams & CreatedSearchParams & UpdatedSearchParams;
 
 interface DynamicContentResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id';

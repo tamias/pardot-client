@@ -1,4 +1,10 @@
-import { BaseResultParams, BaseSearchParams, DateString, ResponseBase } from './types';
+import {
+  BaseResultParams,
+  CreatedSearchParams,
+  IdSearchParams,
+  ResponseBase,
+  UpdatedSearchParams,
+} from './types';
 import ObjectsBase from './base';
 
 export interface Form {
@@ -13,10 +19,7 @@ export interface Form {
   updated_at: string;
 }
 
-interface FormSearchParams extends BaseSearchParams {
-  updated_after?: DateString;
-  updated_before?: DateString;
-}
+type FormSearchParams = IdSearchParams & CreatedSearchParams & UpdatedSearchParams;
 
 interface FormResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id';
