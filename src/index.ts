@@ -14,6 +14,7 @@ import EmailTemplates from './objects/email-templates';
 import Forms from './objects/forms';
 import LifecycleHistories from './objects/lifecycle-histories';
 import LifecycleStages from './objects/lifecycle-stages';
+import Lists from './objects/lists';
 
 export default class PardotClient {
   clientId: string;
@@ -38,6 +39,7 @@ export default class PardotClient {
   forms: Forms;
   lifecycleHistories: LifecycleHistories;
   lifecycleStages: LifecycleStages;
+  lists: Lists;
 
   public constructor({
     clientId,
@@ -85,6 +87,7 @@ export default class PardotClient {
     this.forms = new Forms(this);
     this.lifecycleHistories = new LifecycleHistories(this);
     this.lifecycleStages = new LifecycleStages(this);
+    this.lists = new Lists(this);
   }
 
   public authorizeUrl(props?: AuthorizeUrlProps): string {
