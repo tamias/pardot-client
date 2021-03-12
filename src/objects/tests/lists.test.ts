@@ -129,20 +129,20 @@ describe('Lists', () => {
   describe('create', () => {
     it('should make a post request to create a list', async () => {
       const params = {
-        created_at: '',
         description: null,
         is_crm_visible: false,
         is_dynamic: false,
         is_public: true,
         name: 'List 1',
         title: 'List Title',
-        updated_at: '',
       };
 
       const mockResponse: ListResponse = {
         ...responseAttributes,
         list: {
+          created_at: '',
           id: 1,
+          updated_at: '',
           ...params,
         },
       };

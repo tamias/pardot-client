@@ -12,6 +12,7 @@ import EmailTemplates from './objects/email-templates';
 import Forms from './objects/forms';
 import LifecycleHistories from './objects/lifecycle-histories';
 import LifecycleStages from './objects/lifecycle-stages';
+import ListMemberships from './objects/list-memberships';
 import Lists from './objects/lists';
 export default class PardotClient {
     clientId: string;
@@ -36,6 +37,7 @@ export default class PardotClient {
     lifecycleHistories: LifecycleHistories;
     lifecycleStages: LifecycleStages;
     lists: Lists;
+    listMemberships: ListMemberships;
     constructor({ clientId, clientSecret, redirectUri, token, businessUnitId, baseUrl, apiVersion, refreshCallback, }: PardotProps);
     authorizeUrl(props?: AuthorizeUrlProps): string;
     getAccessToken(code: string): Promise<RawAccessToken>;
