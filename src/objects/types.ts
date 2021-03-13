@@ -24,12 +24,25 @@ export interface UpdatedSearchParams {
 
 export type SortOrder = 'ascending' | 'descending';
 
+export interface OutputParamsMobile {
+  output: 'mobile';
+}
+
+export interface OutputParamsSimple {
+  output: 'simple';
+}
+
+export interface OutputParamsFull {
+  output?: 'full';
+}
+
+export type OutputParams = OutputParamsSimple | OutputParamsMobile | OutputParamsFull;
+
 export interface BaseResultParams {
-  format?: 'json' | 'xml';
   limit?: number;
   offset?: number;
   sort_order?: SortOrder;
-  // sort_by values vary by object
+  sort_by?: string; // sort_by values vary by object
 }
 
 export interface ResponseAttributes {
@@ -42,3 +55,5 @@ export interface ResponseBase {
 }
 
 export type Update<T> = Partial<Omit<T, 'id'>>;
+
+export type Create<T, K extends keyof Update<T> = null> = Update<T> & Pick<T, K>;

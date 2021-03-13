@@ -1,5 +1,6 @@
 import {
   BaseResultParams,
+  Create,
   CreatedSearchParams,
   IdSearchParams,
   ResponseBase,
@@ -29,7 +30,7 @@ interface ListMembershipResultParams extends BaseResultParams {
 }
 
 export type UpdateListMembership = Update<ListMembership>;
-export type CreateListMembership = UpdateListMembership; // ...
+export type CreateListMembership = Create<ListMembership>;
 
 export interface ListMembershipQueryResponse extends ResponseBase {
   result: {

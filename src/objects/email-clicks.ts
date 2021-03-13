@@ -24,7 +24,6 @@ type EmailClickSearchParams = {
 
 // does the API really not accept 'offset' when querying email clicks?
 interface EmailClickResultParams {
-  format?: 'json' | 'xml';
   limit?: number;
 }
 

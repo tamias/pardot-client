@@ -17,7 +17,6 @@ declare type EmailClickSearchParams = {
     tracker_redirect_id?: number;
 } & IdSearchParams & CreatedSearchParams;
 interface EmailClickResultParams {
-    format?: 'json' | 'xml';
     limit?: number;
 }
 export interface EmailClickQueryResponse extends ResponseBase {

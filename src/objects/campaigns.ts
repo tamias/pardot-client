@@ -1,5 +1,6 @@
 import {
   BaseResultParams,
+  Create,
   CreatedSearchParams,
   IdSearchParams,
   ResponseBase,
@@ -25,7 +26,7 @@ interface CampaignResultParams extends BaseResultParams {
 }
 
 export type UpdateCampaign = Update<Campaign>;
-export type CreateCampaign = UpdateCampaign & Pick<Campaign, 'name'>;
+export type CreateCampaign = Create<Campaign, 'name'>;
 
 export interface CampaignQueryResponse extends ResponseBase {
   result: {

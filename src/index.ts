@@ -16,6 +16,7 @@ import LifecycleHistories from './objects/lifecycle-histories';
 import LifecycleStages from './objects/lifecycle-stages';
 import ListMemberships from './objects/list-memberships';
 import Lists from './objects/lists';
+import Opportunities from './objects/opportunities';
 
 export default class PardotClient {
   clientId: string;
@@ -42,6 +43,7 @@ export default class PardotClient {
   lifecycleStages: LifecycleStages;
   lists: Lists;
   listMemberships: ListMemberships;
+  opportunities: Opportunities;
 
   public constructor({
     clientId,
@@ -91,6 +93,7 @@ export default class PardotClient {
     this.lifecycleStages = new LifecycleStages(this);
     this.lists = new Lists(this);
     this.listMemberships = new ListMemberships(this);
+    this.opportunities = new Opportunities(this);
   }
 
   public authorizeUrl(props?: AuthorizeUrlProps): string {

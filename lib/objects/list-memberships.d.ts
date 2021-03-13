@@ -1,4 +1,4 @@
-import { BaseResultParams, CreatedSearchParams, IdSearchParams, ResponseBase, Update, UpdatedSearchParams } from './types';
+import { BaseResultParams, Create, CreatedSearchParams, IdSearchParams, ResponseBase, Update, UpdatedSearchParams } from './types';
 import ObjectsBase from './base';
 export interface ListMembership {
     id: number;
@@ -16,7 +16,7 @@ interface ListMembershipResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id';
 }
 export declare type UpdateListMembership = Update<ListMembership>;
-export declare type CreateListMembership = UpdateListMembership;
+export declare type CreateListMembership = Create<ListMembership>;
 export interface ListMembershipQueryResponse extends ResponseBase {
     result: {
         total_results: number;

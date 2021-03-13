@@ -1,4 +1,4 @@
-import { BaseResultParams, CreatedSearchParams, IdSearchParams, ResponseBase, Update, UpdatedSearchParams } from './types';
+import { BaseResultParams, Create, CreatedSearchParams, IdSearchParams, ResponseBase, Update, UpdatedSearchParams } from './types';
 import ObjectsBase from './base';
 export interface Campaign {
     id: number;
@@ -12,7 +12,7 @@ interface CampaignResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id' | 'name' | 'updated_at' | 'cost';
 }
 export declare type UpdateCampaign = Update<Campaign>;
-export declare type CreateCampaign = UpdateCampaign & Pick<Campaign, 'name'>;
+export declare type CreateCampaign = Create<Campaign, 'name'>;
 export interface CampaignQueryResponse extends ResponseBase {
     result: {
         total_results: number;

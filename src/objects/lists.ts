@@ -1,5 +1,6 @@
 import {
   BaseResultParams,
+  Create,
   CreatedSearchParams,
   IdSearchParams,
   ResponseBase,
@@ -31,7 +32,7 @@ interface ListResultParams extends BaseResultParams {
 }
 
 export type UpdateList = Update<List>;
-export type CreateList = UpdateList; // ...
+export type CreateList = Create<List>;
 
 export interface ListQueryResponse extends ResponseBase {
   result: {

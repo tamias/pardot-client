@@ -38,10 +38,10 @@ export interface CustomFieldResponse extends ResponseBase {
   customField: CustomField;
 }
 
-// TODO: determine which custom field properties are required
-// export type CreateCustomField = UpdateCustomField & Pick<CustomField, 'name' | 'field_id'>;
-
 export type UpdateCustomField = Update<CustomField>;
+// TODO: determine which custom field properties are required
+// export type CreateCustomField = Create<CustomField, 'name' | 'field_id'>;
+
 export default class CustomFields extends ObjectsBase {
   objectName = 'customField';
 
