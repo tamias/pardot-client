@@ -55,10 +55,17 @@ describe('Opportunities', () => {
 
       const params: OpportunityQueryParams = {
         limit: 2,
-        output: 'simple',
+        output: 'mobile',
       };
 
       const response = await opportunities.query(params);
+
+      expect(onGetSpy).toHaveBeenCalledWith(
+        'https://pi.pardot.com/api/opportunity/version/4/do/query',
+        {
+          params,
+        },
+      );
 
       expect(response).toEqual(mockResponse);
     });

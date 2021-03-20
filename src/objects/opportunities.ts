@@ -32,12 +32,14 @@ export interface OpportunitySimple extends OpportunityMobile {
     name: string;
   };
   prospects: {
+    // TODO - fill out after implementing prospects
     prospect: unknown | unknown[];
   };
 }
 
 export interface OpportunityFull extends OpportunitySimple {
   opportunity_activities: {
+    // TODO - fill out after implementing visitor activities
     visitor_activity: unknown;
   };
 }
@@ -87,7 +89,7 @@ export interface OpportunityQueryResponseFull extends ResponseBase {
   };
 }
 
-type OpportunityQueryResponse =
+export type OpportunityQueryResponse =
   | OpportunityQueryResponseMobile
   | OpportunityQueryResponseSimple
   | OpportunityQueryResponseFull;
@@ -112,7 +114,6 @@ export type OpportunityResponse =
 export default class Opportunities extends ObjectsBase {
   objectName = 'opportunity';
 
-  query(): Promise<OpportunityQueryResponseFull>;
   query<T extends OutputParamsMobile & OpportunityQueryParams>(
     params: T,
   ): Promise<OpportunityQueryResponseMobile>;
@@ -120,7 +121,7 @@ export default class Opportunities extends ObjectsBase {
     params: T,
   ): Promise<OpportunityQueryResponseSimple>;
   query<T extends OutputParamsFull & OpportunityQueryParams>(
-    params: T,
+    params?: T,
   ): Promise<OpportunityQueryResponseFull>;
 
   public async query(params?: OpportunityQueryParams): Promise<OpportunityQueryResponse> {
@@ -131,7 +132,6 @@ export default class Opportunities extends ObjectsBase {
     return response.data;
   }
 
-  read(id: number): Promise<OpportunityResponseFull>;
   read<T extends OutputParamsMobile & OpportunityQueryParams>(
     id: number,
     params: T,
@@ -142,7 +142,7 @@ export default class Opportunities extends ObjectsBase {
   ): Promise<OpportunityResponseSimple>;
   read<T extends OutputParamsFull & OpportunityQueryParams>(
     id: number,
-    params: T,
+    params?: T,
   ): Promise<OpportunityResponseFull>;
 
   public async read(id: number, params?: OutputParams): Promise<OpportunityResponse> {
@@ -153,7 +153,6 @@ export default class Opportunities extends ObjectsBase {
     return response.data;
   }
 
-  createByEmail(prospectEmail: string, create: CreateOpportunity): Promise<OpportunityResponseFull>;
   createByEmail<T extends OutputParamsMobile & OpportunityQueryParams>(
     prospectEmail: string,
     create: CreateOpportunity,
@@ -167,7 +166,7 @@ export default class Opportunities extends ObjectsBase {
   createByEmail<T extends OutputParamsFull & OpportunityQueryParams>(
     prospectEmail: string,
     create: CreateOpportunity,
-    params: T,
+    params?: T,
   ): Promise<OpportunityResponseFull>;
 
   public async createByEmail(
@@ -185,7 +184,6 @@ export default class Opportunities extends ObjectsBase {
     return response.data;
   }
 
-  createById(prospectId: number, create: CreateOpportunity): Promise<OpportunityResponseFull>;
   createById<T extends OutputParamsMobile & OpportunityQueryParams>(
     prospectId: number,
     create: CreateOpportunity,
@@ -199,7 +197,7 @@ export default class Opportunities extends ObjectsBase {
   createById<T extends OutputParamsFull & OpportunityQueryParams>(
     prospectId: number,
     create: CreateOpportunity,
-    params: T,
+    params?: T,
   ): Promise<OpportunityResponseFull>;
 
   public async createById(
@@ -217,7 +215,6 @@ export default class Opportunities extends ObjectsBase {
     return response.data;
   }
 
-  update(id: number, update: UpdateOpportunity): Promise<OpportunityResponseFull>;
   update<T extends OutputParamsMobile & OpportunityQueryParams>(
     id: number,
     update: UpdateOpportunity,
@@ -231,7 +228,7 @@ export default class Opportunities extends ObjectsBase {
   update<T extends OutputParamsFull & OpportunityQueryParams>(
     id: number,
     update: UpdateOpportunity,
-    params: T,
+    params?: T,
   ): Promise<OpportunityResponseFull>;
 
   public async update(

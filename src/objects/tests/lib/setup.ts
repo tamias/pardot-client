@@ -26,6 +26,18 @@ export const pardot = new PardotClient({
 export const onGetSpy = jest.spyOn(pardot.axios, 'get');
 export const onPostSpy = jest.spyOn(pardot.axios, 'post');
 
+export const pardotV3 = new PardotClient({
+  apiVersion: 3,
+  businessUnitId,
+  clientId,
+  clientSecret,
+  redirectUri,
+  token: rawToken,
+});
+
+export const onGetSpyV3 = jest.spyOn(pardotV3.axios, 'get');
+export const onPostSpyV3 = jest.spyOn(pardotV3.axios, 'post');
+
 export const responseAttributes: ResponseBase = {
   '@attributes': {
     status: 'ok',

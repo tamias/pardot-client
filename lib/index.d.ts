@@ -15,6 +15,7 @@ import LifecycleStages from './objects/lifecycle-stages';
 import ListMemberships from './objects/list-memberships';
 import Lists from './objects/lists';
 import Opportunities from './objects/opportunities';
+import Prospects from './objects/prospects';
 export default class PardotClient {
     clientId: string;
     clientSecret: string;
@@ -40,6 +41,7 @@ export default class PardotClient {
     lists: Lists;
     listMemberships: ListMemberships;
     opportunities: Opportunities;
+    prospects: Prospects;
     constructor({ clientId, clientSecret, redirectUri, token, businessUnitId, baseUrl, apiVersion, refreshCallback, }: PardotProps);
     authorizeUrl(props?: AuthorizeUrlProps): string;
     getAccessToken(code: string): Promise<RawAccessToken>;

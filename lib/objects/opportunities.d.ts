@@ -59,6 +59,7 @@ export interface OpportunityQueryResponseFull extends ResponseBase {
         opportunity: OpportunityFull | OpportunityFull[];
     };
 }
+export declare type OpportunityQueryResponse = OpportunityQueryResponseMobile | OpportunityQueryResponseSimple | OpportunityQueryResponseFull;
 export interface OpportunityResponseMobile extends ResponseBase {
     opportunity: OpportunityMobile;
 }
@@ -71,26 +72,21 @@ export interface OpportunityResponseFull extends ResponseBase {
 export declare type OpportunityResponse = OpportunityResponseMobile | OpportunityResponseSimple | OpportunityResponseFull;
 export default class Opportunities extends ObjectsBase {
     objectName: string;
-    query(): Promise<OpportunityQueryResponseFull>;
     query<T extends OutputParamsMobile & OpportunityQueryParams>(params: T): Promise<OpportunityQueryResponseMobile>;
     query<T extends OutputParamsSimple & OpportunityQueryParams>(params: T): Promise<OpportunityQueryResponseSimple>;
-    query<T extends OutputParamsFull & OpportunityQueryParams>(params: T): Promise<OpportunityQueryResponseFull>;
-    read(id: number): Promise<OpportunityResponseFull>;
+    query<T extends OutputParamsFull & OpportunityQueryParams>(params?: T): Promise<OpportunityQueryResponseFull>;
     read<T extends OutputParamsMobile & OpportunityQueryParams>(id: number, params: T): Promise<OpportunityResponseMobile>;
     read<T extends OutputParamsSimple & OpportunityQueryParams>(id: number, params: T): Promise<OpportunityResponseSimple>;
-    read<T extends OutputParamsFull & OpportunityQueryParams>(id: number, params: T): Promise<OpportunityResponseFull>;
-    createByEmail(prospectEmail: string, create: CreateOpportunity): Promise<OpportunityResponseFull>;
+    read<T extends OutputParamsFull & OpportunityQueryParams>(id: number, params?: T): Promise<OpportunityResponseFull>;
     createByEmail<T extends OutputParamsMobile & OpportunityQueryParams>(prospectEmail: string, create: CreateOpportunity, params: T): Promise<OpportunityResponseMobile>;
     createByEmail<T extends OutputParamsSimple & OpportunityQueryParams>(prospectEmail: string, create: CreateOpportunity, params: T): Promise<OpportunityResponseSimple>;
-    createByEmail<T extends OutputParamsFull & OpportunityQueryParams>(prospectEmail: string, create: CreateOpportunity, params: T): Promise<OpportunityResponseFull>;
-    createById(prospectId: number, create: CreateOpportunity): Promise<OpportunityResponseFull>;
+    createByEmail<T extends OutputParamsFull & OpportunityQueryParams>(prospectEmail: string, create: CreateOpportunity, params?: T): Promise<OpportunityResponseFull>;
     createById<T extends OutputParamsMobile & OpportunityQueryParams>(prospectId: number, create: CreateOpportunity, params: T): Promise<OpportunityResponseMobile>;
     createById<T extends OutputParamsSimple & OpportunityQueryParams>(prospectId: number, create: CreateOpportunity, params: T): Promise<OpportunityResponseSimple>;
-    createById<T extends OutputParamsFull & OpportunityQueryParams>(prospectId: number, create: CreateOpportunity, params: T): Promise<OpportunityResponseFull>;
-    update(id: number, update: UpdateOpportunity): Promise<OpportunityResponseFull>;
+    createById<T extends OutputParamsFull & OpportunityQueryParams>(prospectId: number, create: CreateOpportunity, params?: T): Promise<OpportunityResponseFull>;
     update<T extends OutputParamsMobile & OpportunityQueryParams>(id: number, update: UpdateOpportunity, params: T): Promise<OpportunityResponseMobile>;
     update<T extends OutputParamsSimple & OpportunityQueryParams>(id: number, update: UpdateOpportunity, params: T): Promise<OpportunityResponseSimple>;
-    update<T extends OutputParamsFull & OpportunityQueryParams>(id: number, update: UpdateOpportunity, params: T): Promise<OpportunityResponseFull>;
+    update<T extends OutputParamsFull & OpportunityQueryParams>(id: number, update: UpdateOpportunity, params?: T): Promise<OpportunityResponseFull>;
     delete(id: number): Promise<void>;
     undelete(id: number): Promise<void>;
 }
