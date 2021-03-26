@@ -17,6 +17,7 @@ import Lists from './objects/lists';
 import Opportunities from './objects/opportunities';
 import ProspectAccounts from './objects/prospect-accounts';
 import Prospects from './objects/prospects';
+import Tags from './objects/tags';
 export default class PardotClient {
     clientId: string;
     clientSecret: string;
@@ -44,6 +45,7 @@ export default class PardotClient {
     opportunities: Opportunities;
     prospects: Prospects;
     prospectAccounts: ProspectAccounts;
+    tags: Tags;
     constructor({ clientId, clientSecret, redirectUri, token, businessUnitId, baseUrl, apiVersion, refreshCallback, }: PardotProps);
     authorizeUrl(props?: AuthorizeUrlProps): string;
     getAccessToken(code: string): Promise<RawAccessToken>;

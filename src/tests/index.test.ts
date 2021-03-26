@@ -19,6 +19,7 @@ import Opportunities from '../objects/opportunities';
 import Pardot from '..';
 import ProspectAccounts from '../objects/prospect-accounts';
 import Prospects from '../objects/prospects';
+import Tags from '../objects/tags';
 
 const mockAxios = new MockAdapter(axios);
 const axiosCreateSpy = jest.spyOn(axios, 'create');
@@ -114,6 +115,7 @@ describe('Pardot', () => {
         opportunities: expect.any(Opportunities),
         prospectAccounts: expect.any(ProspectAccounts),
         prospects: expect.any(Prospects),
+        tags: expect.any(Tags),
       });
     });
   });
