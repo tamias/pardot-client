@@ -17,6 +17,7 @@ import Lists from '../objects/lists';
 import MockAdapter from 'axios-mock-adapter';
 import Opportunities from '../objects/opportunities';
 import Pardot from '..';
+import ProspectAccounts from '../objects/prospect-accounts';
 import Prospects from '../objects/prospects';
 
 const mockAxios = new MockAdapter(axios);
@@ -111,6 +112,7 @@ describe('Pardot', () => {
         listMemberships: expect.any(ListMemberships),
         lists: expect.any(Lists),
         opportunities: expect.any(Opportunities),
+        prospectAccounts: expect.any(ProspectAccounts),
         prospects: expect.any(Prospects),
       });
     });
