@@ -19,6 +19,7 @@ declare type DynamicContentSearchParams = IdSearchParams & CreatedSearchParams &
 interface DynamicContentResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id';
 }
+declare type DynamicContentQueryParams = DynamicContentSearchParams & DynamicContentResultParams;
 export interface DynamicContentQueryResponse extends ResponseBase {
     result: {
         total_results: number;
@@ -30,7 +31,7 @@ export interface DynamicContentResponse extends ResponseBase {
 }
 export default class DynamicContent extends ObjectsBase {
     objectName: string;
-    query(params?: DynamicContentSearchParams & DynamicContentResultParams): Promise<DynamicContentQueryResponse>;
+    query(params?: DynamicContentQueryParams): Promise<DynamicContentQueryResponse>;
     read(id: number): Promise<DynamicContentResponse>;
 }
 export {};

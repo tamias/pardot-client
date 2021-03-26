@@ -17,6 +17,7 @@ declare type ListSearchParams = {
 interface ListResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id' | 'name' | 'updated_at';
 }
+export declare type ListQueryParams = ListSearchParams & ListResultParams;
 export declare type UpdateList = Update<List>;
 export declare type CreateList = Create<List>;
 export interface ListQueryResponse extends ResponseBase {
@@ -30,7 +31,7 @@ export interface ListResponse extends ResponseBase {
 }
 export default class Lists extends ObjectsBase {
     objectName: string;
-    query(params?: ListSearchParams & ListResultParams): Promise<ListQueryResponse>;
+    query(params?: ListQueryParams): Promise<ListQueryResponse>;
     read(id: number): Promise<ListResponse>;
     update(id: number, update: UpdateList): Promise<ListResponse>;
     create(data: CreateList): Promise<ListResponse>;

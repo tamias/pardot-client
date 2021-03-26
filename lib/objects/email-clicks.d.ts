@@ -19,6 +19,7 @@ declare type EmailClickSearchParams = {
 interface EmailClickResultParams {
     limit?: number;
 }
+declare type EmailClickQueryParams = EmailClickSearchParams & EmailClickResultParams;
 export interface EmailClickQueryResponse extends ResponseBase {
     result: {
         total_results: number;
@@ -27,6 +28,6 @@ export interface EmailClickQueryResponse extends ResponseBase {
 }
 export default class EmailClicks extends ObjectsBase {
     objectName: string;
-    query(params?: EmailClickSearchParams & EmailClickResultParams): Promise<EmailClickQueryResponse>;
+    query(params?: EmailClickQueryParams): Promise<EmailClickQueryResponse>;
 }
 export {};

@@ -14,6 +14,8 @@ interface LifecycleStageResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id';
 }
 
+type LifecycleStageQueryParams = LifecycleStageSearchParams & LifecycleStageResultParams;
+
 export interface LifecycleStageQueryResponse extends ResponseBase {
   result: {
     total_results: number;
@@ -24,9 +26,7 @@ export interface LifecycleStageQueryResponse extends ResponseBase {
 export default class LifecycleStages extends ObjectsBase {
   objectName = 'lifecycleStage';
 
-  public async query(
-    params?: LifecycleStageSearchParams & LifecycleStageResultParams,
-  ): Promise<LifecycleStageQueryResponse> {
+  public async query(params?: LifecycleStageQueryParams): Promise<LifecycleStageQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 
     const response = await this.parent.axios.get<LifecycleStageQueryResponse>(url, { params });

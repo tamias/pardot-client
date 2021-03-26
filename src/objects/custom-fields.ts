@@ -27,6 +27,8 @@ interface CustomFieldResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id' | 'name';
 }
 
+export type CustomFieldQueryParams = CustomFieldSearchParams & CustomFieldResultParams;
+
 export interface CustomFieldQueryResponse extends ResponseBase {
   result: {
     total_results: number;
@@ -45,9 +47,7 @@ export type UpdateCustomField = Update<CustomField>;
 export default class CustomFields extends ObjectsBase {
   objectName = 'customField';
 
-  public async query(
-    params?: CustomFieldSearchParams & CustomFieldResultParams,
-  ): Promise<CustomFieldQueryResponse> {
+  public async query(params?: CustomFieldQueryParams): Promise<CustomFieldQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 
     const response = await this.parent.axios.get<CustomFieldQueryResponse>(url, { params });

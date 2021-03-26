@@ -25,6 +25,8 @@ interface CampaignResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id' | 'name' | 'updated_at' | 'cost';
 }
 
+export type CampaignQueryParams = CampaignSearchParams & CampaignResultParams;
+
 export type UpdateCampaign = Update<Campaign>;
 export type CreateCampaign = Create<Campaign, 'name'>;
 
@@ -42,9 +44,7 @@ export interface CampaignResponse extends ResponseBase {
 export default class Campaigns extends ObjectsBase {
   objectName = 'campaign';
 
-  public async query(
-    params?: CampaignSearchParams & CampaignResultParams,
-  ): Promise<CampaignQueryResponse> {
+  public async query(params?: CampaignQueryParams): Promise<CampaignQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 
     const response = await this.parent.axios.get<CampaignQueryResponse>(url, { params });

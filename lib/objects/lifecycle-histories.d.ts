@@ -12,6 +12,7 @@ declare type LifecycleHistorySearchParams = IdSearchParams & CreatedSearchParams
 interface LifecycleHistoryResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id';
 }
+declare type LifecycleHistoryQueryParams = LifecycleHistorySearchParams & LifecycleHistoryResultParams;
 export interface LifecycleHistoryQueryResponse extends ResponseBase {
     result: {
         total_results: number;
@@ -23,7 +24,7 @@ export interface LifecycleHistoryResponse extends ResponseBase {
 }
 export default class LifecycleHistories extends ObjectsBase {
     objectName: string;
-    query(params?: LifecycleHistorySearchParams & LifecycleHistoryResultParams): Promise<LifecycleHistoryQueryResponse>;
+    query(params?: LifecycleHistoryQueryParams): Promise<LifecycleHistoryQueryResponse>;
     read(id: number): Promise<LifecycleHistoryResponse>;
 }
 export {};

@@ -31,6 +31,8 @@ interface ListResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id' | 'name' | 'updated_at';
 }
 
+export type ListQueryParams = ListSearchParams & ListResultParams;
+
 export type UpdateList = Update<List>;
 export type CreateList = Create<List>;
 
@@ -48,7 +50,7 @@ export interface ListResponse extends ResponseBase {
 export default class Lists extends ObjectsBase {
   objectName = 'list';
 
-  public async query(params?: ListSearchParams & ListResultParams): Promise<ListQueryResponse> {
+  public async query(params?: ListQueryParams): Promise<ListQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 
     const response = await this.parent.axios.get<ListQueryResponse>(url, { params });

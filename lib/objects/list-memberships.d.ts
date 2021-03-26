@@ -15,6 +15,7 @@ declare type ListMembershipSearchParams = {
 interface ListMembershipResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id';
 }
+export declare type ListMembershipQueryParams = ListMembershipSearchParams & ListMembershipResultParams;
 export declare type UpdateListMembership = Update<ListMembership>;
 export declare type CreateListMembership = Create<ListMembership>;
 export interface ListMembershipQueryResponse extends ResponseBase {
@@ -28,7 +29,7 @@ export interface ListMembershipResponse extends ResponseBase {
 }
 export default class ListMemberships extends ObjectsBase {
     objectName: string;
-    query(params?: ListMembershipSearchParams & ListMembershipResultParams): Promise<ListMembershipQueryResponse>;
+    query(params?: ListMembershipQueryParams): Promise<ListMembershipQueryResponse>;
     read(listId: number, prospectId: number): Promise<ListMembershipResponse>;
     readById(id: number): Promise<ListMembershipResponse>;
     create(listId: number, prospectId: number, data: CreateListMembership): Promise<ListMembershipResponse>;

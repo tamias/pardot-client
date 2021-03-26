@@ -29,6 +29,8 @@ interface ListMembershipResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id';
 }
 
+export type ListMembershipQueryParams = ListMembershipSearchParams & ListMembershipResultParams;
+
 export type UpdateListMembership = Update<ListMembership>;
 export type CreateListMembership = Create<ListMembership>;
 
@@ -46,9 +48,7 @@ export interface ListMembershipResponse extends ResponseBase {
 export default class ListMemberships extends ObjectsBase {
   objectName = 'listMembership';
 
-  public async query(
-    params?: ListMembershipSearchParams & ListMembershipResultParams,
-  ): Promise<ListMembershipQueryResponse> {
+  public async query(params?: ListMembershipQueryParams): Promise<ListMembershipQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 
     const response = await this.parent.axios.get<ListMembershipQueryResponse>(url, { params });

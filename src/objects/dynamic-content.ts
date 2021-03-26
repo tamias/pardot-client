@@ -30,6 +30,8 @@ interface DynamicContentResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id';
 }
 
+type DynamicContentQueryParams = DynamicContentSearchParams & DynamicContentResultParams;
+
 export interface DynamicContentQueryResponse extends ResponseBase {
   result: {
     total_results: number;
@@ -44,9 +46,7 @@ export interface DynamicContentResponse extends ResponseBase {
 export default class DynamicContent extends ObjectsBase {
   objectName = 'dynamicContent';
 
-  public async query(
-    params?: DynamicContentSearchParams & DynamicContentResultParams,
-  ): Promise<DynamicContentQueryResponse> {
+  public async query(params?: DynamicContentQueryParams): Promise<DynamicContentQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 
     const response = await this.parent.axios.get<DynamicContentQueryResponse>(url, { params });

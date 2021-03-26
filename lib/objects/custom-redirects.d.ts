@@ -16,6 +16,7 @@ declare type CustomRedirectSearchParams = IdSearchParams & CreatedSearchParams &
 interface CustomRedirectResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id';
 }
+export declare type CustomRedirectQueryParams = CustomRedirectSearchParams & CustomRedirectResultParams;
 export interface CustomRedirectQueryResponse extends ResponseBase {
     result: {
         total_results: number;
@@ -27,7 +28,7 @@ export interface CustomRedirectResponse extends ResponseBase {
 }
 export default class CustomRedirects extends ObjectsBase {
     objectName: string;
-    query(params?: CustomRedirectSearchParams & CustomRedirectResultParams): Promise<CustomRedirectQueryResponse>;
+    query(params?: CustomRedirectQueryParams): Promise<CustomRedirectQueryResponse>;
     read(id: number): Promise<CustomRedirectResponse>;
 }
 export {};

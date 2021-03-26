@@ -16,6 +16,8 @@ interface LifecycleHistoryResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id';
 }
 
+type LifecycleHistoryQueryParams = LifecycleHistorySearchParams & LifecycleHistoryResultParams;
+
 export interface LifecycleHistoryQueryResponse extends ResponseBase {
   result: {
     total_results: number;
@@ -30,9 +32,7 @@ export interface LifecycleHistoryResponse extends ResponseBase {
 export default class LifecycleHistories extends ObjectsBase {
   objectName = 'lifecycleHistory';
 
-  public async query(
-    params?: LifecycleHistorySearchParams & LifecycleHistoryResultParams,
-  ): Promise<LifecycleHistoryQueryResponse> {
+  public async query(params?: LifecycleHistoryQueryParams): Promise<LifecycleHistoryQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 
     const response = await this.parent.axios.get<LifecycleHistoryQueryResponse>(url, { params });

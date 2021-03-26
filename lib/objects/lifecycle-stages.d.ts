@@ -10,6 +10,7 @@ declare type LifecycleStageSearchParams = IdSearchParams;
 interface LifecycleStageResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id';
 }
+declare type LifecycleStageQueryParams = LifecycleStageSearchParams & LifecycleStageResultParams;
 export interface LifecycleStageQueryResponse extends ResponseBase {
     result: {
         total_results: number;
@@ -18,6 +19,6 @@ export interface LifecycleStageQueryResponse extends ResponseBase {
 }
 export default class LifecycleStages extends ObjectsBase {
     objectName: string;
-    query(params?: LifecycleStageSearchParams & LifecycleStageResultParams): Promise<LifecycleStageQueryResponse>;
+    query(params?: LifecycleStageQueryParams): Promise<LifecycleStageQueryResponse>;
 }
 export {};

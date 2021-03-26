@@ -15,6 +15,7 @@ declare type FormSearchParams = IdSearchParams & CreatedSearchParams & UpdatedSe
 interface FormResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id';
 }
+declare type FormQueryParams = FormSearchParams & FormResultParams;
 export interface FormQueryResponse extends ResponseBase {
     result: {
         total_results: number;
@@ -26,7 +27,7 @@ export interface FormResponse extends ResponseBase {
 }
 export default class Forms extends ObjectsBase {
     objectName: string;
-    query(params?: FormSearchParams & FormResultParams): Promise<FormQueryResponse>;
+    query(params?: FormQueryParams): Promise<FormQueryResponse>;
     read(id: number): Promise<FormResponse>;
 }
 export {};

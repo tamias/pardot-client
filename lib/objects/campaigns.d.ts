@@ -11,6 +11,7 @@ declare type CampaignSearchParams = {
 interface CampaignResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id' | 'name' | 'updated_at' | 'cost';
 }
+export declare type CampaignQueryParams = CampaignSearchParams & CampaignResultParams;
 export declare type UpdateCampaign = Update<Campaign>;
 export declare type CreateCampaign = Create<Campaign, 'name'>;
 export interface CampaignQueryResponse extends ResponseBase {
@@ -24,7 +25,7 @@ export interface CampaignResponse extends ResponseBase {
 }
 export default class Campaigns extends ObjectsBase {
     objectName: string;
-    query(params?: CampaignSearchParams & CampaignResultParams): Promise<CampaignQueryResponse>;
+    query(params?: CampaignQueryParams): Promise<CampaignQueryResponse>;
     read(id: number): Promise<CampaignResponse>;
     update(id: number, update: UpdateCampaign): Promise<CampaignResponse>;
     create(data: CreateCampaign): Promise<CampaignResponse>;

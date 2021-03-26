@@ -26,6 +26,8 @@ interface CustomRedirectResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id';
 }
 
+export type CustomRedirectQueryParams = CustomRedirectSearchParams & CustomRedirectResultParams;
+
 export interface CustomRedirectQueryResponse extends ResponseBase {
   result: {
     total_results: number;
@@ -40,9 +42,7 @@ export interface CustomRedirectResponse extends ResponseBase {
 export default class CustomRedirects extends ObjectsBase {
   objectName = 'customRedirect';
 
-  public async query(
-    params?: CustomRedirectSearchParams & CustomRedirectResultParams,
-  ): Promise<CustomRedirectQueryResponse> {
+  public async query(params?: CustomRedirectQueryParams): Promise<CustomRedirectQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 
     const response = await this.parent.axios.get<CustomRedirectQueryResponse>(url, { params });

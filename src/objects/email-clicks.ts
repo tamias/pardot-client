@@ -27,6 +27,8 @@ interface EmailClickResultParams {
   limit?: number;
 }
 
+type EmailClickQueryParams = EmailClickSearchParams & EmailClickResultParams;
+
 export interface EmailClickQueryResponse extends ResponseBase {
   result: {
     total_results: number;
@@ -37,9 +39,7 @@ export interface EmailClickQueryResponse extends ResponseBase {
 export default class EmailClicks extends ObjectsBase {
   objectName = 'emailClick';
 
-  public async query(
-    params?: EmailClickSearchParams & EmailClickResultParams,
-  ): Promise<EmailClickQueryResponse> {
+  public async query(params?: EmailClickQueryParams): Promise<EmailClickQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 
     const response = await this.parent.axios.get(url, { params });

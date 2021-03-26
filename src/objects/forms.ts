@@ -25,6 +25,8 @@ interface FormResultParams extends BaseResultParams {
   sort_by?: 'created_at' | 'id';
 }
 
+type FormQueryParams = FormSearchParams & FormResultParams;
+
 export interface FormQueryResponse extends ResponseBase {
   result: {
     total_results: number;
@@ -39,7 +41,7 @@ export interface FormResponse extends ResponseBase {
 export default class Forms extends ObjectsBase {
   objectName = 'form';
 
-  public async query(params?: FormSearchParams & FormResultParams): Promise<FormQueryResponse> {
+  public async query(params?: FormQueryParams): Promise<FormQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, 'query');
 
     const response = await this.parent.axios.get<FormQueryResponse>(url, { params });

@@ -17,6 +17,7 @@ declare type CustomFieldSearchParams = IdSearchParams & CreatedSearchParams;
 interface CustomFieldResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id' | 'name';
 }
+export declare type CustomFieldQueryParams = CustomFieldSearchParams & CustomFieldResultParams;
 export interface CustomFieldQueryResponse extends ResponseBase {
     result: {
         total_results: number;
@@ -29,7 +30,7 @@ export interface CustomFieldResponse extends ResponseBase {
 export declare type UpdateCustomField = Update<CustomField>;
 export default class CustomFields extends ObjectsBase {
     objectName: string;
-    query(params?: CustomFieldSearchParams & CustomFieldResultParams): Promise<CustomFieldQueryResponse>;
+    query(params?: CustomFieldQueryParams): Promise<CustomFieldQueryResponse>;
     read(id: number): Promise<CustomFieldResponse>;
     update(id: number, update: UpdateCustomField): Promise<CustomFieldResponse>;
 }
