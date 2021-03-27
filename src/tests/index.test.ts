@@ -19,6 +19,7 @@ import Opportunities from '../objects/opportunities';
 import Pardot from '..';
 import ProspectAccounts from '../objects/prospect-accounts';
 import Prospects from '../objects/prospects';
+import TagObjects from '../objects/tag-objects';
 import Tags from '../objects/tags';
 
 const mockAxios = new MockAdapter(axios);
@@ -115,6 +116,7 @@ describe('Pardot', () => {
         opportunities: expect.any(Opportunities),
         prospectAccounts: expect.any(ProspectAccounts),
         prospects: expect.any(Prospects),
+        tagObjects: expect.any(TagObjects),
         tags: expect.any(Tags),
       });
     });
