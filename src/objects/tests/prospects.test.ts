@@ -107,7 +107,7 @@ describe('Prospects', () => {
       expect(
         onPostSpy,
       ).toHaveBeenCalledWith(
-        `https://pi.pardot.com/api/prospect/version/4/do/create/email/${email}`,
+        `https://pi.pardot.com/api/prospect/version/4/do/create/email/${encodeURIComponent(email)}`,
         { ...create, ...params },
       );
 
@@ -130,7 +130,7 @@ describe('Prospects', () => {
       expect(
         onGetSpy,
       ).toHaveBeenCalledWith(
-        `https://pi.pardot.com/api/prospect/version/4/do/read/email/${email}`,
+        `https://pi.pardot.com/api/prospect/version/4/do/read/email/${encodeURIComponent(email)}`,
         { params },
       );
 
@@ -324,7 +324,7 @@ describe('Prospects', () => {
       const response = await prospects.upsertByEmail(email, data, params);
 
       expect(onPostSpy).toHaveBeenCalledWith(
-        `https://pi.pardot.com/api/prospect/version/4/do/upsert/email/${email}`,
+        `https://pi.pardot.com/api/prospect/version/4/do/upsert/email/${encodeURIComponent(email)}`,
         {
           ...params,
           ...data,
@@ -765,7 +765,7 @@ describe('Prospects', () => {
       const response = await prospects.deleteByEmail(email);
 
       expect(onPostSpy).toHaveBeenCalledWith(
-        `https://pi.pardot.com/api/prospect/version/4/do/delete/email/${email}`,
+        `https://pi.pardot.com/api/prospect/version/4/do/delete/email/${encodeURIComponent(email)}`,
       );
 
       expect(response).toBeUndefined();

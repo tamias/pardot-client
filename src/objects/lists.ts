@@ -51,7 +51,7 @@ export default class Lists extends ObjectsBase {
   objectName = 'list';
 
   public async query(params?: ListQueryParams): Promise<ListQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<ListQueryResponse>(url, { params });
 
@@ -59,7 +59,7 @@ export default class Lists extends ObjectsBase {
   }
 
   public async read(id: number): Promise<ListResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<ListResponse>(url);
 
@@ -67,7 +67,7 @@ export default class Lists extends ObjectsBase {
   }
 
   public async update(id: number, update: UpdateList): Promise<ListResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `update/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['update', 'id', id]);
 
     const response = await this.parent.axios.post<ListResponse>(url, update);
 
@@ -75,7 +75,7 @@ export default class Lists extends ObjectsBase {
   }
 
   public async create(data: CreateList): Promise<ListResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `create`);
+    const url = this.parent.getApiUrl(this.objectName, ['create']);
 
     const response = await this.parent.axios.post<ListResponse>(url, data);
 
@@ -83,7 +83,7 @@ export default class Lists extends ObjectsBase {
   }
 
   public async delete(id: number): Promise<void> {
-    const url = this.parent.getApiUrl(this.objectName, `delete/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['delete', 'id', id]);
 
     await this.parent.axios.post(url);
   }

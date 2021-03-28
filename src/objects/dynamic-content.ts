@@ -47,7 +47,7 @@ export default class DynamicContent extends ObjectsBase {
   objectName = 'dynamicContent';
 
   public async query(params?: DynamicContentQueryParams): Promise<DynamicContentQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<DynamicContentQueryResponse>(url, { params });
 
@@ -55,7 +55,7 @@ export default class DynamicContent extends ObjectsBase {
   }
 
   public async read(id: number): Promise<DynamicContentResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<DynamicContentResponse>(url);
 

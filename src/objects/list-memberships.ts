@@ -49,7 +49,7 @@ export default class ListMemberships extends ObjectsBase {
   objectName = 'listMembership';
 
   public async query(params?: ListMembershipQueryParams): Promise<ListMembershipQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<ListMembershipQueryResponse>(url, { params });
 
@@ -57,10 +57,13 @@ export default class ListMemberships extends ObjectsBase {
   }
 
   public async read(listId: number, prospectId: number): Promise<ListMembershipResponse> {
-    const url = this.parent.getApiUrl(
-      this.objectName,
-      `read/list_id/${listId}/prospect_id/${prospectId}`,
-    );
+    const url = this.parent.getApiUrl(this.objectName, [
+      'read',
+      'list_id',
+      listId,
+      'prospect_id',
+      prospectId,
+    ]);
 
     const response = await this.parent.axios.get<ListMembershipResponse>(url);
 
@@ -68,7 +71,7 @@ export default class ListMemberships extends ObjectsBase {
   }
 
   public async readById(id: number): Promise<ListMembershipResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<ListMembershipResponse>(url);
 
@@ -80,10 +83,13 @@ export default class ListMemberships extends ObjectsBase {
     prospectId: number,
     data: CreateListMembership,
   ): Promise<ListMembershipResponse> {
-    const url = this.parent.getApiUrl(
-      this.objectName,
-      `create/list_id/${listId}/prospect_id/${prospectId}`,
-    );
+    const url = this.parent.getApiUrl(this.objectName, [
+      'create',
+      'list_id',
+      listId,
+      'prospect_id',
+      prospectId,
+    ]);
 
     const response = await this.parent.axios.post<ListMembershipResponse>(url, data);
 
@@ -95,10 +101,13 @@ export default class ListMemberships extends ObjectsBase {
     prospectId: number,
     update: UpdateListMembership,
   ): Promise<ListMembershipResponse> {
-    const url = this.parent.getApiUrl(
-      this.objectName,
-      `update/list_id/${listId}/prospect_id/${prospectId}`,
-    );
+    const url = this.parent.getApiUrl(this.objectName, [
+      'update',
+      'list_id',
+      listId,
+      'prospect_id',
+      prospectId,
+    ]);
 
     const response = await this.parent.axios.post<ListMembershipResponse>(url, update);
 
@@ -109,7 +118,7 @@ export default class ListMemberships extends ObjectsBase {
     id: number,
     update: UpdateListMembership,
   ): Promise<ListMembershipResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `update/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['update', 'id', id]);
 
     const response = await this.parent.axios.post<ListMembershipResponse>(url, update);
 
@@ -117,16 +126,19 @@ export default class ListMemberships extends ObjectsBase {
   }
 
   public async delete(listId: number, prospectId: number): Promise<void> {
-    const url = this.parent.getApiUrl(
-      this.objectName,
-      `delete/list_id/${listId}/prospect_id/${prospectId}`,
-    );
+    const url = this.parent.getApiUrl(this.objectName, [
+      'delete',
+      'list_id',
+      listId,
+      'prospect_id',
+      prospectId,
+    ]);
 
     await this.parent.axios.post(url);
   }
 
   public async deleteById(id: number): Promise<void> {
-    const url = this.parent.getApiUrl(this.objectName, `delete/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['delete', 'id', id]);
 
     await this.parent.axios.post(url);
   }

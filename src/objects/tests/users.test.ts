@@ -92,7 +92,7 @@ describe('Users', () => {
       const response = await users.readByEmail(email);
 
       expect(onGetSpy).toHaveBeenCalledWith(
-        `https://pi.pardot.com/api/user/version/4/do/read/email/${email}`,
+        `https://pi.pardot.com/api/user/version/4/do/read/email/${encodeURIComponent(email)}`,
       );
 
       expect(response).toEqual(mockUserResponse);

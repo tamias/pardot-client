@@ -125,7 +125,7 @@ export default class Opportunities extends ObjectsBase {
   ): Promise<OpportunityQueryResponseFull>;
 
   public async query(params?: OpportunityQueryParams): Promise<OpportunityQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<OpportunityQueryResponse>(url, { params });
 
@@ -146,7 +146,7 @@ export default class Opportunities extends ObjectsBase {
   ): Promise<OpportunityResponseFull>;
 
   public async read(id: number, params?: OutputParams): Promise<OpportunityResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<OpportunityResponse>(url, { params });
 
@@ -174,7 +174,7 @@ export default class Opportunities extends ObjectsBase {
     create: CreateOpportunity,
     params?: OutputParams,
   ): Promise<OpportunityResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `create/prospect_email/${prospectEmail}`);
+    const url = this.parent.getApiUrl(this.objectName, ['create', 'prospect_email', prospectEmail]);
 
     const response = await this.parent.axios.post<OpportunityResponse>(url, {
       ...create,
@@ -205,7 +205,7 @@ export default class Opportunities extends ObjectsBase {
     create: CreateOpportunity,
     params?: OutputParams,
   ): Promise<OpportunityResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `create/prospect_id/${prospectId}`);
+    const url = this.parent.getApiUrl(this.objectName, ['create', 'prospect_id', prospectId]);
 
     const response = await this.parent.axios.post<OpportunityResponse>(url, {
       ...create,
@@ -236,7 +236,7 @@ export default class Opportunities extends ObjectsBase {
     update: UpdateOpportunity,
     params?: OutputParams,
   ): Promise<OpportunityResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `update/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['update', 'id', id]);
 
     const response = await this.parent.axios.post<OpportunityResponse>(url, {
       ...update,
@@ -247,13 +247,13 @@ export default class Opportunities extends ObjectsBase {
   }
 
   public async delete(id: number): Promise<void> {
-    const url = this.parent.getApiUrl(this.objectName, `delete/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['delete', 'id', id]);
 
     await this.parent.axios.post(url);
   }
 
   public async undelete(id: number): Promise<void> {
-    const url = this.parent.getApiUrl(this.objectName, `undelete/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['undelete', 'id', id]);
 
     await this.parent.axios.post(url);
   }

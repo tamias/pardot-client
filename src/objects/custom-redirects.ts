@@ -43,7 +43,7 @@ export default class CustomRedirects extends ObjectsBase {
   objectName = 'customRedirect';
 
   public async query(params?: CustomRedirectQueryParams): Promise<CustomRedirectQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<CustomRedirectQueryResponse>(url, { params });
 
@@ -51,7 +51,7 @@ export default class CustomRedirects extends ObjectsBase {
   }
 
   public async read(id: number): Promise<CustomRedirectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<CustomRedirectResponse>(url);
 

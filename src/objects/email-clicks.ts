@@ -40,7 +40,7 @@ export default class EmailClicks extends ObjectsBase {
   objectName = 'emailClick';
 
   public async query(params?: EmailClickQueryParams): Promise<EmailClickQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get(url, { params });
 

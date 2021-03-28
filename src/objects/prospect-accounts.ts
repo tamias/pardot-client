@@ -78,7 +78,7 @@ export default class ProspectAccounts extends ObjectsBase {
   objectName = 'prospectAccount';
 
   public async query(params?: ProspectAccountQueryParams): Promise<ProspectAccountQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<ProspectAccountQueryResponse>(url, { params });
 
@@ -86,7 +86,7 @@ export default class ProspectAccounts extends ObjectsBase {
   }
 
   public async describe(): Promise<ProspectAccountDescribeResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'describe');
+    const url = this.parent.getApiUrl(this.objectName, ['describe']);
 
     const response = await this.parent.axios.get<ProspectAccountDescribeResponse>(url);
 
@@ -94,7 +94,7 @@ export default class ProspectAccounts extends ObjectsBase {
   }
 
   public async read(id: number): Promise<ProspectAccountResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<ProspectAccountResponse>(url);
 
@@ -102,7 +102,7 @@ export default class ProspectAccounts extends ObjectsBase {
   }
 
   public async create(data: CreateProspectAccount): Promise<ProspectAccountResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'create');
+    const url = this.parent.getApiUrl(this.objectName, ['create']);
 
     const response = await this.parent.axios.post<ProspectAccountResponse>(url, data);
 
@@ -110,7 +110,7 @@ export default class ProspectAccounts extends ObjectsBase {
   }
 
   public async update(id: number, update: UpdateProspectAccount): Promise<ProspectAccountResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `update/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['update', 'id', id]);
 
     const response = await this.parent.axios.post<ProspectAccountResponse>(url, update);
 
@@ -119,7 +119,7 @@ export default class ProspectAccounts extends ObjectsBase {
 
   // TODO - what does assign return?
   public async assign(id: number, userId: number): Promise<ProspectAccountResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `assign/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['assign', 'id', id]);
 
     const response = await this.parent.axios.post<ProspectAccountResponse>(url, {
       user_id: userId,

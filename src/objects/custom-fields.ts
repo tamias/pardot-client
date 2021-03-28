@@ -48,7 +48,7 @@ export default class CustomFields extends ObjectsBase {
   objectName = 'customField';
 
   public async query(params?: CustomFieldQueryParams): Promise<CustomFieldQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<CustomFieldQueryResponse>(url, { params });
 
@@ -56,7 +56,7 @@ export default class CustomFields extends ObjectsBase {
   }
 
   public async read(id: number): Promise<CustomFieldResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<CustomFieldResponse>(url);
 
@@ -64,7 +64,7 @@ export default class CustomFields extends ObjectsBase {
   }
 
   public async update(id: number, update: UpdateCustomField): Promise<CustomFieldResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `update/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['update', 'id', id]);
 
     const response = await this.parent.axios.post<CustomFieldResponse>(url, update);
 
@@ -74,7 +74,7 @@ export default class CustomFields extends ObjectsBase {
   // TODO: Pardot API returns err code 10000 "Please provide a valid type for this field"
   //   despite passing apparently valid values for type
   // public async create(data: CreateCustomField): Promise<CustomFieldResponse> {
-  //   const url = this.parent.getApiUrl(this.objectName, 'create');
+  //   const url = this.parent.getApiUrl(this.objectName, ['create']);
   //
   //   const response = await this.parent.axios.post<CustomFieldResponse>(url, data);
   //
@@ -82,7 +82,7 @@ export default class CustomFields extends ObjectsBase {
   // }
   //
   // public async delete(id: number): Promise<void> {
-  //   const url = this.parent.getApiUrl(this.objectName, `delete/id/${id}`);
+  //   const url = this.parent.getApiUrl(this.objectName, ['delete', 'id', id]);
   //
   //   await this.parent.axios.post(url);
   // }

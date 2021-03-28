@@ -54,5 +54,5 @@ export default class PardotClient {
     authorizeUrl(props?: AuthorizeUrlProps): string;
     getAccessToken(code: string): Promise<RawAccessToken>;
     get axios(): AxiosInstance;
-    getApiUrl(object: string, path: string): string;
+    getApiUrl(object: string, pathParts: (string | number)[]): string;
 }

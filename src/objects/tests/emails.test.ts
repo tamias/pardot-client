@@ -100,7 +100,9 @@ describe('Emails', () => {
       const response = await emails.sendToEmail(prospectEmail, params);
 
       expect(onPostSpy).toHaveBeenCalledWith(
-        `https://pi.pardot.com/api/email/version/4/do/send/prospect_email/${prospectEmail}`,
+        `https://pi.pardot.com/api/email/version/4/do/send/prospect_email/${encodeURIComponent(
+          prospectEmail,
+        )}`,
         params,
       );
 

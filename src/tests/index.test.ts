@@ -336,12 +336,24 @@ describe('Pardot', () => {
       const pardot = new Pardot(basePardotProps);
 
       const object = 'campaign';
-      const path = 'query';
+      const pathParts = ['query'];
 
-      const url = pardot.getApiUrl(object, path);
+      const url = pardot.getApiUrl(object, pathParts);
+
+      expect(url).toEqual(`${pardot.baseUrl}/api/${object}/version/${pardot.apiVersion}/do/query`);
+    });
+
+    it('should URI encode the path parts', () => {
+      const pardot = new Pardot(basePardotProps);
+
+      const object = 'user';
+      const pathParts = ['read', 'email', 'user+with#special/chars@example.com'];
+
+      const url = pardot.getApiUrl(object, pathParts);
 
       expect(url).toEqual(
-        `${pardot.baseUrl}/api/${object}/version/${pardot.apiVersion}/do/${path}`,
+        `${pardot.baseUrl}/api/${object}/version/${pardot.apiVersion}/do/` +
+          'read/email/user%2Bwith%23special%2Fchars%40example.com',
       );
     });
   });

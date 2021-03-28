@@ -179,7 +179,10 @@ export default class PardotClient {
     return this.axiosInstance;
   }
 
-  public getApiUrl(object: string, path: string): string {
-    return `${this.baseUrl}/api/${object}/version/${this.apiVersion}/do/${path}`;
+  public getApiUrl(object: string, pathParts: (string | number)[]): string {
+    return (
+      `${this.baseUrl}/api/${object}/version/${this.apiVersion}/do/` +
+      pathParts.map(encodeURIComponent).join('/')
+    );
   }
 }

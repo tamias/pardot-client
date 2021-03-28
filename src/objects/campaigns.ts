@@ -45,7 +45,7 @@ export default class Campaigns extends ObjectsBase {
   objectName = 'campaign';
 
   public async query(params?: CampaignQueryParams): Promise<CampaignQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<CampaignQueryResponse>(url, { params });
 
@@ -53,7 +53,7 @@ export default class Campaigns extends ObjectsBase {
   }
 
   public async read(id: number): Promise<CampaignResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<CampaignResponse>(url);
 
@@ -61,7 +61,7 @@ export default class Campaigns extends ObjectsBase {
   }
 
   public async update(id: number, update: UpdateCampaign): Promise<CampaignResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `update/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['update', 'id', id]);
 
     const response = await this.parent.axios.post<CampaignResponse>(url, update);
 
@@ -69,7 +69,7 @@ export default class Campaigns extends ObjectsBase {
   }
 
   public async create(data: CreateCampaign): Promise<CampaignResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'create');
+    const url = this.parent.getApiUrl(this.objectName, ['create']);
 
     const response = await this.parent.axios.post<CampaignResponse>(url, data);
 

@@ -31,7 +31,7 @@ export default class Accounts extends ObjectsBase {
   objectName = 'account';
 
   public async read(): Promise<AccountResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'read');
+    const url = this.parent.getApiUrl(this.objectName, ['read']);
 
     const response = await this.parent.axios.get<AccountResponse>(url);
 

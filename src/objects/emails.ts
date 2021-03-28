@@ -60,7 +60,7 @@ export default class Emails extends ObjectsBase {
   objectName = 'email';
 
   public async read(id: number): Promise<EmailResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axiosInstance.get<EmailResponse>(url);
 
@@ -68,7 +68,7 @@ export default class Emails extends ObjectsBase {
   }
 
   public async stats(id: number): Promise<EmailStatsResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `stats/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['stats', 'id', id]);
 
     const response = await this.parent.axiosInstance.get<EmailStatsResponse>(url);
 
@@ -76,7 +76,7 @@ export default class Emails extends ObjectsBase {
   }
 
   public async sendToEmail(prospectEmail: string, params: EmailSendParams): Promise<EmailResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `send/prospect_email/${prospectEmail}`);
+    const url = this.parent.getApiUrl(this.objectName, ['send', 'prospect_email', prospectEmail]);
 
     const response = await this.parent.axios.post<EmailResponse>(url, params);
 
@@ -84,7 +84,7 @@ export default class Emails extends ObjectsBase {
   }
 
   public async sendToId(prospectId: number, params: EmailSendParams): Promise<EmailResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `send/prospect_id/${prospectId}`);
+    const url = this.parent.getApiUrl(this.objectName, ['send', 'prospect_id', prospectId]);
 
     const response = await this.parent.axios.post<EmailResponse>(url, params);
 
@@ -92,7 +92,7 @@ export default class Emails extends ObjectsBase {
   }
 
   public async sendToLists(listIds: number[], params: EmailSendParams): Promise<EmailResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'send');
+    const url = this.parent.getApiUrl(this.objectName, ['send']);
 
     const response = await this.parent.axiosInstance.post<EmailResponse>(url, {
       ...params,

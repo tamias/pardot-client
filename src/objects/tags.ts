@@ -41,7 +41,7 @@ export default class Tags extends ObjectsBase {
   objectName = 'tag';
 
   public async query(params?: TagQueryParams): Promise<TagQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<TagQueryResponse>(url, { params });
 
@@ -49,7 +49,7 @@ export default class Tags extends ObjectsBase {
   }
 
   public async read(id: number): Promise<TagResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<TagResponse>(url);
 

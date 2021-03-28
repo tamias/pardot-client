@@ -27,7 +27,7 @@ export default class LifecycleStages extends ObjectsBase {
   objectName = 'lifecycleStage';
 
   public async query(params?: LifecycleStageQueryParams): Promise<LifecycleStageQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<LifecycleStageQueryResponse>(url, { params });
 

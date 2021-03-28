@@ -251,7 +251,7 @@ export default class Prospects extends ObjectsBase {
   ): Promise<ProspectQueryResponseFull>;
 
   public async query(params?: ProspectQueryParams): Promise<ProspectQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<ProspectQueryResponse>(url, { params });
 
@@ -279,7 +279,7 @@ export default class Prospects extends ObjectsBase {
     data: CreateProspect,
     params?: OutputParams,
   ): Promise<ProspectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `create/email/${email}`);
+    const url = this.parent.getApiUrl(this.objectName, ['create', 'email', email]);
 
     const response = await this.parent.axios.post<ProspectResponse>(url, { ...data, ...params });
 
@@ -297,7 +297,7 @@ export default class Prospects extends ObjectsBase {
   readByEmail<T extends OutputParamsFull>(email: string, params?: T): Promise<ProspectResponseFull>;
 
   public async readByEmail(email: string, params?: OutputParams): Promise<ProspectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/email/${email}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'email', email]);
 
     const response = await this.parent.axios.get<ProspectResponse>(url, { params });
 
@@ -309,7 +309,7 @@ export default class Prospects extends ObjectsBase {
   readById<T extends OutputParamsFull>(id: number, params?: T): Promise<ProspectResponseFull>;
 
   public async readById(id: number, params?: OutputParams): Promise<ProspectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<ProspectResponse>(url, { params });
 
@@ -321,7 +321,7 @@ export default class Prospects extends ObjectsBase {
   readByFid<T extends OutputParamsFull>(fid: number, params?: T): Promise<ProspectResponseFull>;
 
   public async readByFid(fid: number, params?: OutputParams): Promise<ProspectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/fid/${fid}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'fid', fid]);
 
     const response = await this.parent.axios.get<ProspectResponse>(url, { params });
 
@@ -349,7 +349,7 @@ export default class Prospects extends ObjectsBase {
     update: UpdateProspect,
     params?: OutputParams,
   ): Promise<ProspectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `update/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['update', 'id', id]);
 
     const response = await this.parent.axios.post<ProspectResponse>(url, {
       ...update,
@@ -380,7 +380,7 @@ export default class Prospects extends ObjectsBase {
     update: UpdateProspect,
     params?: OutputParams,
   ): Promise<ProspectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `update/fid/${fid}`);
+    const url = this.parent.getApiUrl(this.objectName, ['update', 'fid', fid]);
 
     const response = await this.parent.axios.post<ProspectResponse>(url, {
       ...update,
@@ -411,7 +411,7 @@ export default class Prospects extends ObjectsBase {
     data: UpsertProspect,
     params?: OutputParams,
   ): Promise<ProspectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `upsert/email/${email}`);
+    const url = this.parent.getApiUrl(this.objectName, ['upsert', 'email', email]);
 
     const response = await this.parent.axios.post<ProspectResponse>(url, { ...data, ...params });
 
@@ -439,7 +439,7 @@ export default class Prospects extends ObjectsBase {
     data: UpsertProspect,
     params?: OutputParams,
   ): Promise<ProspectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `upsert/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['upsert', 'id', id]);
 
     const response = await this.parent.axios.post<ProspectResponse>(url, { ...data, ...params });
 
@@ -467,7 +467,7 @@ export default class Prospects extends ObjectsBase {
     data: UpsertProspect,
     params?: OutputParams,
   ): Promise<ProspectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `upsert/fid/${fid}`);
+    const url = this.parent.getApiUrl(this.objectName, ['upsert', 'fid', fid]);
 
     const response = await this.parent.axios.post<ProspectResponse>(url, { ...data, ...params });
 
@@ -488,7 +488,7 @@ export default class Prospects extends ObjectsBase {
   ): Promise<ProspectResponseFull>;
 
   public async assignById(id: number, params: AssignParams): Promise<ProspectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `assign/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['assign', 'id', id]);
 
     const response = await this.parent.axios.post<ProspectResponse>(url, params);
 
@@ -509,7 +509,7 @@ export default class Prospects extends ObjectsBase {
   ): Promise<ProspectResponseFull>;
 
   public async assignByFid(fid: number, params: AssignParams): Promise<ProspectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `assign/fid/${fid}`);
+    const url = this.parent.getApiUrl(this.objectName, ['assign', 'fid', fid]);
 
     const response = await this.parent.axios.post<ProspectResponse>(url, params);
 
@@ -527,7 +527,7 @@ export default class Prospects extends ObjectsBase {
   unassignById<T extends OutputParamsFull>(id: number, params?: T): Promise<ProspectResponseFull>;
 
   public async unassignById(id: number, params?: OutputParams): Promise<ProspectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `unassign/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['unassign', 'id', id]);
 
     const response = await this.parent.axios.post<ProspectResponse>(url, params);
 
@@ -545,7 +545,7 @@ export default class Prospects extends ObjectsBase {
   unassignByFid<T extends OutputParamsFull>(fid: number, params?: T): Promise<ProspectResponseFull>;
 
   public async unassignByFid(fid: number, params?: OutputParams): Promise<ProspectResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `unassign/fid/${fid}`);
+    const url = this.parent.getApiUrl(this.objectName, ['unassign', 'fid', fid]);
 
     const response = await this.parent.axios.post<ProspectResponse>(url, params);
 
@@ -553,7 +553,7 @@ export default class Prospects extends ObjectsBase {
   }
 
   public async batchCreate(prospects: CreateProspects | CreateProspectsV3): Promise<BatchResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'batchCreate');
+    const url = this.parent.getApiUrl(this.objectName, ['batchCreate']);
 
     let prospectsStruct = prospects;
 
@@ -575,7 +575,7 @@ export default class Prospects extends ObjectsBase {
   }
 
   public async batchUpdate(prospects: UpdateProspects | UpdateProspectsV3): Promise<BatchResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'batchUpdate');
+    const url = this.parent.getApiUrl(this.objectName, ['batchUpdate']);
 
     let prospectsStruct = prospects;
 
@@ -597,7 +597,7 @@ export default class Prospects extends ObjectsBase {
   }
 
   public async batchUpsert(prospects: UpsertProspects | UpsertProspectsV3): Promise<BatchResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'batchUpsert');
+    const url = this.parent.getApiUrl(this.objectName, ['batchUpsert']);
 
     let prospectsStruct = prospects;
 
@@ -618,19 +618,19 @@ export default class Prospects extends ObjectsBase {
   }
 
   public async deleteById(id: number): Promise<void> {
-    const url = this.parent.getApiUrl(this.objectName, `delete/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['delete', 'id', id]);
 
     await this.parent.axios.post(url);
   }
 
   public async deleteByFid(fid: number): Promise<void> {
-    const url = this.parent.getApiUrl(this.objectName, `delete/fid/${fid}`);
+    const url = this.parent.getApiUrl(this.objectName, ['delete', 'fid', fid]);
 
     await this.parent.axios.post(url);
   }
 
   public async deleteByEmail(email: string): Promise<void> {
-    const url = this.parent.getApiUrl(this.objectName, `delete/email/${email}`);
+    const url = this.parent.getApiUrl(this.objectName, ['delete', 'email', email]);
 
     await this.parent.axios.post(url);
   }

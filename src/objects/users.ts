@@ -37,7 +37,7 @@ export default class Users extends ObjectsBase {
   objectName = 'user';
 
   public async query(params?: UserQueryParams): Promise<UserQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<UserQueryResponse>(url, { params });
 
@@ -45,7 +45,7 @@ export default class Users extends ObjectsBase {
   }
 
   public async readById(id: number): Promise<UserResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<UserResponse>(url);
 
@@ -53,7 +53,7 @@ export default class Users extends ObjectsBase {
   }
 
   public async readByEmail(email: string): Promise<UserResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/email/${email}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'email', email]);
 
     const response = await this.parent.axios.get<UserResponse>(url);
 

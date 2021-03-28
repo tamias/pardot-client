@@ -42,7 +42,7 @@ export default class Forms extends ObjectsBase {
   objectName = 'form';
 
   public async query(params?: FormQueryParams): Promise<FormQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<FormQueryResponse>(url, { params });
 
@@ -50,7 +50,7 @@ export default class Forms extends ObjectsBase {
   }
 
   public async read(id: number): Promise<FormResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<FormResponse>(url);
 

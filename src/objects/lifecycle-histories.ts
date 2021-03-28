@@ -33,7 +33,7 @@ export default class LifecycleHistories extends ObjectsBase {
   objectName = 'lifecycleHistory';
 
   public async query(params?: LifecycleHistoryQueryParams): Promise<LifecycleHistoryQueryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'query');
+    const url = this.parent.getApiUrl(this.objectName, ['query']);
 
     const response = await this.parent.axios.get<LifecycleHistoryQueryResponse>(url, { params });
 
@@ -41,7 +41,7 @@ export default class LifecycleHistories extends ObjectsBase {
   }
 
   public async read(id: number): Promise<LifecycleHistoryResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<LifecycleHistoryResponse>(url);
 

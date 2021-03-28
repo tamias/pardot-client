@@ -148,7 +148,9 @@ describe('Opportunities', () => {
       const response = await opportunities.createByEmail(prospectEmail, create, params);
 
       expect(onPostSpy).toHaveBeenCalledWith(
-        `https://pi.pardot.com/api/opportunity/version/4/do/create/prospect_email/${prospectEmail}`,
+        `https://pi.pardot.com/api/opportunity/version/4/do/create/prospect_email/${encodeURIComponent(
+          prospectEmail,
+        )}`,
         {
           ...create,
           ...params,

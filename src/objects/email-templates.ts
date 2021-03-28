@@ -71,7 +71,7 @@ export default class EmailTemplates extends ObjectsBase {
   objectName = 'emailTemplate';
 
   public async read(id: number, params?: EmailTemplateParams): Promise<EmailTemplateResponse> {
-    const url = this.parent.getApiUrl(this.objectName, `read/id/${id}`);
+    const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<EmailTemplateResponse>(url, { params });
 
@@ -79,7 +79,7 @@ export default class EmailTemplates extends ObjectsBase {
   }
 
   public async listOneToOne(params?: EmailTemplateParams): Promise<EmailTemplateListResponse> {
-    const url = this.parent.getApiUrl(this.objectName, 'listOneToOne');
+    const url = this.parent.getApiUrl(this.objectName, ['listOneToOne']);
 
     const response = await this.parent.axios.get<EmailTemplateListResponse>(url, { params });
 
