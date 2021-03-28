@@ -21,6 +21,7 @@ import ProspectAccounts from './objects/prospect-accounts';
 import Prospects from './objects/prospects';
 import TagObjects from './objects/tag-objects';
 import Tags from './objects/tags';
+import Users from './objects/users';
 
 export default class PardotClient {
   clientId: string;
@@ -52,6 +53,7 @@ export default class PardotClient {
   prospectAccounts: ProspectAccounts;
   tags: Tags;
   tagObjects: TagObjects;
+  users: Users;
 
   public constructor({
     clientId,
@@ -106,6 +108,7 @@ export default class PardotClient {
     this.prospectAccounts = new ProspectAccounts(this);
     this.tags = new Tags(this);
     this.tagObjects = new TagObjects(this);
+    this.users = new Users(this);
   }
 
   public authorizeUrl(props?: AuthorizeUrlProps): string {

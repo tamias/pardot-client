@@ -19,6 +19,7 @@ import ProspectAccounts from './objects/prospect-accounts';
 import Prospects from './objects/prospects';
 import TagObjects from './objects/tag-objects';
 import Tags from './objects/tags';
+import Users from './objects/users';
 export default class PardotClient {
     clientId: string;
     clientSecret: string;
@@ -48,6 +49,7 @@ export default class PardotClient {
     prospectAccounts: ProspectAccounts;
     tags: Tags;
     tagObjects: TagObjects;
+    users: Users;
     constructor({ clientId, clientSecret, redirectUri, token, businessUnitId, baseUrl, apiVersion, refreshCallback, }: PardotProps);
     authorizeUrl(props?: AuthorizeUrlProps): string;
     getAccessToken(code: string): Promise<RawAccessToken>;
