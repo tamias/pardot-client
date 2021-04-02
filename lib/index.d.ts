@@ -53,6 +53,11 @@ export default class PardotClient {
     constructor({ clientId, clientSecret, redirectUri, token, businessUnitId, baseUrl, apiVersion, refreshCallback, }: PardotProps);
     authorizeUrl(props?: AuthorizeUrlProps): string;
     getAccessToken(code: string): Promise<RawAccessToken>;
+    protected convertRequestValues(data: {
+        [key: string]: unknown;
+    }): {
+        [key: string]: unknown;
+    };
     get axios(): AxiosInstance;
     getApiUrl(object: string, pathParts: (string | number)[]): string;
 }

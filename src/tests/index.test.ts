@@ -250,6 +250,49 @@ describe('Pardot', () => {
           data: 'testFalse=0&testTrue=1',
         });
       });
+
+      it('should convert fields array in data to comma-separated string', async () => {
+        mockAxios.onPost().reply(200);
+
+        const response = await pardot.axios.post('http://example.com', {
+          fields: ['field_1', 'field_2'],
+        });
+
+        expect(response.config).toMatchObject({
+          data: 'fields=field_1%2Cfield_2',
+        });
+      });
+
+      it('should convert booleans in params to numbers', async () => {
+        mockAxios.onGet().reply(200);
+
+        const response = await pardot.axios.get('http://example.com', {
+          params: {
+            testFalse: false,
+            testTrue: true,
+          },
+        });
+
+        expect(response.config).toMatchObject({
+          params: { testFalse: 0, testTrue: 1 },
+        });
+      });
+
+      it('should convert fields array in params to comma-separated string', async () => {
+        mockAxios.onGet().reply(200);
+
+        const response = await pardot.axios.get('http://example.com', {
+          params: {
+            fields: ['field_1', 'field_2'],
+          },
+        });
+
+        expect(response.config).toMatchObject({
+          params: {
+            fields: 'field_1,field_2',
+          },
+        });
+      });
     });
 
     describe('refresh interceptor', () => {

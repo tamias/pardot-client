@@ -122,6 +122,26 @@ export default class PardotClient {
     return this.token.token as RawAccessToken;
   }
 
+  protected convertRequestValues(data: { [key: string]: unknown }): { [key: string]: unknown } {
+    // When sending data to Pardot API, false is stored as true,
+    // presumably because it's treating the value as a string rather than a boolean
+    // As a workaround, pass booleans as 1 or 0 instead
+    return Object.entries(data).reduce((acc, [key, value]) => {
+      let updatedValue;
+      if (typeof value === 'boolean') {
+        updatedValue = +value;
+      } else if (key === 'fields' && Array.isArray(value)) {
+        updatedValue = value.join(',');
+      } else {
+        updatedValue = value;
+      }
+      return {
+        ...acc,
+        [key]: updatedValue,
+      };
+    }, {});
+  }
+
   public get axios(): AxiosInstance {
     if (!this.axiosInstance) {
       if (!this.token) {
@@ -131,22 +151,16 @@ export default class PardotClient {
       this.axiosInstance = axios.create();
 
       this.axiosInstance.interceptors.request.use((config) => {
-        let { data } = config;
+        let { data, params } = config;
 
         if (data && typeof data === 'object') {
-          // When sending data to Pardot API, false is stored as true,
-          // presumably because it's treating the value as a string rather than a boolean
-          // As a workaround, pass booleans as 1 or 0 instead
-          const convertedData = Object.entries(data).reduce(
-            (acc, [key, value]) => ({
-              ...acc,
-              [key]: typeof value === 'boolean' ? +value : value,
-            }),
-            {},
-          );
-
-          data = stringify(convertedData);
+          data = stringify(this.convertRequestValues(data));
         }
+
+        if (params && typeof params === 'object') {
+          params = this.convertRequestValues(params);
+        }
+
         return {
           ...config,
           data,
@@ -157,7 +171,7 @@ export default class PardotClient {
           },
           params: {
             format: 'json',
-            ...config.params,
+            ...params,
           },
         };
       });

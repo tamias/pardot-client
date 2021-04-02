@@ -99,7 +99,7 @@ declare type ProspectSearchParams = {
     score_less_than?: number;
 } & IdSearchParams & CreatedSearchParams & UpdatedSearchParams;
 interface ProspectResultParams extends BaseResultParams {
-    fields?: number[];
+    fields?: string[];
     limit_related_records?: boolean;
     sort_by?: 'created_at' | 'id' | 'probability' | 'value';
 }
