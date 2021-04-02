@@ -22,6 +22,7 @@ import Prospects from '../objects/prospects';
 import TagObjects from '../objects/tag-objects';
 import Tags from '../objects/tags';
 import Users from '../objects/users';
+import Visitors from '../objects/visitors';
 
 const mockAxios = new MockAdapter(axios);
 const axiosCreateSpy = jest.spyOn(axios, 'create');
@@ -120,6 +121,7 @@ describe('Pardot', () => {
         tagObjects: expect.any(TagObjects),
         tags: expect.any(Tags),
         users: expect.any(Users),
+        visitors: expect.any(Visitors),
       });
     });
   });
@@ -263,6 +265,18 @@ describe('Pardot', () => {
         });
       });
 
+      it('should convert prospect_ids array in data to comma-separated string', async () => {
+        mockAxios.onPost().reply(200);
+
+        const response = await pardot.axios.post('http://example.com', {
+          prospect_ids: [123, 456],
+        });
+
+        expect(response.config).toMatchObject({
+          data: 'prospect_ids=123%2C456',
+        });
+      });
+
       it('should convert booleans in params to numbers', async () => {
         mockAxios.onGet().reply(200);
 
@@ -290,6 +304,22 @@ describe('Pardot', () => {
         expect(response.config).toMatchObject({
           params: {
             fields: 'field_1,field_2',
+          },
+        });
+      });
+
+      it('should convert prospect_ids array in params to comma-separated string', async () => {
+        mockAxios.onGet().reply(200);
+
+        const response = await pardot.axios.get('http://example.com', {
+          params: {
+            prospect_ids: [123, 456],
+          },
+        });
+
+        expect(response.config).toMatchObject({
+          params: {
+            prospect_ids: '123,456',
           },
         });
       });

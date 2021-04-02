@@ -9,10 +9,10 @@ import {
 } from './lib/setup';
 import { OutputParams } from '../types';
 import Prospects, {
-  AssignParams,
   BatchResponse,
   CreateProspects,
   CreateProspectsV3,
+  ProspectAssignParams,
   ProspectQueryParams,
   ProspectQueryResponseMobile,
   ProspectResponseMobile,
@@ -341,7 +341,7 @@ describe('Prospects', () => {
 
       mockAxios.onPost().reply<ProspectResponseMobile>(200, mockProspectResponse);
 
-      const params: AssignParams = {
+      const params: ProspectAssignParams = {
         output: 'mobile',
         user_id: 101,
       };
@@ -363,7 +363,7 @@ describe('Prospects', () => {
 
       mockAxios.onPost().reply<ProspectResponseMobile>(200, mockProspectResponse);
 
-      const params: AssignParams = {
+      const params: ProspectAssignParams = {
         output: 'mobile',
         user_email: 'user@example.com',
       };

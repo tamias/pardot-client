@@ -22,7 +22,7 @@ export interface OutputParamsSimple {
 export interface OutputParamsFull {
     output?: 'full';
 }
-export declare type OutputParams = OutputParamsSimple | OutputParamsMobile | OutputParamsFull;
+export declare type OutputParams = OutputParamsMobile | OutputParamsSimple | OutputParamsFull;
 export interface BaseResultParams {
     limit?: number;
     offset?: number;

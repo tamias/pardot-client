@@ -22,6 +22,7 @@ import Prospects from './objects/prospects';
 import TagObjects from './objects/tag-objects';
 import Tags from './objects/tags';
 import Users from './objects/users';
+import Visitors from './objects/visitors';
 
 export default class PardotClient {
   clientId: string;
@@ -54,6 +55,7 @@ export default class PardotClient {
   tags: Tags;
   tagObjects: TagObjects;
   users: Users;
+  visitors: Visitors;
 
   public constructor({
     clientId,
@@ -109,6 +111,7 @@ export default class PardotClient {
     this.tags = new Tags(this);
     this.tagObjects = new TagObjects(this);
     this.users = new Users(this);
+    this.visitors = new Visitors(this);
   }
 
   public authorizeUrl(props?: AuthorizeUrlProps): string {
@@ -130,7 +133,7 @@ export default class PardotClient {
       let updatedValue;
       if (typeof value === 'boolean') {
         updatedValue = +value;
-      } else if (key === 'fields' && Array.isArray(value)) {
+      } else if ((key === 'fields' || key === 'prospect_ids') && Array.isArray(value)) {
         updatedValue = value.join(',');
       } else {
         updatedValue = value;

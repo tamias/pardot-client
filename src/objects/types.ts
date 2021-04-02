@@ -36,7 +36,7 @@ export interface OutputParamsFull {
   output?: 'full';
 }
 
-export type OutputParams = OutputParamsSimple | OutputParamsMobile | OutputParamsFull;
+export type OutputParams = OutputParamsMobile | OutputParamsSimple | OutputParamsFull;
 
 export interface BaseResultParams {
   limit?: number;

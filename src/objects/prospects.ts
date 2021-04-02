@@ -23,6 +23,7 @@ export interface ProspectMobile {
 }
 
 interface ProspectBase extends ProspectMobile {
+  campaign_id: number | null;
   salutation?: string | null;
   password?: string | null;
   prospect_account_id?: number;
@@ -66,7 +67,6 @@ export interface ProspectSimple extends ProspectBase {
   opted_out: boolean | null;
   created_at: string;
   updated_at: string;
-  // responses contain 'campaign'; requests use 'campaign_id'
   campaign?: {
     id: number;
     name: string;
@@ -151,24 +151,19 @@ export type ProspectQueryParams = ProspectSearchParams & ProspectResultParams & 
 
 // TODO - fix these types
 
-interface ProspectRequest extends Partial<ProspectBase> {
-  // responses contain 'campaign'; requests use 'campaign_id'
-  campaign_id?: number;
-}
-
-export type UpdateProspect = Update<ProspectRequest>;
-export type UpdateProspects = Partial<ProspectRequest>[]; // 'id' is allowed
+export type UpdateProspect = Update<ProspectBase>;
+export type UpdateProspects = Partial<ProspectBase>[]; // 'id' is allowed
 export type UpdateProspectsV3 = {
   [idOrEmail: string]: UpdateProspect;
 };
 
-export type CreateProspect = Create<Omit<ProspectRequest, 'email'>>;
-export type CreateProspects = Create<ProspectRequest, 'email'>[];
+export type CreateProspect = Create<Omit<ProspectBase, 'email'>>;
+export type CreateProspects = Create<ProspectBase, 'email'>[];
 export type CreateProspectsV3 = {
   [email: string]: CreateProspect;
 };
 
-export type UpsertProspect = Partial<ProspectRequest>;
+export type UpsertProspect = Partial<ProspectBase>;
 export type UpsertProspects = UpsertProspect[];
 export type UpsertProspectsV3 = {
   [idOrEmail: string]: UpdateProspect;
@@ -181,7 +176,7 @@ export interface BatchResponse extends ResponseBase {
 }
 
 // assign must have exactly one of the following params
-export type AssignParams = (
+export type ProspectAssignParams = (
   | {
       user_email: string;
     }
@@ -208,17 +203,7 @@ export interface ProspectQueryResponseSimple extends ResponseBase {
   };
 }
 
-export interface ProspectQueryResponseFull extends ResponseBase {
-  result: {
-    total_results: number;
-    prospect: ProspectFull | ProspectFull[];
-  };
-}
-
-type ProspectQueryResponse =
-  | ProspectQueryResponseMobile
-  | ProspectQueryResponseSimple
-  | ProspectQueryResponseFull;
+type ProspectQueryResponse = ProspectQueryResponseMobile | ProspectQueryResponseSimple;
 
 export interface ProspectResponseMobile extends ResponseBase {
   prospect: ProspectMobile;
@@ -246,9 +231,10 @@ export default class Prospects extends ObjectsBase {
   query<T extends OutputParamsSimple & ProspectQueryParams>(
     params: T,
   ): Promise<ProspectQueryResponseSimple>;
+  // query only returns mobile or simple
   query<T extends OutputParamsFull & ProspectQueryParams>(
     params?: T,
-  ): Promise<ProspectQueryResponseFull>;
+  ): Promise<ProspectQueryResponseSimple>;
 
   public async query(params?: ProspectQueryParams): Promise<ProspectQueryResponse> {
     const url = this.parent.getApiUrl(this.objectName, ['query']);
@@ -474,20 +460,20 @@ export default class Prospects extends ObjectsBase {
     return response.data;
   }
 
-  assignById<T extends OutputParamsMobile & AssignParams>(
+  assignById<T extends OutputParamsMobile & ProspectAssignParams>(
     id: number,
     params: T,
   ): Promise<ProspectResponseMobile>;
-  assignById<T extends OutputParamsSimple & AssignParams>(
+  assignById<T extends OutputParamsSimple & ProspectAssignParams>(
     id: number,
     params: T,
   ): Promise<ProspectResponseSimple>;
-  assignById<T extends OutputParamsFull & AssignParams>(
+  assignById<T extends OutputParamsFull & ProspectAssignParams>(
     id: number,
     params: T,
   ): Promise<ProspectResponseFull>;
 
-  public async assignById(id: number, params: AssignParams): Promise<ProspectResponse> {
+  public async assignById(id: number, params: ProspectAssignParams): Promise<ProspectResponse> {
     const url = this.parent.getApiUrl(this.objectName, ['assign', 'id', id]);
 
     const response = await this.parent.axios.post<ProspectResponse>(url, params);
@@ -495,20 +481,20 @@ export default class Prospects extends ObjectsBase {
     return response.data;
   }
 
-  assignByFid<T extends OutputParamsMobile & AssignParams>(
+  assignByFid<T extends OutputParamsMobile & ProspectAssignParams>(
     fid: number,
     params: T,
   ): Promise<ProspectResponseMobile>;
-  assignByFid<T extends OutputParamsSimple & AssignParams>(
+  assignByFid<T extends OutputParamsSimple & ProspectAssignParams>(
     fid: number,
     params: T,
   ): Promise<ProspectResponseSimple>;
-  assignByFid<T extends OutputParamsFull & AssignParams>(
+  assignByFid<T extends OutputParamsFull & ProspectAssignParams>(
     fid: number,
     params: T,
   ): Promise<ProspectResponseFull>;
 
-  public async assignByFid(fid: number, params: AssignParams): Promise<ProspectResponse> {
+  public async assignByFid(fid: number, params: ProspectAssignParams): Promise<ProspectResponse> {
     const url = this.parent.getApiUrl(this.objectName, ['assign', 'fid', fid]);
 
     const response = await this.parent.axios.post<ProspectResponse>(url, params);
