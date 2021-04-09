@@ -1,5 +1,6 @@
 import {
   BaseResultParams,
+  Create,
   CreatedSearchParams,
   IdSearchParams,
   ResponseBase,
@@ -41,8 +42,7 @@ export interface CustomFieldResponse extends ResponseBase {
 }
 
 export type UpdateCustomField = Update<CustomField>;
-// TODO: determine which custom field properties are required
-// export type CreateCustomField = Create<CustomField, 'name' | 'field_id'>;
+export type CreateCustomField = Create<CustomField, 'name' | 'field_id'>;
 
 export default class CustomFields extends ObjectsBase {
   objectName = 'customField';
@@ -71,19 +71,21 @@ export default class CustomFields extends ObjectsBase {
     return response.data;
   }
 
-  // TODO: Pardot API returns err code 10000 "Please provide a valid type for this field"
+  // TODO: determine how to specify type;
+  //   Pardot API returns err code 10000 "Please provide a valid type for this field"
   //   despite passing apparently valid values for type
-  // public async create(data: CreateCustomField): Promise<CustomFieldResponse> {
-  //   const url = this.parent.getApiUrl(this.objectName, ['create']);
-  //
-  //   const response = await this.parent.axios.post<CustomFieldResponse>(url, data);
-  //
-  //   return response.data;
-  // }
-  //
-  // public async delete(id: number): Promise<void> {
-  //   const url = this.parent.getApiUrl(this.objectName, ['delete', 'id', id]);
-  //
-  //   await this.parent.axios.post(url);
-  // }
+  //   (Not specifying type works, creating a text field)
+  public async create(data: CreateCustomField): Promise<CustomFieldResponse> {
+    const url = this.parent.getApiUrl(this.objectName, ['create']);
+
+    const response = await this.parent.axios.post<CustomFieldResponse>(url, data);
+
+    return response.data;
+  }
+
+  public async delete(id: number): Promise<void> {
+    const url = this.parent.getApiUrl(this.objectName, ['delete', 'id', id]);
+
+    await this.parent.axios.post(url);
+  }
 }

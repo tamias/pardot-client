@@ -9,44 +9,51 @@ describe('CustomFields', () => {
 
   const customFields = new CustomFields(pardot);
 
+  const mockCustomFields = [
+    {
+      created_at: '',
+      crm_id: null,
+      field_id: 'custom_field_50',
+      id: 50,
+      is_analytics_synced: false,
+      is_record_multiple_responses: false,
+      is_use_values: false,
+      name: 'Custom Field 1',
+      type: 'Number',
+      type_id: 8,
+      updated_at: '',
+    },
+    {
+      created_at: '',
+      crm_id: null,
+      field_id: 'custom_field_51',
+      id: 51,
+      is_analytics_synced: false,
+      is_record_multiple_responses: false,
+      is_use_values: false,
+      name: 'Custom Field 1',
+      type: 'Number',
+      type_id: 8,
+      updated_at: '',
+    },
+  ];
+
+  const mockCustomFieldsResponse: CustomFieldQueryResponse = {
+    ...responseAttributes,
+    result: {
+      customField: mockCustomFields,
+      total_results: 5,
+    },
+  };
+
+  const mockCustomFieldResponse: CustomFieldResponse = {
+    ...responseAttributes,
+    customField: mockCustomFields[0],
+  };
+
   describe('query', () => {
     it('should make a get request to query custom fields', async () => {
-      const mockResponse: CustomFieldQueryResponse = {
-        ...responseAttributes,
-        result: {
-          customField: [
-            {
-              created_at: '',
-              crm_id: null,
-              field_id: 'custom_field_50',
-              id: 50,
-              is_analytics_synced: false,
-              is_record_multiple_responses: false,
-              is_use_values: false,
-              name: 'Custom Field 1',
-              type: 'Number',
-              type_id: 8,
-              updated_at: '',
-            },
-            {
-              created_at: '',
-              crm_id: null,
-              field_id: 'custom_field_51',
-              id: 51,
-              is_analytics_synced: false,
-              is_record_multiple_responses: false,
-              is_use_values: false,
-              name: 'Custom Field 1',
-              type: 'Number',
-              type_id: 8,
-              updated_at: '',
-            },
-          ],
-          total_results: 10,
-        },
-      };
-
-      mockAxios.onGet().reply<CustomFieldQueryResponse>(200, mockResponse);
+      mockAxios.onGet().reply<CustomFieldQueryResponse>(200, mockCustomFieldsResponse);
 
       const params = {
         id_greater_than: 40,
@@ -62,7 +69,7 @@ describe('CustomFields', () => {
         },
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockCustomFieldsResponse);
     });
   });
 
@@ -70,24 +77,7 @@ describe('CustomFields', () => {
     it('should make a get request to read a custom field', async () => {
       const id = 1;
 
-      const mockResponse: CustomFieldResponse = {
-        ...responseAttributes,
-        customField: {
-          created_at: '',
-          crm_id: null,
-          field_id: 'custom_field_50',
-          id: 50,
-          is_analytics_synced: false,
-          is_record_multiple_responses: false,
-          is_use_values: false,
-          name: 'Custom Field 1',
-          type: 'Number',
-          type_id: 8,
-          updated_at: '',
-        },
-      };
-
-      mockAxios.onGet().reply<CustomFieldResponse>(200, mockResponse);
+      mockAxios.onGet().reply<CustomFieldResponse>(200, mockCustomFieldResponse);
 
       const response = await customFields.read(id);
 
@@ -95,7 +85,7 @@ describe('CustomFields', () => {
         `https://pi.pardot.com/api/customField/version/4/do/read/id/${id}`,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockCustomFieldResponse);
     });
   });
 
@@ -107,24 +97,7 @@ describe('CustomFields', () => {
         is_record_multiple_responses: true,
       };
 
-      const mockResponse: CustomFieldResponse = {
-        ...responseAttributes,
-        customField: {
-          created_at: '',
-          crm_id: null,
-          field_id: 'custom_field_50',
-          id: 50,
-          is_analytics_synced: false,
-          is_record_multiple_responses: true,
-          is_use_values: false,
-          name: 'Custom Field 1',
-          type: 'Number',
-          type_id: 8,
-          updated_at: '',
-        },
-      };
-
-      mockAxios.onPost().reply<CustomFieldResponse>(200, mockResponse);
+      mockAxios.onPost().reply<CustomFieldResponse>(200, mockCustomFieldResponse);
 
       const response = await customFields.update(id, params);
 
@@ -133,7 +106,43 @@ describe('CustomFields', () => {
         params,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockCustomFieldResponse);
+    });
+  });
+
+  describe('create', () => {
+    it('should make a post request to create a custom field', async () => {
+      const params = {
+        field_id: 'custom_field',
+        name: 'Custom Field',
+      };
+
+      mockAxios.onPost().reply(200, mockCustomFieldResponse);
+
+      const response = await customFields.create(params);
+
+      expect(onPostSpy).toHaveBeenCalledWith(
+        'https://pi.pardot.com/api/customField/version/4/do/create',
+        params,
+      );
+
+      expect(response).toEqual(mockCustomFieldResponse);
+    });
+  });
+
+  describe('delete', () => {
+    it('should make a post request to delete a custom field', async () => {
+      const id = 1;
+
+      mockAxios.onPost().reply(204);
+
+      const response = await customFields.delete(id);
+
+      expect(onPostSpy).toHaveBeenCalledWith(
+        `https://pi.pardot.com/api/customField/version/4/do/delete/id/${id}`,
+      );
+
+      expect(response).toBeUndefined();
     });
   });
 });
