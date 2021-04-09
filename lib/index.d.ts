@@ -20,6 +20,7 @@ import Prospects from './objects/prospects';
 import TagObjects from './objects/tag-objects';
 import Tags from './objects/tags';
 import Users from './objects/users';
+import VisitorActivities from './objects/visitor-activities';
 import Visitors from './objects/visitors';
 export default class PardotClient {
     clientId: string;
@@ -52,12 +53,13 @@ export default class PardotClient {
     tagObjects: TagObjects;
     users: Users;
     visitors: Visitors;
+    visitorActivities: VisitorActivities;
     constructor({ clientId, clientSecret, redirectUri, token, businessUnitId, baseUrl, apiVersion, refreshCallback, }: PardotProps);
     authorizeUrl(props?: AuthorizeUrlProps): string;
     getAccessToken(code: string): Promise<RawAccessToken>;
     protected convertRequestValues(data: {
         [key: string]: unknown;
-    }): {
+    }, isQueryRequest: boolean): {
         [key: string]: unknown;
     };
     get axios(): AxiosInstance;

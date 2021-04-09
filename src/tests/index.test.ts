@@ -22,6 +22,7 @@ import Prospects from '../objects/prospects';
 import TagObjects from '../objects/tag-objects';
 import Tags from '../objects/tags';
 import Users from '../objects/users';
+import VisitorActivities from '../objects/visitor-activities';
 import Visitors from '../objects/visitors';
 
 const mockAxios = new MockAdapter(axios);
@@ -121,6 +122,7 @@ describe('Pardot', () => {
         tagObjects: expect.any(TagObjects),
         tags: expect.any(Tags),
         users: expect.any(Users),
+        visitorActivities: expect.any(VisitorActivities),
         visitors: expect.any(Visitors),
       });
     });
@@ -240,7 +242,7 @@ describe('Pardot', () => {
         });
       });
 
-      it('should convert booleans in data to numbers', async () => {
+      it('should convert booleans in data to numbers for non-query requests', async () => {
         mockAxios.onPost().reply(200);
 
         const response = await pardot.axios.post('http://example.com', {
@@ -250,6 +252,19 @@ describe('Pardot', () => {
 
         expect(response.config).toMatchObject({
           data: 'testFalse=0&testTrue=1',
+        });
+      });
+
+      it('should not convert booleans in data to numbers for query requests', async () => {
+        mockAxios.onPost().reply(200);
+
+        const response = await pardot.axios.post('http://example.com/query', {
+          testFalse: false,
+          testTrue: true,
+        });
+
+        expect(response.config).toMatchObject({
+          data: 'testFalse=false&testTrue=true',
         });
       });
 
@@ -277,7 +292,7 @@ describe('Pardot', () => {
         });
       });
 
-      it('should convert booleans in params to numbers', async () => {
+      it('should convert booleans in params to numbers for non-query requests', async () => {
         mockAxios.onGet().reply(200);
 
         const response = await pardot.axios.get('http://example.com', {
@@ -289,6 +304,21 @@ describe('Pardot', () => {
 
         expect(response.config).toMatchObject({
           params: { testFalse: 0, testTrue: 1 },
+        });
+      });
+
+      it('should not convert booleans in params to numbers for query requests', async () => {
+        mockAxios.onGet().reply(200);
+
+        const response = await pardot.axios.get('http://example.com/query', {
+          params: {
+            testFalse: false,
+            testTrue: true,
+          },
+        });
+
+        expect(response.config).toMatchObject({
+          params: { testFalse: false, testTrue: true },
         });
       });
 

@@ -22,6 +22,7 @@ import Prospects from './objects/prospects';
 import TagObjects from './objects/tag-objects';
 import Tags from './objects/tags';
 import Users from './objects/users';
+import VisitorActivities from './objects/visitor-activities';
 import Visitors from './objects/visitors';
 
 export default class PardotClient {
@@ -56,6 +57,7 @@ export default class PardotClient {
   tagObjects: TagObjects;
   users: Users;
   visitors: Visitors;
+  visitorActivities: VisitorActivities;
 
   public constructor({
     clientId,
@@ -112,6 +114,7 @@ export default class PardotClient {
     this.tagObjects = new TagObjects(this);
     this.users = new Users(this);
     this.visitors = new Visitors(this);
+    this.visitorActivities = new VisitorActivities(this);
   }
 
   public authorizeUrl(props?: AuthorizeUrlProps): string {
@@ -125,14 +128,17 @@ export default class PardotClient {
     return this.token.token as RawAccessToken;
   }
 
-  protected convertRequestValues(data: { [key: string]: unknown }): { [key: string]: unknown } {
-    // When sending data to Pardot API, false is stored as true,
-    // presumably because it's treating the value as a string rather than a boolean
+  protected convertRequestValues(
+    data: { [key: string]: unknown },
+    isQueryRequest: boolean,
+  ): { [key: string]: unknown } {
+    // When creating or updating objects, false is stored as true,
+    // presumably because the API is treating the value as a string rather than a boolean
     // As a workaround, pass booleans as 1 or 0 instead
     return Object.entries(data).reduce((acc, [key, value]) => {
       let updatedValue;
       if (typeof value === 'boolean') {
-        updatedValue = +value;
+        updatedValue = isQueryRequest ? value : +value;
       } else if ((key === 'fields' || key === 'prospect_ids') && Array.isArray(value)) {
         updatedValue = value.join(',');
       } else {
@@ -154,14 +160,17 @@ export default class PardotClient {
       this.axiosInstance = axios.create();
 
       this.axiosInstance.interceptors.request.use((config) => {
+        const { url } = config;
         let { data, params } = config;
 
+        const isQueryRequest = /\/query/.test(url);
+
         if (data && typeof data === 'object') {
-          data = stringify(this.convertRequestValues(data));
+          data = stringify(this.convertRequestValues(data, isQueryRequest));
         }
 
         if (params && typeof params === 'object') {
-          params = this.convertRequestValues(params);
+          params = this.convertRequestValues(params, isQueryRequest);
         }
 
         return {
