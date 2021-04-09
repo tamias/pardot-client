@@ -1,7 +1,7 @@
 import { BaseResultParams, CreatedSearchParams, IdSearchParams, OutputParams, OutputParamsFull, OutputParamsMobile, OutputParamsSimple, ResponseBase, UpdatedSearchParams } from './types';
 import { ProspectMobile } from './prospects';
 import ObjectsBase from './base';
-export interface VisitorBase {
+interface VisitorBase {
     id: number;
     page_view_count?: number;
     ip_address?: string;

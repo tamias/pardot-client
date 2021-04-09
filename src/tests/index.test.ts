@@ -24,6 +24,7 @@ import Tags from '../objects/tags';
 import Users from '../objects/users';
 import VisitorActivities from '../objects/visitor-activities';
 import Visitors from '../objects/visitors';
+import Visits from '../objects/visits';
 
 const mockAxios = new MockAdapter(axios);
 const axiosCreateSpy = jest.spyOn(axios, 'create');
@@ -124,6 +125,7 @@ describe('Pardot', () => {
         users: expect.any(Users),
         visitorActivities: expect.any(VisitorActivities),
         visitors: expect.any(Visitors),
+        visits: expect.any(Visits),
       });
     });
   });

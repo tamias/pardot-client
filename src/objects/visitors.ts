@@ -12,7 +12,7 @@ import {
 import { ProspectMobile } from './prospects';
 import ObjectsBase from './base';
 
-export interface VisitorBase {
+interface VisitorBase {
   id: number;
   page_view_count?: number;
   ip_address?: string;

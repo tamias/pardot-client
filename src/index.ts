@@ -24,6 +24,7 @@ import Tags from './objects/tags';
 import Users from './objects/users';
 import VisitorActivities from './objects/visitor-activities';
 import Visitors from './objects/visitors';
+import Visits from './objects/visits';
 
 export default class PardotClient {
   clientId: string;
@@ -58,6 +59,7 @@ export default class PardotClient {
   users: Users;
   visitors: Visitors;
   visitorActivities: VisitorActivities;
+  visits: Visits;
 
   public constructor({
     clientId,
@@ -115,6 +117,7 @@ export default class PardotClient {
     this.users = new Users(this);
     this.visitors = new Visitors(this);
     this.visitorActivities = new VisitorActivities(this);
+    this.visits = new Visits(this);
   }
 
   public authorizeUrl(props?: AuthorizeUrlProps): string {
