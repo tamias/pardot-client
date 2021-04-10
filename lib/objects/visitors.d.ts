@@ -1,5 +1,6 @@
 import { BaseResultParams, CreatedSearchParams, IdSearchParams, OutputParams, OutputParamsFull, OutputParamsMobile, OutputParamsSimple, ResponseBase, UpdatedSearchParams } from './types';
 import { ProspectMobile } from './prospects';
+import { VisitorActivityMobile } from './visitor-activities';
 import ObjectsBase from './base';
 interface VisitorBase {
     id: number;
@@ -48,7 +49,7 @@ export interface VisitorFull extends VisitorBase {
     };
     visitor_referrer: VisitorReferrer | VisitorReferrer[];
     visitor_activities: {
-        visitor_activity: unknown;
+        visitor_activity: VisitorActivityMobile | VisitorActivityMobile[];
     };
 }
 declare type VisitorSearchParams = {

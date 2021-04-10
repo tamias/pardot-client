@@ -10,6 +10,7 @@ import {
   UpdatedSearchParams,
 } from './types';
 import { ProspectMobile } from './prospects';
+import { VisitorActivityMobile } from './visitor-activities';
 import ObjectsBase from './base';
 
 interface VisitorBase {
@@ -64,8 +65,7 @@ export interface VisitorFull extends VisitorBase {
   };
   visitor_referrer: VisitorReferrer | VisitorReferrer[];
   visitor_activities: {
-    // TODO - fill out after implementing visitor activities
-    visitor_activity: unknown;
+    visitor_activity: VisitorActivityMobile | VisitorActivityMobile[];
   };
 }
 

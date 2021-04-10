@@ -10,6 +10,7 @@ import {
   ResponseBase,
   Update,
 } from './types';
+import { VisitorActivityMobile } from './visitor-activities';
 import ObjectsBase from './base';
 
 export const OPPORTUNITY_STATUSES = {
@@ -42,15 +43,14 @@ export interface OpportunitySimple extends OpportunityMobile {
     name: string;
   };
   prospects: {
-    // TODO - fill out after implementing prospects
+    // TODO - determine what fields are present in prospects here
     prospect: unknown | unknown[];
   };
 }
 
 export interface OpportunityFull extends OpportunitySimple {
   opportunity_activities: {
-    // TODO - fill out after implementing visitor activities
-    visitor_activity: unknown;
+    visitor_activity: VisitorActivityMobile | VisitorActivityMobile[];
   };
 }
 

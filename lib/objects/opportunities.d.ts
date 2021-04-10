@@ -1,4 +1,5 @@
 import { BaseResultParams, Create, CreatedSearchParams, IdSearchParams, OutputParams, OutputParamsFull, OutputParamsMobile, OutputParamsSimple, ResponseBase, Update } from './types';
+import { VisitorActivityMobile } from './visitor-activities';
 import ObjectsBase from './base';
 export declare const OPPORTUNITY_STATUSES: {
     readonly Lost: "lost";
@@ -31,7 +32,7 @@ export interface OpportunitySimple extends OpportunityMobile {
 }
 export interface OpportunityFull extends OpportunitySimple {
     opportunity_activities: {
-        visitor_activity: unknown;
+        visitor_activity: VisitorActivityMobile | VisitorActivityMobile[];
     };
 }
 declare type OpportunitySearchParams = {
