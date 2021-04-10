@@ -1,4 +1,7 @@
 import { BaseResultParams, Create, CreatedSearchParams, DateString, IdSearchParams, OutputParams, OutputParamsFull, OutputParamsMobile, OutputParamsSimple, ResponseBase, Update, UpdatedSearchParams } from './types';
+import { List } from './lists';
+import { VisitorActivityMobile } from './visitor-activities';
+import { VisitorSimple } from './visitors';
 import ObjectsBase from './base';
 export interface ProspectMobile {
     id: number;
@@ -57,13 +60,21 @@ export interface ProspectSimple extends ProspectBase {
     };
     assigned_to?: unknown;
     last_activity?: {
-        visitor_activity: unknown;
+        visitor_activity: VisitorActivityMobile;
     };
 }
 interface ProfileCriteria {
     id: number;
     name: string;
     matches: string;
+}
+export interface ListSubscription {
+    id: number;
+    did_opt_in: boolean;
+    did_opt_out: boolean;
+    created_at: string;
+    updated_at: string;
+    list: List;
 }
 export interface ProspectFull extends ProspectSimple {
     profile?: {
@@ -72,13 +83,13 @@ export interface ProspectFull extends ProspectSimple {
         profile_criteria: ProfileCriteria | ProfileCriteria[];
     };
     visitors?: {
-        visitor: unknown | unknown[];
+        visitor: VisitorSimple | VisitorSimple[];
     } | null;
     visitor_activities?: {
-        visitor_activity: unknown | unknown[];
+        visitor_activity: VisitorActivityMobile | VisitorActivityMobile[];
     } | null;
     lists?: {
-        list_subscription: unknown | unknown[];
+        list_subscription: ListSubscription | ListSubscription[];
     } | null;
 }
 export declare type LetterGrade = 'A+' | 'A' | 'A-' | 'B+' | 'B' | 'B-' | 'C+' | 'C' | 'C-' | 'D+' | 'D' | 'D-' | 'F';

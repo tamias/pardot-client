@@ -12,6 +12,9 @@ import {
   Update,
   UpdatedSearchParams,
 } from './types';
+import { List } from './lists';
+import { VisitorActivityMobile } from './visitor-activities';
+import { VisitorSimple } from './visitors';
 import ObjectsBase from './base';
 
 export interface ProspectMobile {
@@ -71,11 +74,10 @@ export interface ProspectSimple extends ProspectBase {
     id: number;
     name: string;
   };
-  // TODO - fill out these nested documents
+  // TODO - fill out
   assigned_to?: unknown; // user
   last_activity?: {
-    // TODO - fill out after implementing visitor activities
-    visitor_activity: unknown;
+    visitor_activity: VisitorActivityMobile;
   };
   // TODO - custom fields
 }
@@ -86,6 +88,15 @@ interface ProfileCriteria {
   matches: string;
 }
 
+export interface ListSubscription {
+  id: number;
+  did_opt_in: boolean;
+  did_opt_out: boolean;
+  created_at: string;
+  updated_at: string;
+  list: List;
+}
+
 export interface ProspectFull extends ProspectSimple {
   profile?: {
     id: number;
@@ -93,16 +104,13 @@ export interface ProspectFull extends ProspectSimple {
     profile_criteria: ProfileCriteria | ProfileCriteria[];
   };
   visitors?: {
-    // TODO - fill out after implementing visitors
-    visitor: unknown | unknown[];
+    visitor: VisitorSimple | VisitorSimple[];
   } | null;
   visitor_activities?: {
-    // TODO - fill out after implementing visitor activities
-    visitor_activity: unknown | unknown[];
+    visitor_activity: VisitorActivityMobile | VisitorActivityMobile[];
   } | null;
   lists?: {
-    // TODO - fill out after implementing Lists
-    list_subscription: unknown | unknown[];
+    list_subscription: ListSubscription | ListSubscription[];
   } | null;
 }
 
