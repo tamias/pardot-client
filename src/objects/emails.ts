@@ -62,7 +62,7 @@ export default class Emails extends ObjectsBase {
   public async read(id: number): Promise<EmailResponse> {
     const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
-    const response = await this.parent.axiosInstance.get<EmailResponse>(url);
+    const response = await this.parent.axios.get<EmailResponse>(url);
 
     return response.data;
   }
@@ -70,7 +70,7 @@ export default class Emails extends ObjectsBase {
   public async stats(id: number): Promise<EmailStatsResponse> {
     const url = this.parent.getApiUrl(this.objectName, ['stats', 'id', id]);
 
-    const response = await this.parent.axiosInstance.get<EmailStatsResponse>(url);
+    const response = await this.parent.axios.get<EmailStatsResponse>(url);
 
     return response.data;
   }
@@ -94,7 +94,7 @@ export default class Emails extends ObjectsBase {
   public async sendToLists(listIds: number[], params: EmailSendParams): Promise<EmailResponse> {
     const url = this.parent.getApiUrl(this.objectName, ['send']);
 
-    const response = await this.parent.axiosInstance.post<EmailResponse>(url, {
+    const response = await this.parent.axios.post<EmailResponse>(url, {
       ...params,
       list_ids: listIds,
     });

@@ -71,21 +71,21 @@ export type CreateOpportunity = Create<
 export interface OpportunityQueryResponseMobile extends ResponseBase {
   result: {
     total_results: number;
-    opportunity: OpportunityMobile | OpportunityMobile[];
+    opportunity?: OpportunityMobile | OpportunityMobile[];
   };
 }
 
 export interface OpportunityQueryResponseSimple extends ResponseBase {
   result: {
     total_results: number;
-    opportunity: OpportunitySimple | OpportunitySimple[];
+    opportunity?: OpportunitySimple | OpportunitySimple[];
   };
 }
 
 export interface OpportunityQueryResponseFull extends ResponseBase {
   result: {
     total_results: number;
-    opportunity: OpportunityFull | OpportunityFull[];
+    opportunity?: OpportunityFull | OpportunityFull[];
   };
 }
 

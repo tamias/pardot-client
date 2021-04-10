@@ -20,7 +20,7 @@ export declare type TagObjectQueryParams = TagObjectSearchParams & TagObjectResu
 export interface TagObjectQueryResponse extends ResponseBase {
     result: {
         total_results: number;
-        tagObject: TagObject | TagObject[];
+        tagObject?: TagObject | TagObject[];
     };
 }
 export interface TagObjectResponse extends ResponseBase {

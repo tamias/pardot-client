@@ -18,6 +18,7 @@ export const VISITOR_ACTIVITY_TYPE_NAMES = {
   Form: 'Form',
   FormHandler: 'FormHandler',
   LandingPage: 'Landing Page',
+  Visit: 'Visit',
 } as const;
 
 type VisitorActivityTypeNames = typeof VISITOR_ACTIVITY_TYPE_NAMES;
@@ -62,6 +63,10 @@ interface VisitorActivityMobileLandingPage extends VisitorActivityBase {
   type_name: typeof VISITOR_ACTIVITY_TYPE_NAMES.LandingPage;
   landing_page_id: number;
 }
+interface VisitorActivityMobileVisit extends VisitorActivityBase {
+  type_name: typeof VISITOR_ACTIVITY_TYPE_NAMES.Visit;
+  visit_id: number;
+}
 
 export type VisitorActivityMobile =
   | VisitorActivityMobileCustomRedirect
@@ -69,7 +74,8 @@ export type VisitorActivityMobile =
   | VisitorActivityMobileFile
   | VisitorActivityMobileForm
   | VisitorActivityMobileFormHandler
-  | VisitorActivityMobileLandingPage;
+  | VisitorActivityMobileLandingPage
+  | VisitorActivityMobileVisit;
 
 export type VisitorActivitySimple = VisitorActivityMobile;
 
@@ -96,6 +102,7 @@ export interface VisitorActivityFullFormHandler extends VisitorActivityMobileFor
 export interface VisitorActivityFullLandingPage extends VisitorActivityMobileLandingPage {
   landing_page: VisitorActivityInfo;
 }
+type VisitorActivityFullVisit = VisitorActivityMobileVisit;
 
 export type VisitorActivityFull =
   | VisitorActivityFullCustomRedirect
@@ -103,7 +110,8 @@ export type VisitorActivityFull =
   | VisitorActivityFullFile
   | VisitorActivityFullForm
   | VisitorActivityFullFormHandler
-  | VisitorActivityFullLandingPage;
+  | VisitorActivityFullLandingPage
+  | VisitorActivityFullVisit;
 
 type VisitorActivityType = number[];
 
@@ -142,21 +150,21 @@ export type VisitorActivityQueryParams = VisitorActivitySearchParams &
 export interface VisitorActivityQueryResponseMobile extends ResponseBase {
   result: {
     total_results: number;
-    visitor_activity: VisitorActivityMobile | VisitorActivityMobile[];
+    visitor_activity?: VisitorActivityMobile | VisitorActivityMobile[];
   };
 }
 
 export interface VisitorActivityQueryResponseSimple extends ResponseBase {
   result: {
     total_results: number;
-    visitor_activity: VisitorActivitySimple | VisitorActivitySimple[];
+    visitor_activity?: VisitorActivitySimple | VisitorActivitySimple[];
   };
 }
 
 export interface VisitorActivityQueryResponseFull extends ResponseBase {
   result: {
     total_results: number;
-    visitor_activity: VisitorActivityFull | VisitorActivityFull[];
+    visitor_activity?: VisitorActivityFull | VisitorActivityFull[];
   };
 }
 

@@ -14,7 +14,7 @@ declare type LifecycleStageQueryParams = LifecycleStageSearchParams & LifecycleS
 export interface LifecycleStageQueryResponse extends ResponseBase {
     result: {
         total_results: number;
-        lifecycleStage: LifecycleStage | LifecycleStage[];
+        lifecycleStage?: LifecycleStage | LifecycleStage[];
     };
 }
 export default class LifecycleStages extends ObjectsBase {

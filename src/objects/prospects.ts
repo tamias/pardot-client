@@ -192,14 +192,14 @@ export type ProspectAssignParams = (
 export interface ProspectQueryResponseMobile extends ResponseBase {
   result: {
     total_results: number;
-    prospect: ProspectMobile | ProspectMobile[];
+    prospect?: ProspectMobile | ProspectMobile[];
   };
 }
 
 export interface ProspectQueryResponseSimple extends ResponseBase {
   result: {
     total_results: number;
-    prospect: ProspectSimple | ProspectSimple[];
+    prospect?: ProspectSimple | ProspectSimple[];
   };
 }
 
@@ -544,13 +544,15 @@ export default class Prospects extends ObjectsBase {
     let prospectsStruct = prospects;
 
     if (this.parent.apiVersion === 3 && Array.isArray(prospects)) {
-      prospectsStruct = prospects.reduce(
-        (struct: CreateProspectsV3, { email, ...rest }) => ({
+      prospectsStruct = prospects.reduce((struct: CreateProspectsV3, { email, ...rest }) => {
+        if (!email) {
+          throw 'Must specify email in each prospect for create';
+        }
+        return {
           ...struct,
           [email]: rest,
-        }),
-        {},
-      );
+        };
+      }, {});
     }
 
     const response = await this.parent.axios.post<BatchResponse>(url, {
@@ -566,13 +568,20 @@ export default class Prospects extends ObjectsBase {
     let prospectsStruct = prospects;
 
     if (this.parent.apiVersion === 3 && Array.isArray(prospects)) {
-      prospectsStruct = prospects.reduce(
-        (struct: UpdateProspectsV3, { id, email, ...rest }) => ({
+      prospectsStruct = prospects.reduce((struct: UpdateProspectsV3, { id, email, ...rest }) => {
+        let updateProspect: UpdateProspectsV3;
+        if (id) {
+          updateProspect = { [id]: { email, ...rest } };
+        } else if (email) {
+          updateProspect = { [email]: rest };
+        } else {
+          throw 'Must specify id or email in each prospect for update';
+        }
+        return {
           ...struct,
-          ...(id ? { [id]: { email, ...rest } } : { [email]: rest }),
-        }),
-        {},
-      );
+          ...updateProspect,
+        };
+      }, {});
     }
 
     const response = await this.parent.axios.post<BatchResponse>(url, {
@@ -588,13 +597,20 @@ export default class Prospects extends ObjectsBase {
     let prospectsStruct = prospects;
 
     if (this.parent.apiVersion === 3 && Array.isArray(prospects)) {
-      prospectsStruct = prospects.reduce(
-        (struct: UpsertProspectsV3, { id, email, ...rest }) => ({
+      prospectsStruct = prospects.reduce((struct: UpsertProspectsV3, { id, email, ...rest }) => {
+        let upsertProspect: UpsertProspectsV3;
+        if (id) {
+          upsertProspect = { [id]: { email, ...rest } };
+        } else if (email) {
+          upsertProspect = { [email]: rest };
+        } else {
+          throw 'Must specify id or email in each prospect for upsert';
+        }
+        return {
           ...struct,
-          ...(id ? { [id]: { email, ...rest } } : { [email]: rest }),
-        }),
-        {},
-      );
+          ...upsertProspect,
+        };
+      }, {});
     }
     const response = await this.parent.axios.post<BatchResponse>(url, {
       prospects: JSON.stringify({ prospects: prospectsStruct }),

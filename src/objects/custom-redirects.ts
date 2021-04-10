@@ -31,7 +31,7 @@ export type CustomRedirectQueryParams = CustomRedirectSearchParams & CustomRedir
 export interface CustomRedirectQueryResponse extends ResponseBase {
   result: {
     total_results: number;
-    customRedirect: CustomRedirect | CustomRedirect[];
+    customRedirect?: CustomRedirect | CustomRedirect[];
   };
 }
 

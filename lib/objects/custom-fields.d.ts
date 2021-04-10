@@ -21,7 +21,7 @@ export declare type CustomFieldQueryParams = CustomFieldSearchParams & CustomFie
 export interface CustomFieldQueryResponse extends ResponseBase {
     result: {
         total_results: number;
-        customField: CustomField | CustomField[];
+        customField?: CustomField | CustomField[];
     };
 }
 export interface CustomFieldResponse extends ResponseBase {

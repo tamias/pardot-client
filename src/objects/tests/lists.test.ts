@@ -106,7 +106,8 @@ describe('Lists', () => {
           id,
           is_crm_visible: false,
           is_dynamic: false,
-          is_public: true,
+          // TODO: clean up tests
+          // is_public: true,
           title: 'List Title',
           updated_at: '',
           ...params,

@@ -23,7 +23,7 @@ export declare type CreateList = Create<List>;
 export interface ListQueryResponse extends ResponseBase {
     result: {
         total_results: number;
-        list: List | List[];
+        list?: List | List[];
     };
 }
 export interface ListResponse extends ResponseBase {

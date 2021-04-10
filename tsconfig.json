@@ -2,13 +2,10 @@
   "compilerOptions": {
     "declaration": true,
     "outDir": "lib",
+    "strictNullChecks": true,
     "target": "ES5"
   },
   "include": [
     "src"
-  ],
-  "exclude": [
-    "src/**/*.test.ts",
-    "src/**/tests/lib/*.ts"
   ]
 }

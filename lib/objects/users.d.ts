@@ -20,7 +20,7 @@ export declare type UserQueryParams = UserSearchParams & UserResultParams;
 export interface UserQueryResponse extends ResponseBase {
     result: {
         total_results: number;
-        user: User | User[];
+        user?: User | User[];
     };
 }
 export interface UserResponse extends ResponseBase {

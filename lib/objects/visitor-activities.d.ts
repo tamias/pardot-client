@@ -7,6 +7,7 @@ export declare const VISITOR_ACTIVITY_TYPE_NAMES: {
     readonly Form: "Form";
     readonly FormHandler: "FormHandler";
     readonly LandingPage: "Landing Page";
+    readonly Visit: "Visit";
 };
 declare type VisitorActivityTypeNames = typeof VISITOR_ACTIVITY_TYPE_NAMES;
 export declare type VisitorActivityTypeName = VisitorActivityTypeNames[keyof VisitorActivityTypeNames];
@@ -47,7 +48,11 @@ interface VisitorActivityMobileLandingPage extends VisitorActivityBase {
     type_name: typeof VISITOR_ACTIVITY_TYPE_NAMES.LandingPage;
     landing_page_id: number;
 }
-export declare type VisitorActivityMobile = VisitorActivityMobileCustomRedirect | VisitorActivityMobileEmail | VisitorActivityMobileFile | VisitorActivityMobileForm | VisitorActivityMobileFormHandler | VisitorActivityMobileLandingPage;
+interface VisitorActivityMobileVisit extends VisitorActivityBase {
+    type_name: typeof VISITOR_ACTIVITY_TYPE_NAMES.Visit;
+    visit_id: number;
+}
+export declare type VisitorActivityMobile = VisitorActivityMobileCustomRedirect | VisitorActivityMobileEmail | VisitorActivityMobileFile | VisitorActivityMobileForm | VisitorActivityMobileFormHandler | VisitorActivityMobileLandingPage | VisitorActivityMobileVisit;
 export declare type VisitorActivitySimple = VisitorActivityMobile;
 export interface VisitorActivityInfo {
     name: string;
@@ -71,7 +76,8 @@ export interface VisitorActivityFullFormHandler extends VisitorActivityMobileFor
 export interface VisitorActivityFullLandingPage extends VisitorActivityMobileLandingPage {
     landing_page: VisitorActivityInfo;
 }
-export declare type VisitorActivityFull = VisitorActivityFullCustomRedirect | VisitorActivityFullEmail | VisitorActivityFullFile | VisitorActivityFullForm | VisitorActivityFullFormHandler | VisitorActivityFullLandingPage;
+declare type VisitorActivityFullVisit = VisitorActivityMobileVisit;
+export declare type VisitorActivityFull = VisitorActivityFullCustomRedirect | VisitorActivityFullEmail | VisitorActivityFullFile | VisitorActivityFullForm | VisitorActivityFullFormHandler | VisitorActivityFullLandingPage | VisitorActivityFullVisit;
 declare type VisitorActivityType = number[];
 declare type VisitorActivitySearchParams = {
     prospect_only?: boolean;
@@ -99,19 +105,19 @@ export declare type VisitorActivityQueryParams = VisitorActivitySearchParams & V
 export interface VisitorActivityQueryResponseMobile extends ResponseBase {
     result: {
         total_results: number;
-        visitor_activity: VisitorActivityMobile | VisitorActivityMobile[];
+        visitor_activity?: VisitorActivityMobile | VisitorActivityMobile[];
     };
 }
 export interface VisitorActivityQueryResponseSimple extends ResponseBase {
     result: {
         total_results: number;
-        visitor_activity: VisitorActivitySimple | VisitorActivitySimple[];
+        visitor_activity?: VisitorActivitySimple | VisitorActivitySimple[];
     };
 }
 export interface VisitorActivityQueryResponseFull extends ResponseBase {
     result: {
         total_results: number;
-        visitor_activity: VisitorActivityFull | VisitorActivityFull[];
+        visitor_activity?: VisitorActivityFull | VisitorActivityFull[];
     };
 }
 export declare type VisitorActivityQueryResponse = VisitorActivityQueryResponseMobile | VisitorActivityQueryResponseSimple | VisitorActivityQueryResponseFull;

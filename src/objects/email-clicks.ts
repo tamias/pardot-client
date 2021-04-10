@@ -32,7 +32,7 @@ type EmailClickQueryParams = EmailClickSearchParams & EmailClickResultParams;
 export interface EmailClickQueryResponse extends ResponseBase {
   result: {
     total_results: number;
-    emailClick: EmailClick | EmailClick[];
+    emailClick?: EmailClick | EmailClick[];
   };
 }
 

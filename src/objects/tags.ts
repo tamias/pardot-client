@@ -29,7 +29,7 @@ export type TagQueryParams = TagSearchParams & TagResultParams;
 export interface TagQueryResponse extends ResponseBase {
   result: {
     total_results: number;
-    tag: Tag | Tag[];
+    tag?: Tag | Tag[];
   };
 }
 

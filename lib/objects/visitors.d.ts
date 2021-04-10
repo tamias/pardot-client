@@ -68,13 +68,13 @@ export declare type VisitorAssignParams = ({
 export interface VisitorQueryResponseMobile extends ResponseBase {
     result: {
         total_results: number;
-        visitor: VisitorMobile | VisitorMobile[];
+        visitor?: VisitorMobile | VisitorMobile[];
     };
 }
 export interface VisitorQueryResponseSimple extends ResponseBase {
     result: {
         total_results: number;
-        visitor: VisitorSimple | VisitorSimple[];
+        visitor?: VisitorSimple | VisitorSimple[];
     };
 }
 export interface VisitorResponseMobile extends ResponseBase {

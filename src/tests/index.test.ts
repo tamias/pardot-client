@@ -85,7 +85,6 @@ describe('Pardot', () => {
       const pardot = new Pardot(basePardotProps);
 
       expect(pardot.oauthClient).toBeInstanceOf(AuthorizationCode);
-      expect(pardot.token).toBeUndefined();
     });
 
     it('should instantiate an AccessToken if token is present', () => {
@@ -146,6 +145,20 @@ describe('Pardot', () => {
     });
   });
 
+  describe('token getter', () => {
+    it('should return the access token', () => {
+      const pardot = new Pardot({ ...basePardotProps, token: rawToken });
+
+      expect(pardot.token).toMatchObject({ token: rawToken });
+    });
+
+    it('should throw an error if accessToken is not set', () => {
+      const pardot = new Pardot(basePardotProps);
+
+      expect(() => pardot.token).toThrow('Attempt to use missing token');
+    });
+  });
+
   describe('getAccessToken', () => {
     const pardot = new Pardot(basePardotProps);
 
@@ -173,19 +186,15 @@ describe('Pardot', () => {
     it('should create an axios instance', () => {
       const pardot = new Pardot({ ...basePardotProps, token: rawToken });
 
-      expect(pardot.axiosInstance).toBeUndefined();
-
       const axiosInstance = pardot.axios;
 
       expect(axiosCreateSpy).toHaveBeenCalled();
       expect(axiosInstance).toBeDefined();
-      expect(pardot.axiosInstance).toBe(axiosInstance);
+      expect(pardot.axios).toBe(axiosInstance);
     });
 
     it('should return a previously-created axios instance', () => {
       const pardot = new Pardot({ ...basePardotProps, token: rawToken });
-
-      expect(pardot.axiosInstance).toBeUndefined();
 
       const axiosInstance = pardot.axios;
       const axiosInstance2 = pardot.axios;

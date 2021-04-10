@@ -33,7 +33,7 @@ export type CreateCampaign = Create<Campaign, 'name'>;
 export interface CampaignQueryResponse extends ResponseBase {
   result: {
     total_results: number;
-    campaign: Campaign | Campaign[];
+    campaign?: Campaign | Campaign[];
   };
 }
 

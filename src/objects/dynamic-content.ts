@@ -35,7 +35,7 @@ type DynamicContentQueryParams = DynamicContentSearchParams & DynamicContentResu
 export interface DynamicContentQueryResponse extends ResponseBase {
   result: {
     total_results: number;
-    dynamicContent: DynamicContentItem | DynamicContentItem[];
+    dynamicContent?: DynamicContentItem | DynamicContentItem[];
   };
 }
 

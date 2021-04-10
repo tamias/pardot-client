@@ -36,7 +36,7 @@ export type VisitQueryParams = VisitResultParams;
 export interface VisitQueryResponse extends ResponseBase {
   result: {
     total_results: number;
-    visit: Visit | Visit[];
+    visit?: Visit | Visit[];
   };
 }
 

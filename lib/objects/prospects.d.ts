@@ -135,13 +135,13 @@ export declare type ProspectAssignParams = ({
 export interface ProspectQueryResponseMobile extends ResponseBase {
     result: {
         total_results: number;
-        prospect: ProspectMobile | ProspectMobile[];
+        prospect?: ProspectMobile | ProspectMobile[];
     };
 }
 export interface ProspectQueryResponseSimple extends ResponseBase {
     result: {
         total_results: number;
-        prospect: ProspectSimple | ProspectSimple[];
+        prospect?: ProspectSimple | ProspectSimple[];
     };
 }
 export interface ProspectResponseMobile extends ResponseBase {

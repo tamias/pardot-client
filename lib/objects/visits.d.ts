@@ -30,7 +30,7 @@ export declare type VisitQueryParams = VisitResultParams;
 export interface VisitQueryResponse extends ResponseBase {
     result: {
         total_results: number;
-        visit: Visit | Visit[];
+        visit?: Visit | Visit[];
     };
 }
 export interface VisitResponse extends ResponseBase {

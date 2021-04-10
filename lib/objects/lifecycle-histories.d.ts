@@ -16,7 +16,7 @@ declare type LifecycleHistoryQueryParams = LifecycleHistorySearchParams & Lifecy
 export interface LifecycleHistoryQueryResponse extends ResponseBase {
     result: {
         total_results: number;
-        lifecycleHistory: LifecycleHistory | LifecycleHistory[];
+        lifecycleHistory?: LifecycleHistory | LifecycleHistory[];
     };
 }
 export interface LifecycleHistoryResponse extends ResponseBase {

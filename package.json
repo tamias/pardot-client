@@ -5,7 +5,7 @@
   "main": "lib/index",
   "typings": "lib/index",
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsc -p tsconfig.build.json",
     "lint": "eslint .",
     "test": "jest --coverage",
     "jest": "jest"

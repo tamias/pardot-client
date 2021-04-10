@@ -30,13 +30,14 @@ export default class PardotClient {
   clientId: string;
   clientSecret: string;
   redirectUri: string;
-  token?: AccessToken;
   businessUnitId: string;
   baseUrl: string;
   apiVersion: number;
   refreshCallback?: RefreshCallback;
   oauthClient: AuthorizationCode;
-  axiosInstance?: AxiosInstance;
+
+  private accessToken?: AccessToken;
+  private axiosInstance?: AxiosInstance;
 
   accounts: Accounts;
   campaigns: Campaigns;
@@ -93,7 +94,7 @@ export default class PardotClient {
     });
 
     if (token) {
-      this.token = this.oauthClient.createToken(token);
+      this.accessToken = this.oauthClient.createToken(token);
     }
 
     this.accounts = new Accounts(this);
@@ -124,8 +125,16 @@ export default class PardotClient {
     return this.oauthClient.authorizeURL({ ...props, redirect_uri: this.redirectUri });
   }
 
+  public get token(): AccessToken {
+    if (!this.accessToken) {
+      throw new Error('Attempt to use missing token');
+    }
+
+    return this.accessToken;
+  }
+
   public async getAccessToken(code: string): Promise<RawAccessToken> {
-    this.token = await this.oauthClient.getToken({ code, redirect_uri: this.redirectUri });
+    this.accessToken = await this.oauthClient.getToken({ code, redirect_uri: this.redirectUri });
     // simple-oauth2 defines AccessToken['token'] as { [x: string]: any; }
     // assume that Pardot will return a response containing the expected fields
     return this.token.token as RawAccessToken;
@@ -156,14 +165,15 @@ export default class PardotClient {
 
   public get axios(): AxiosInstance {
     if (!this.axiosInstance) {
-      if (!this.token) {
+      if (!this.accessToken) {
         throw new Error('Cannot instantiate axios without token');
       }
 
       this.axiosInstance = axios.create();
 
       this.axiosInstance.interceptors.request.use((config) => {
-        const { url } = config;
+        /* istanbul ignore next */
+        const { url = '' } = config;
         let { data, params } = config;
 
         const isQueryRequest = /\/query/.test(url);
@@ -194,8 +204,9 @@ export default class PardotClient {
       createAuthRefreshInterceptor(this.axiosInstance, async (failedRequest) => {
         // Pardot apparently does not include the refresh token in the refresh response,
         // so create a new AccessToken with the refresh token included
+
         const newToken = await this.token.refresh();
-        this.token = this.oauthClient.createToken({
+        this.accessToken = this.oauthClient.createToken({
           refresh_token: this.token.token.refresh_token,
           ...newToken.token,
         });

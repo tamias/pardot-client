@@ -33,7 +33,7 @@ export type CustomFieldQueryParams = CustomFieldSearchParams & CustomFieldResult
 export interface CustomFieldQueryResponse extends ResponseBase {
   result: {
     total_results: number;
-    customField: CustomField | CustomField[];
+    customField?: CustomField | CustomField[];
   };
 }
 

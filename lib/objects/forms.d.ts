@@ -19,7 +19,7 @@ declare type FormQueryParams = FormSearchParams & FormResultParams;
 export interface FormQueryResponse extends ResponseBase {
     result: {
         total_results: number;
-        form: Form | Form[];
+        form?: Form | Form[];
     };
 }
 export interface FormResponse extends ResponseBase {

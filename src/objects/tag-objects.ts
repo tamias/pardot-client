@@ -59,7 +59,7 @@ export type TagObjectQueryParams = TagObjectSearchParams & TagObjectResultParams
 export interface TagObjectQueryResponse extends ResponseBase {
   result: {
     total_results: number;
-    tagObject: TagObject | TagObject[];
+    tagObject?: TagObject | TagObject[];
   };
 }
 

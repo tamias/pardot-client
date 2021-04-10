@@ -27,13 +27,13 @@ export default class PardotClient {
     clientId: string;
     clientSecret: string;
     redirectUri: string;
-    token?: AccessToken;
     businessUnitId: string;
     baseUrl: string;
     apiVersion: number;
     refreshCallback?: RefreshCallback;
     oauthClient: AuthorizationCode;
-    axiosInstance?: AxiosInstance;
+    private accessToken?;
+    private axiosInstance?;
     accounts: Accounts;
     campaigns: Campaigns;
     customFields: CustomFields;
@@ -58,6 +58,7 @@ export default class PardotClient {
     visits: Visits;
     constructor({ clientId, clientSecret, redirectUri, token, businessUnitId, baseUrl, apiVersion, refreshCallback, }: PardotProps);
     authorizeUrl(props?: AuthorizeUrlProps): string;
+    get token(): AccessToken;
     getAccessToken(code: string): Promise<RawAccessToken>;
     protected convertRequestValues(data: {
         [key: string]: unknown;

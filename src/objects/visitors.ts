@@ -90,14 +90,14 @@ export type VisitorAssignParams = ({ prospect_email: string } | { prospect_id: n
 export interface VisitorQueryResponseMobile extends ResponseBase {
   result: {
     total_results: number;
-    visitor: VisitorMobile | VisitorMobile[];
+    visitor?: VisitorMobile | VisitorMobile[];
   };
 }
 
 export interface VisitorQueryResponseSimple extends ResponseBase {
   result: {
     total_results: number;
-    visitor: VisitorSimple | VisitorSimple[];
+    visitor?: VisitorSimple | VisitorSimple[];
   };
 }
 

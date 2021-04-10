@@ -36,7 +36,7 @@ export type CreateProspectAccount = Create<ProspectAccount, 'name'>;
 export interface ProspectAccountQueryResponse extends ResponseBase {
   result: {
     total_results: number;
-    prospectAccount: ProspectAccount | ProspectAccount[];
+    prospectAccount?: ProspectAccount | ProspectAccount[];
   };
 }
 

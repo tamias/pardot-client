@@ -21,7 +21,7 @@ export declare type CreateListMembership = Create<ListMembership>;
 export interface ListMembershipQueryResponse extends ResponseBase {
     result: {
         total_results: number;
-        list_membership: ListMembership | ListMembership[];
+        list_membership?: ListMembership | ListMembership[];
     };
 }
 export interface ListMembershipResponse extends ResponseBase {

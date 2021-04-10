@@ -19,7 +19,7 @@ type LifecycleStageQueryParams = LifecycleStageSearchParams & LifecycleStageResu
 export interface LifecycleStageQueryResponse extends ResponseBase {
   result: {
     total_results: number;
-    lifecycleStage: LifecycleStage | LifecycleStage[];
+    lifecycleStage?: LifecycleStage | LifecycleStage[];
   };
 }
 

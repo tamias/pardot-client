@@ -517,6 +517,12 @@ describe('Prospects', () => {
 
         expect(response).toEqual(mockBatchResponse);
       });
+
+      it('should reject with an error for array input containing a prospect without email', async () => {
+        await expect(prospectsV3.batchCreate([{ email: '' }])).rejects.toEqual(
+          'Must specify email in each prospect for create',
+        );
+      });
     });
   });
 
@@ -619,6 +625,12 @@ describe('Prospects', () => {
 
         expect(response).toEqual(mockBatchResponse);
       });
+
+      it('should reject with an error for array input containing a prospect without id or email', async () => {
+        await expect(prospectsV3.batchUpdate([{}])).rejects.toEqual(
+          'Must specify id or email in each prospect for update',
+        );
+      });
     });
   });
 
@@ -720,6 +732,12 @@ describe('Prospects', () => {
         );
 
         expect(response).toEqual(mockBatchResponse);
+      });
+
+      it('should reject with an error for array input containing a prospect without id or email', async () => {
+        await expect(prospectsV3.batchUpsert([{}])).rejects.toEqual(
+          'Must specify id or email in each prospect for upsert',
+        );
       });
     });
   });
