@@ -13,6 +13,7 @@ import Prospects, {
   CreateProspects,
   CreateProspectsV3,
   ProspectAssignParams,
+  ProspectMobile,
   ProspectQueryParams,
   ProspectQueryResponseMobile,
   ProspectResponseMobile,
@@ -32,7 +33,7 @@ describe('Prospects', () => {
 
   const prospectsV3 = new Prospects(pardotV3);
 
-  const mockProspects = [
+  const mockProspects: ProspectMobile[] = [
     {
       company: null,
       email: 'prospect1@example.com',

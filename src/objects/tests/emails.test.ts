@@ -9,22 +9,22 @@ describe('Emails', () => {
 
   const emails = new Emails(pardot);
 
+  const mockEmailResponse: EmailResponse = {
+    ...responseAttributes,
+    email: {
+      created_at: '',
+      id: 1,
+      message: 'Hello!',
+      name: 'Email 1',
+      subject: 'Subject',
+    },
+  };
+
   describe('read', () => {
     it('should make a get request to read an email', async () => {
       const id = 1;
 
-      const mockResponse: EmailResponse = {
-        ...responseAttributes,
-        email: {
-          created_at: '',
-          id: 1,
-          message: 'Hello!',
-          name: 'Email 1',
-          subject: 'Subject',
-        },
-      };
-
-      mockAxios.onGet().reply<EmailResponse>(200, mockResponse);
+      mockAxios.onGet().reply<EmailResponse>(200, mockEmailResponse);
 
       const response = await emails.read(id);
 
@@ -32,7 +32,7 @@ describe('Emails', () => {
         `https://pi.pardot.com/api/email/version/4/do/read/id/${id}`,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockEmailResponse);
     });
   });
 
@@ -84,18 +84,7 @@ describe('Emails', () => {
         email_template_id: 3,
       };
 
-      const mockResponse: EmailResponse = {
-        ...responseAttributes,
-        email: {
-          created_at: '',
-          id: 1,
-          message: 'Hello!',
-          name: 'Email 1',
-          subject: 'Subject',
-        },
-      };
-
-      mockAxios.onPost().reply<EmailResponse>(200, mockResponse);
+      mockAxios.onPost().reply<EmailResponse>(200, mockEmailResponse);
 
       const response = await emails.sendToEmail(prospectEmail, params);
 
@@ -106,7 +95,7 @@ describe('Emails', () => {
         params,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockEmailResponse);
     });
   });
 
@@ -123,18 +112,7 @@ describe('Emails', () => {
         text_content: 'Hello World!',
       };
 
-      const mockResponse: EmailResponse = {
-        ...responseAttributes,
-        email: {
-          created_at: '',
-          id: 1,
-          message: 'Hello!',
-          name: 'Email 1',
-          subject: 'Subject',
-        },
-      };
-
-      mockAxios.onPost().reply<EmailResponse>(200, mockResponse);
+      mockAxios.onPost().reply<EmailResponse>(200, mockEmailResponse);
 
       const response = await emails.sendToId(prospectId, params);
 
@@ -143,7 +121,7 @@ describe('Emails', () => {
         params,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockEmailResponse);
     });
   });
 
@@ -159,18 +137,7 @@ describe('Emails', () => {
         text_content: 'Hello World!',
       };
 
-      const mockResponse: EmailResponse = {
-        ...responseAttributes,
-        email: {
-          created_at: '',
-          id: 1,
-          message: 'Hello!',
-          name: 'Email 1',
-          subject: 'Subject',
-        },
-      };
-
-      mockAxios.onPost().reply<EmailResponse>(200, mockResponse);
+      mockAxios.onPost().reply<EmailResponse>(200, mockEmailResponse);
 
       const response = await emails.sendToLists(listIds, params);
 
@@ -179,7 +146,7 @@ describe('Emails', () => {
         list_ids: listIds,
       });
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockEmailResponse);
     });
   });
 });

@@ -1,5 +1,5 @@
 import { mockAxios, onGetSpy, pardot, responseAttributes } from './lib/setup';
-import Tags, { TagQueryParams, TagQueryResponse, TagResponse } from '../tags';
+import Tags, { Tag, TagQueryParams, TagQueryResponse, TagResponse } from '../tags';
 
 describe('Tags', () => {
   beforeEach(() => {
@@ -9,7 +9,7 @@ describe('Tags', () => {
 
   const tags = new Tags(pardot);
 
-  const mockTags = [
+  const mockTags: Tag[] = [
     {
       created_at: '',
       id: 1,

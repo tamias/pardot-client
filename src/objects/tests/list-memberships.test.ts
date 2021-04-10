@@ -1,5 +1,6 @@
 import { mockAxios, onGetSpy, onPostSpy, pardot, responseAttributes } from './lib/setup';
 import ListMemberships, {
+  ListMembership,
   ListMembershipQueryResponse,
   ListMembershipResponse,
 } from '../list-memberships';
@@ -12,34 +13,41 @@ describe('ListMemberships', () => {
 
   const listMemberships = new ListMemberships(pardot);
 
+  const mockListMemberships: ListMembership[] = [
+    {
+      created_at: '',
+      id: 1,
+      list_id: 11,
+      opted_out: false,
+      prospect_id: 101,
+      updated_at: '',
+    },
+    {
+      created_at: '',
+      id: 2,
+      list_id: 11,
+      opted_out: true,
+      prospect_id: 102,
+      updated_at: '',
+    },
+  ];
+
+  const mockListMembershipQueryResponse: ListMembershipQueryResponse = {
+    ...responseAttributes,
+    result: {
+      list_membership: mockListMemberships,
+      total_results: 5,
+    },
+  };
+
+  const mockListMembershipResponse: ListMembershipResponse = {
+    ...responseAttributes,
+    list_membership: mockListMemberships[0],
+  };
+
   describe('query', () => {
     it('should make a get request to query list memberships', async () => {
-      const mockResponse: ListMembershipQueryResponse = {
-        ...responseAttributes,
-        result: {
-          list_membership: [
-            {
-              created_at: '',
-              id: 1,
-              list_id: 11,
-              opted_out: false,
-              prospect_id: 101,
-              updated_at: '',
-            },
-            {
-              created_at: '',
-              id: 2,
-              list_id: 11,
-              opted_out: true,
-              prospect_id: 102,
-              updated_at: '',
-            },
-          ],
-          total_results: 5,
-        },
-      };
-
-      mockAxios.onGet().reply<ListMembershipQueryResponse>(200, mockResponse);
+      mockAxios.onGet().reply<ListMembershipQueryResponse>(200, mockListMembershipQueryResponse);
 
       const params = {
         limit: 2,
@@ -55,7 +63,7 @@ describe('ListMemberships', () => {
         },
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockListMembershipQueryResponse);
     });
   });
 
@@ -64,19 +72,7 @@ describe('ListMemberships', () => {
       const listId = 11;
       const prospectId = 101;
 
-      const mockResponse: ListMembershipResponse = {
-        ...responseAttributes,
-        list_membership: {
-          created_at: '',
-          id: 1,
-          list_id: 11,
-          opted_out: false,
-          prospect_id: 101,
-          updated_at: '',
-        },
-      };
-
-      mockAxios.onGet().reply<ListMembershipResponse>(200, mockResponse);
+      mockAxios.onGet().reply<ListMembershipResponse>(200, mockListMembershipResponse);
 
       const response = await listMemberships.read(listId, prospectId);
 
@@ -84,7 +80,7 @@ describe('ListMemberships', () => {
         `https://pi.pardot.com/api/listMembership/version/4/do/read/list_id/${listId}/prospect_id/${prospectId}`,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockListMembershipResponse);
     });
   });
 
@@ -92,19 +88,7 @@ describe('ListMemberships', () => {
     it('should make a get request to read a list membership by id', async () => {
       const id = 1;
 
-      const mockResponse: ListMembershipResponse = {
-        ...responseAttributes,
-        list_membership: {
-          created_at: '',
-          id: 1,
-          list_id: 11,
-          opted_out: false,
-          prospect_id: 101,
-          updated_at: '',
-        },
-      };
-
-      mockAxios.onGet().reply<ListMembershipResponse>(200, mockResponse);
+      mockAxios.onGet().reply<ListMembershipResponse>(200, mockListMembershipResponse);
 
       const response = await listMemberships.readById(id);
 
@@ -112,7 +96,7 @@ describe('ListMemberships', () => {
         `https://pi.pardot.com/api/listMembership/version/4/do/read/id/${id}`,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockListMembershipResponse);
     });
   });
 
@@ -125,19 +109,7 @@ describe('ListMemberships', () => {
         opted_out: false,
       };
 
-      const mockResponse: ListMembershipResponse = {
-        ...responseAttributes,
-        list_membership: {
-          created_at: '',
-          id: 1,
-          list_id: listId,
-          prospect_id: prospectId,
-          updated_at: '',
-          ...params,
-        },
-      };
-
-      mockAxios.onPost().reply<ListMembershipResponse>(200, mockResponse);
+      mockAxios.onPost().reply<ListMembershipResponse>(200, mockListMembershipResponse);
 
       const response = await listMemberships.create(listId, prospectId, params);
 
@@ -146,7 +118,7 @@ describe('ListMemberships', () => {
         params,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockListMembershipResponse);
     });
   });
 
@@ -159,19 +131,7 @@ describe('ListMemberships', () => {
         opted_out: true,
       };
 
-      const mockResponse: ListMembershipResponse = {
-        ...responseAttributes,
-        list_membership: {
-          created_at: '',
-          id: 1,
-          list_id: listId,
-          prospect_id: prospectId,
-          updated_at: '',
-          ...params,
-        },
-      };
-
-      mockAxios.onPost().reply<ListMembershipResponse>(200, mockResponse);
+      mockAxios.onPost().reply<ListMembershipResponse>(200, mockListMembershipResponse);
 
       const response = await listMemberships.update(listId, prospectId, params);
 
@@ -180,7 +140,7 @@ describe('ListMemberships', () => {
         params,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockListMembershipResponse);
     });
   });
 
@@ -192,19 +152,7 @@ describe('ListMemberships', () => {
         opted_out: true,
       };
 
-      const mockResponse: ListMembershipResponse = {
-        ...responseAttributes,
-        list_membership: {
-          created_at: '',
-          id: 1,
-          list_id: 11,
-          prospect_id: 101,
-          updated_at: '',
-          ...params,
-        },
-      };
-
-      mockAxios.onPost().reply<ListMembershipResponse>(200, mockResponse);
+      mockAxios.onPost().reply<ListMembershipResponse>(200, mockListMembershipResponse);
 
       const response = await listMemberships.updateById(id, params);
 
@@ -213,7 +161,7 @@ describe('ListMemberships', () => {
         params,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockListMembershipResponse);
     });
   });
 

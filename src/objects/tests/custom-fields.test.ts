@@ -1,5 +1,9 @@
 import { mockAxios, onGetSpy, onPostSpy, pardot, responseAttributes } from './lib/setup';
-import CustomFields, { CustomFieldQueryResponse, CustomFieldResponse } from '../custom-fields';
+import CustomFields, {
+  CustomField,
+  CustomFieldQueryResponse,
+  CustomFieldResponse,
+} from '../custom-fields';
 
 describe('CustomFields', () => {
   beforeEach(() => {
@@ -9,7 +13,7 @@ describe('CustomFields', () => {
 
   const customFields = new CustomFields(pardot);
 
-  const mockCustomFields = [
+  const mockCustomFields: CustomField[] = [
     {
       created_at: '',
       crm_id: null,
@@ -38,7 +42,7 @@ describe('CustomFields', () => {
     },
   ];
 
-  const mockCustomFieldsResponse: CustomFieldQueryResponse = {
+  const mockCustomFieldQueryResponse: CustomFieldQueryResponse = {
     ...responseAttributes,
     result: {
       customField: mockCustomFields,
@@ -53,7 +57,7 @@ describe('CustomFields', () => {
 
   describe('query', () => {
     it('should make a get request to query custom fields', async () => {
-      mockAxios.onGet().reply<CustomFieldQueryResponse>(200, mockCustomFieldsResponse);
+      mockAxios.onGet().reply<CustomFieldQueryResponse>(200, mockCustomFieldQueryResponse);
 
       const params = {
         id_greater_than: 40,
@@ -69,7 +73,7 @@ describe('CustomFields', () => {
         },
       );
 
-      expect(response).toEqual(mockCustomFieldsResponse);
+      expect(response).toEqual(mockCustomFieldQueryResponse);
     });
   });
 

@@ -1,5 +1,5 @@
 import { mockAxios, onGetSpy, pardot, responseAttributes } from './lib/setup';
-import Visits, { VisitQueryParams, VisitQueryResponse, VisitResponse } from '../visits';
+import Visits, { Visit, VisitQueryParams, VisitQueryResponse, VisitResponse } from '../visits';
 
 describe('Visits', () => {
   beforeEach(() => {
@@ -9,7 +9,7 @@ describe('Visits', () => {
 
   const visits = new Visits(pardot);
 
-  const mockVisits = [
+  const mockVisits: Visit[] = [
     {
       campaign_parameter: null,
       content_parameter: null,

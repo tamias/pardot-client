@@ -1,5 +1,6 @@
 import { mockAxios, onGetSpy, pardot, responseAttributes } from './lib/setup';
 import LifecycleHistories, {
+  LifecycleHistory,
   LifecycleHistoryQueryResponse,
   LifecycleHistoryResponse,
 } from '../lifecycle-histories';
@@ -12,34 +13,43 @@ describe('LifecycleHistories', () => {
 
   const lifecycleHistories = new LifecycleHistories(pardot);
 
+  const mockLifecycleHistories: LifecycleHistory[] = [
+    {
+      created_at: '',
+      id: 1,
+      next_stage_id: 101,
+      previous_stage_id: null,
+      prospect_id: 11,
+      seconds_elapsed: null,
+    },
+    {
+      created_at: '',
+      id: 2,
+      next_stage_id: 102,
+      previous_stage_id: 101,
+      prospect_id: 12,
+      seconds_elapsed: null,
+    },
+  ];
+
+  const mockLifecycleHistoryQueryResponse: LifecycleHistoryQueryResponse = {
+    ...responseAttributes,
+    result: {
+      lifecycleHistory: mockLifecycleHistories,
+      total_results: 5,
+    },
+  };
+
+  const mockLifecycleHistoryResponse: LifecycleHistoryResponse = {
+    ...responseAttributes,
+    lifecycleHistory: mockLifecycleHistories[0],
+  };
+
   describe('query', () => {
     it('should make a get request to query lifecycle histories', async () => {
-      const mockResponse: LifecycleHistoryQueryResponse = {
-        ...responseAttributes,
-        result: {
-          lifecycleHistory: [
-            {
-              created_at: '',
-              id: 1,
-              next_stage_id: 101,
-              previous_stage_id: null,
-              prospect_id: 11,
-              seconds_elapsed: null,
-            },
-            {
-              created_at: '',
-              id: 2,
-              next_stage_id: 102,
-              previous_stage_id: 101,
-              prospect_id: 12,
-              seconds_elapsed: null,
-            },
-          ],
-          total_results: 5,
-        },
-      };
-
-      mockAxios.onGet().reply<LifecycleHistoryQueryResponse>(200, mockResponse);
+      mockAxios
+        .onGet()
+        .reply<LifecycleHistoryQueryResponse>(200, mockLifecycleHistoryQueryResponse);
 
       const params = {
         id_greater_than: 40,
@@ -55,7 +65,7 @@ describe('LifecycleHistories', () => {
         },
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockLifecycleHistoryQueryResponse);
     });
   });
 
@@ -63,19 +73,7 @@ describe('LifecycleHistories', () => {
     it('should make a get query to read a lifecycle history', async () => {
       const id = 1;
 
-      const mockResponse: LifecycleHistoryResponse = {
-        ...responseAttributes,
-        lifecycleHistory: {
-          created_at: '',
-          id: 1,
-          next_stage_id: 101,
-          previous_stage_id: null,
-          prospect_id: 11,
-          seconds_elapsed: null,
-        },
-      };
-
-      mockAxios.onGet().reply<LifecycleHistoryResponse>(200, mockResponse);
+      mockAxios.onGet().reply<LifecycleHistoryResponse>(200, mockLifecycleHistoryResponse);
 
       const response = await lifecycleHistories.read(id);
 
@@ -83,7 +81,7 @@ describe('LifecycleHistories', () => {
         `https://pi.pardot.com/api/lifecycleHistory/version/4/do/read/id/${id}`,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockLifecycleHistoryResponse);
     });
   });
 });

@@ -13,6 +13,8 @@ declare type VisitorActivityTypeNames = typeof VISITOR_ACTIVITY_TYPE_NAMES;
 export declare type VisitorActivityTypeName = VisitorActivityTypeNames[keyof VisitorActivityTypeNames];
 interface VisitorActivityBase {
     id: number;
+    visitor_id?: number;
+    prospect_id?: number;
     type: number;
     type_name: VisitorActivityTypeName;
     details: string;

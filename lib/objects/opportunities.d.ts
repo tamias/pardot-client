@@ -1,5 +1,12 @@
 import { BaseResultParams, Create, CreatedSearchParams, IdSearchParams, OutputParams, OutputParamsFull, OutputParamsMobile, OutputParamsSimple, ResponseBase, Update } from './types';
 import ObjectsBase from './base';
+export declare const OPPORTUNITY_STATUSES: {
+    readonly Lost: "lost";
+    readonly Open: "open";
+    readonly Won: "won";
+};
+declare type OpportunityStatuses = typeof OPPORTUNITY_STATUSES;
+export declare type OpportunityStatus = OpportunityStatuses[keyof OpportunityStatuses];
 export interface OpportunityMobile {
     id: number;
     campaign_id: number;
@@ -8,7 +15,7 @@ export interface OpportunityMobile {
     probability: number;
     type: string;
     stage: string;
-    status: 'won' | 'lost' | 'open';
+    status: OpportunityStatus;
     closed_at: string;
     created_at: string;
     updated_at: string;

@@ -1,5 +1,6 @@
 import { mockAxios, onGetSpy, onPostSpy, pardot, responseAttributes } from './lib/setup';
 import ProspectAccounts, {
+  ProspectAccount,
   ProspectAccountDescribeResponse,
   ProspectAccountQueryParams,
   ProspectAccountQueryResponse,
@@ -14,7 +15,7 @@ describe('ProspectAccounts', () => {
 
   const prospectAccounts = new ProspectAccounts(pardot);
 
-  const mockProspectAccounts = [
+  const mockProspectAccounts: ProspectAccount[] = [
     {
       created_at: '',
       id: 1,

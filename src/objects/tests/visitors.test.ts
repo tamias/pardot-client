@@ -2,6 +2,7 @@ import { mockAxios, onGetSpy, onPostSpy, pardot, responseAttributes } from './li
 import { OutputParams } from '../types';
 import Visitors, {
   VisitorAssignParams,
+  VisitorMobile,
   VisitorQueryParams,
   VisitorQueryResponseMobile,
   VisitorResponseMobile,
@@ -15,7 +16,7 @@ describe('Visitors', () => {
 
   const visitors = new Visitors(pardot);
 
-  const mockVisitors = [
+  const mockVisitors: VisitorMobile[] = [
     {
       created_at: '',
       hostname: 'localhost',

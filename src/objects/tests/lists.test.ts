@@ -1,5 +1,5 @@
 import { mockAxios, onGetSpy, onPostSpy, pardot, responseAttributes } from './lib/setup';
-import Lists, { ListQueryResponse, ListResponse } from '../lists';
+import Lists, { List, ListQueryResponse, ListResponse } from '../lists';
 
 describe('Lists', () => {
   beforeEach(() => {
@@ -9,40 +9,47 @@ describe('Lists', () => {
 
   const lists = new Lists(pardot);
 
+  const mockLists: List[] = [
+    {
+      created_at: '',
+      description: null,
+      id: 1,
+      is_crm_visible: false,
+      is_dynamic: false,
+      is_public: true,
+      name: 'List 1',
+      title: 'List Title',
+      updated_at: '',
+    },
+    {
+      created_at: '',
+      description: null,
+      id: 2,
+      is_crm_visible: false,
+      is_dynamic: true,
+      is_public: true,
+      name: 'List 2',
+      title: 'List Title',
+      updated_at: '',
+    },
+  ];
+
+  const mockListQueryResponse: ListQueryResponse = {
+    ...responseAttributes,
+    result: {
+      list: mockLists,
+      total_results: 5,
+    },
+  };
+
+  const mockListResponse: ListResponse = {
+    ...responseAttributes,
+    list: mockLists[0],
+  };
+
   describe('query', () => {
     it('should make a get request to query campaigns', async () => {
-      const mockResponse: ListQueryResponse = {
-        ...responseAttributes,
-        result: {
-          list: [
-            {
-              created_at: '',
-              description: null,
-              id: 1,
-              is_crm_visible: false,
-              is_dynamic: false,
-              is_public: true,
-              name: 'List 1',
-              title: 'List Title',
-              updated_at: '',
-            },
-            {
-              created_at: '',
-              description: null,
-              id: 2,
-              is_crm_visible: false,
-              is_dynamic: true,
-              is_public: true,
-              name: 'List 2',
-              title: 'List Title',
-              updated_at: '',
-            },
-          ],
-          total_results: 5,
-        },
-      };
-
-      mockAxios.onGet().reply<ListQueryResponse>(200, mockResponse);
+      mockAxios.onGet().reply<ListQueryResponse>(200, mockListQueryResponse);
 
       const params = {
         id_less_than: 10,
@@ -55,7 +62,7 @@ describe('Lists', () => {
         params,
       });
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockListQueryResponse);
     });
   });
 
@@ -63,22 +70,7 @@ describe('Lists', () => {
     it('should make a get request to read a list', async () => {
       const id = 1;
 
-      const mockResponse: ListResponse = {
-        ...responseAttributes,
-        list: {
-          created_at: '',
-          description: null,
-          id: 1,
-          is_crm_visible: false,
-          is_dynamic: false,
-          is_public: true,
-          name: 'List 1',
-          title: 'List Title',
-          updated_at: '',
-        },
-      };
-
-      mockAxios.onGet().reply<ListResponse>(200, mockResponse);
+      mockAxios.onGet().reply<ListResponse>(200, mockListResponse);
 
       const response = await lists.read(id);
 
@@ -86,7 +78,7 @@ describe('Lists', () => {
         `https://pi.pardot.com/api/list/version/4/do/read/id/${id}`,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockListResponse);
     });
   });
 
@@ -98,23 +90,7 @@ describe('Lists', () => {
         name: 'List 1 Updated',
       };
 
-      const mockResponse: ListResponse = {
-        ...responseAttributes,
-        list: {
-          created_at: '',
-          description: null,
-          id,
-          is_crm_visible: false,
-          is_dynamic: false,
-          // TODO: clean up tests
-          // is_public: true,
-          title: 'List Title',
-          updated_at: '',
-          ...params,
-        },
-      };
-
-      mockAxios.onPost().reply<ListResponse>(200, mockResponse);
+      mockAxios.onPost().reply<ListResponse>(200, mockListResponse);
 
       const response = await lists.update(id, params);
 
@@ -123,7 +99,7 @@ describe('Lists', () => {
         params,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockListResponse);
     });
   });
 
@@ -138,17 +114,7 @@ describe('Lists', () => {
         title: 'List Title',
       };
 
-      const mockResponse: ListResponse = {
-        ...responseAttributes,
-        list: {
-          created_at: '',
-          id: 1,
-          updated_at: '',
-          ...params,
-        },
-      };
-
-      mockAxios.onPost().reply<ListResponse>(200, mockResponse);
+      mockAxios.onPost().reply<ListResponse>(200, mockListResponse);
 
       const response = await lists.create(params);
 
@@ -157,7 +123,7 @@ describe('Lists', () => {
         params,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockListResponse);
     });
   });
 

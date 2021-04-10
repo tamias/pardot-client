@@ -1,5 +1,5 @@
 import { mockAxios, onGetSpy, onPostSpy, pardot, responseAttributes } from './lib/setup';
-import Campaigns, { CampaignQueryResponse, CampaignResponse } from '../campaigns';
+import Campaigns, { Campaign, CampaignQueryResponse, CampaignResponse } from '../campaigns';
 
 describe('Campaigns', () => {
   beforeEach(() => {
@@ -9,28 +9,35 @@ describe('Campaigns', () => {
 
   const campaigns = new Campaigns(pardot);
 
+  const mockCampaigns: Campaign[] = [
+    {
+      cost: null,
+      id: 1,
+      name: 'Campaign 1',
+    },
+    {
+      cost: 5,
+      id: 2,
+      name: 'Campaign 2',
+    },
+  ];
+
+  const mockCampaignQueryResponse: CampaignQueryResponse = {
+    ...responseAttributes,
+    result: {
+      campaign: mockCampaigns,
+      total_results: 5,
+    },
+  };
+
+  const mockCampaignResponse: CampaignResponse = {
+    ...responseAttributes,
+    campaign: mockCampaigns[0],
+  };
+
   describe('query', () => {
     it('should make a get request to query campaigns', async () => {
-      const mockResponse: CampaignQueryResponse = {
-        ...responseAttributes,
-        result: {
-          campaign: [
-            {
-              cost: null,
-              id: 1,
-              name: 'Campaign 1',
-            },
-            {
-              cost: 5,
-              id: 2,
-              name: 'Campaign 2',
-            },
-          ],
-          total_results: 5,
-        },
-      };
-
-      mockAxios.onGet().reply<CampaignQueryResponse>(200, mockResponse);
+      mockAxios.onGet().reply<CampaignQueryResponse>(200, mockCampaignQueryResponse);
 
       const params = {
         id_less_than: 10,
@@ -44,7 +51,7 @@ describe('Campaigns', () => {
         { params },
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockCampaignQueryResponse);
     });
   });
 
@@ -52,16 +59,7 @@ describe('Campaigns', () => {
     it('should make a get request to read a campaign', async () => {
       const id = 1;
 
-      const mockResponse: CampaignResponse = {
-        ...responseAttributes,
-        campaign: {
-          cost: null,
-          id,
-          name: 'Campaign 1',
-        },
-      };
-
-      mockAxios.onGet().reply<CampaignResponse>(200, mockResponse);
+      mockAxios.onGet().reply<CampaignResponse>(200, mockCampaignResponse);
 
       const response = await campaigns.read(id);
 
@@ -69,7 +67,7 @@ describe('Campaigns', () => {
         `https://pi.pardot.com/api/campaign/version/4/do/read/id/${id}`,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockCampaignResponse);
     });
   });
 
@@ -81,15 +79,7 @@ describe('Campaigns', () => {
         name: 'Campaign 1 Updated',
       };
 
-      const mockResponse: CampaignResponse = {
-        ...responseAttributes,
-        campaign: {
-          id,
-          ...params,
-        },
-      };
-
-      mockAxios.onPost().reply<CampaignResponse>(200, mockResponse);
+      mockAxios.onPost().reply<CampaignResponse>(200, mockCampaignResponse);
 
       const response = await campaigns.update(id, params);
 
@@ -98,7 +88,7 @@ describe('Campaigns', () => {
         params,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockCampaignResponse);
     });
   });
 
@@ -109,15 +99,7 @@ describe('Campaigns', () => {
         name: 'Campaign 1',
       };
 
-      const mockResponse: CampaignResponse = {
-        ...responseAttributes,
-        campaign: {
-          id: 1,
-          ...params,
-        },
-      };
-
-      mockAxios.onPost().reply<CampaignResponse>(200, mockResponse);
+      mockAxios.onPost().reply<CampaignResponse>(200, mockCampaignResponse);
 
       const response = await campaigns.create(params);
 
@@ -126,7 +108,7 @@ describe('Campaigns', () => {
         params,
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockCampaignResponse);
     });
   });
 });

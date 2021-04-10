@@ -1,5 +1,6 @@
 import { mockAxios, onGetSpy, pardot, responseAttributes } from './lib/setup';
 import TagObjects, {
+  TagObject,
   TagObjectQueryParams,
   TagObjectQueryResponse,
   TagObjectResponse,
@@ -13,7 +14,7 @@ describe('TagObjects', () => {
 
   const tagObjects = new TagObjects(pardot);
 
-  const mockTagObjects = [
+  const mockTagObjects: TagObject[] = [
     {
       created_at: '',
       id: 1,

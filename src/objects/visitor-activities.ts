@@ -27,6 +27,8 @@ export type VisitorActivityTypeName = VisitorActivityTypeNames[keyof VisitorActi
 
 interface VisitorActivityBase {
   id: number;
+  visitor_id?: number;
+  prospect_id?: number;
   type: number;
   type_name: VisitorActivityTypeName;
   details: string;

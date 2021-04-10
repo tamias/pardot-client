@@ -12,6 +12,16 @@ import {
 } from './types';
 import ObjectsBase from './base';
 
+export const OPPORTUNITY_STATUSES = {
+  Lost: 'lost',
+  Open: 'open',
+  Won: 'won',
+} as const;
+
+type OpportunityStatuses = typeof OPPORTUNITY_STATUSES;
+
+export type OpportunityStatus = OpportunityStatuses[keyof OpportunityStatuses];
+
 export interface OpportunityMobile {
   id: number;
   campaign_id: number;
@@ -20,7 +30,7 @@ export interface OpportunityMobile {
   probability: number;
   type: string;
   stage: string;
-  status: 'won' | 'lost' | 'open';
+  status: OpportunityStatus;
   closed_at: string;
   created_at: string;
   updated_at: string;

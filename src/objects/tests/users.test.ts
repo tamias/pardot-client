@@ -1,5 +1,5 @@
 import { mockAxios, onGetSpy, pardot, responseAttributes } from './lib/setup';
-import Users, { UserQueryParams, UserQueryResponse, UserResponse } from '../users';
+import Users, { User, UserQueryParams, UserQueryResponse, UserResponse } from '../users';
 
 describe('Users', () => {
   beforeEach(() => {
@@ -9,7 +9,7 @@ describe('Users', () => {
 
   const users = new Users(pardot);
 
-  const mockUsers = [
+  const mockUsers: User[] = [
     {
       account: 11,
       created_at: '',

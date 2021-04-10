@@ -1,6 +1,8 @@
 import { mockAxios, onGetSpy, onPostSpy, pardot, responseAttributes } from './lib/setup';
 import { OutputParams } from '../types';
 import Opportunities, {
+  OPPORTUNITY_STATUSES,
+  OpportunityMobile,
   OpportunityQueryParams,
   OpportunityQueryResponseMobile,
   OpportunityResponseMobile,
@@ -14,44 +16,51 @@ describe('Opportunities', () => {
 
   const opportunities = new Opportunities(pardot);
 
+  const mockOpportunities: OpportunityMobile[] = [
+    {
+      campaign_id: 11,
+      closed_at: '',
+      created_at: '',
+      id: 1,
+      name: 'Opportunity 1',
+      probability: 0.5,
+      stage: '',
+      status: OPPORTUNITY_STATUSES.Open,
+      type: '',
+      updated_at: '',
+      value: 7,
+    },
+    {
+      campaign_id: 11,
+      closed_at: '',
+      created_at: '',
+      id: 2,
+      name: 'Opportunity 2',
+      probability: 0.25,
+      stage: '',
+      status: OPPORTUNITY_STATUSES.Won,
+      type: '',
+      updated_at: '',
+      value: 14,
+    },
+  ];
+
+  const mockOpportunityQueryResponse: OpportunityQueryResponseMobile = {
+    ...responseAttributes,
+    result: {
+      opportunity: mockOpportunities,
+      total_results: 5,
+    },
+  };
+
+  const mockOpportunityResponse: OpportunityResponseMobile = {
+    ...responseAttributes,
+    opportunity: mockOpportunities[0],
+  };
+
   describe('query', () => {
     it('should make a get request to query opportunities', async () => {
-      const mockResponse: OpportunityQueryResponseMobile = {
-        ...responseAttributes,
-        result: {
-          opportunity: [
-            {
-              campaign_id: 11,
-              closed_at: '',
-              created_at: '',
-              id: 1,
-              name: 'Opportunity 1',
-              probability: 0.5,
-              stage: '',
-              status: 'open',
-              type: '',
-              updated_at: '',
-              value: 7,
-            },
-            {
-              campaign_id: 11,
-              closed_at: '',
-              created_at: '',
-              id: 2,
-              name: 'Opportunity 2',
-              probability: 0.25,
-              stage: '',
-              status: 'won',
-              type: '',
-              updated_at: '',
-              value: 14,
-            },
-          ],
-          total_results: 5,
-        },
-      };
-
-      mockAxios.onGet().reply<OpportunityQueryResponseMobile>(200, mockResponse);
+      mockAxios.onGet().reply<OpportunityQueryResponseMobile>(200, mockOpportunityQueryResponse);
 
       const params: OpportunityQueryParams = {
         limit: 2,
@@ -67,7 +76,7 @@ describe('Opportunities', () => {
         },
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockOpportunityQueryResponse);
     });
   });
 
@@ -75,24 +84,7 @@ describe('Opportunities', () => {
     it('should make a get request to read an opportunity', async () => {
       const id = 1;
 
-      const mockResponse: OpportunityResponseMobile = {
-        ...responseAttributes,
-        opportunity: {
-          campaign_id: 11,
-          closed_at: '',
-          created_at: '',
-          id,
-          name: 'Opportunity 1',
-          probability: 0.5,
-          stage: '',
-          status: 'open',
-          type: '',
-          updated_at: '',
-          value: 7,
-        },
-      };
-
-      mockAxios.onGet().reply<OpportunityResponseMobile>(200, mockResponse);
+      mockAxios.onGet().reply<OpportunityResponseMobile>(200, mockOpportunityResponse);
 
       const params: OutputParams = {
         output: 'mobile',
@@ -107,7 +99,7 @@ describe('Opportunities', () => {
         },
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockOpportunityResponse);
     });
   });
 
@@ -115,24 +107,7 @@ describe('Opportunities', () => {
     it('should make a post request to create an opportunity by prospect email', async () => {
       const prospectEmail = 'prospect@example.com';
 
-      const mockResponse: OpportunityResponseMobile = {
-        ...responseAttributes,
-        opportunity: {
-          campaign_id: 11,
-          closed_at: '',
-          created_at: '',
-          id: 1,
-          name: 'Opportunity 1',
-          probability: 0.5,
-          stage: '',
-          status: 'open',
-          type: '',
-          updated_at: '',
-          value: 7,
-        },
-      };
-
-      mockAxios.onPost().reply<OpportunityResponseMobile>(200, mockResponse);
+      mockAxios.onPost().reply<OpportunityResponseMobile>(200, mockOpportunityResponse);
 
       const create = {
         campaign_id: 1,
@@ -157,7 +132,7 @@ describe('Opportunities', () => {
         },
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockOpportunityResponse);
     });
   });
 
@@ -165,24 +140,7 @@ describe('Opportunities', () => {
     it('should make a post request to create an opportunity by prospect id', async () => {
       const prospectId = 101;
 
-      const mockResponse: OpportunityResponseMobile = {
-        ...responseAttributes,
-        opportunity: {
-          campaign_id: 11,
-          closed_at: '',
-          created_at: '',
-          id: 1,
-          name: 'Opportunity 1',
-          probability: 0.5,
-          stage: '',
-          status: 'open',
-          type: '',
-          updated_at: '',
-          value: 7,
-        },
-      };
-
-      mockAxios.onPost().reply<OpportunityResponseMobile>(200, mockResponse);
+      mockAxios.onPost().reply<OpportunityResponseMobile>(200, mockOpportunityResponse);
 
       const create = {
         campaign_id: 1,
@@ -205,7 +163,7 @@ describe('Opportunities', () => {
         },
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockOpportunityResponse);
     });
   });
 
@@ -213,24 +171,7 @@ describe('Opportunities', () => {
     it('should make a post request to update an opportunity', async () => {
       const id = 1;
 
-      const mockResponse: OpportunityResponseMobile = {
-        ...responseAttributes,
-        opportunity: {
-          campaign_id: 11,
-          closed_at: '',
-          created_at: '',
-          id: 1,
-          name: 'Opportunity 1',
-          probability: 0.5,
-          stage: '',
-          status: 'open',
-          type: '',
-          updated_at: '',
-          value: 7,
-        },
-      };
-
-      mockAxios.onPost().reply<OpportunityResponseMobile>(200, mockResponse);
+      mockAxios.onPost().reply<OpportunityResponseMobile>(200, mockOpportunityResponse);
 
       const update = {
         probability: 1,
@@ -251,7 +192,7 @@ describe('Opportunities', () => {
         },
       );
 
-      expect(response).toEqual(mockResponse);
+      expect(response).toEqual(mockOpportunityResponse);
     });
   });
 

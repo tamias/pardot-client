@@ -2,6 +2,7 @@ import { mockAxios, onGetSpy, pardot, responseAttributes } from './lib/setup';
 import { OutputParams } from '../types';
 import VisitorActivities, {
   VISITOR_ACTIVITY_TYPE_NAMES,
+  VisitorActivityMobile,
   VisitorActivityQueryParams,
   VisitorActivityQueryResponseMobile,
   VisitorActivityResponseMobile,
@@ -15,7 +16,7 @@ describe('VisitorActivities', () => {
 
   const visitorActivities = new VisitorActivities(pardot);
 
-  const mockVisitorActivities = [
+  const mockVisitorActivities: VisitorActivityMobile[] = [
     {
       campaign: { id: 1001, name: 'Campaign 1' },
       created_at: '',
