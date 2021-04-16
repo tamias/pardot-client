@@ -8,22 +8,14 @@ import {
   OutputParamsSimple,
   ResponseBase,
   UpdatedSearchParams,
+  ValueOf,
 } from './types';
+import { VISITOR_ACTIVITY_TYPE_NAMES } from './constants';
 import ObjectsBase from './base';
-
-export const VISITOR_ACTIVITY_TYPE_NAMES = {
-  CustomRedirect: 'Custom Redirect',
-  Email: 'Email',
-  File: 'File',
-  Form: 'Form',
-  FormHandler: 'FormHandler',
-  LandingPage: 'Landing Page',
-  Visit: 'Visit',
-} as const;
 
 type VisitorActivityTypeNames = typeof VISITOR_ACTIVITY_TYPE_NAMES;
 
-export type VisitorActivityTypeName = VisitorActivityTypeNames[keyof VisitorActivityTypeNames];
+export type VisitorActivityTypeName = ValueOf<VisitorActivityTypeNames>;
 
 interface VisitorActivityBase {
   id: number;

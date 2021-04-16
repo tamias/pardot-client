@@ -1,11 +1,12 @@
+import { DATE_STRINGS, OUTPUT_FORMATS, SORT_ORDERS } from './constants';
+
+export type ValueOf<T> = T[keyof T];
+
 type GnuDateString = string; // http://www.gnu.org/software/tar/manual/html_node/Date-input-formats.html
-export type DateString =
-  | 'today'
-  | 'yesterday'
-  | 'last_7_days'
-  | 'this_month'
-  | 'last_month'
-  | GnuDateString;
+
+type DateStrings = typeof DATE_STRINGS;
+
+export type DateString = ValueOf<DateStrings> | GnuDateString;
 
 export interface IdSearchParams {
   id_greater_than?: number;
@@ -22,18 +23,20 @@ export interface UpdatedSearchParams {
   updated_before?: DateString;
 }
 
-export type SortOrder = 'ascending' | 'descending';
+type SortOrders = typeof SORT_ORDERS;
+
+export type SortOrder = ValueOf<SortOrders>;
 
 export interface OutputParamsMobile {
-  output: 'mobile';
+  output: typeof OUTPUT_FORMATS.Mobile;
 }
 
 export interface OutputParamsSimple {
-  output: 'simple';
+  output: typeof OUTPUT_FORMATS.Simple;
 }
 
 export interface OutputParamsFull {
-  output?: 'full';
+  output?: typeof OUTPUT_FORMATS.Full;
 }
 
 export type OutputParams = OutputParamsMobile | OutputParamsSimple | OutputParamsFull;

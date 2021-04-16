@@ -1,5 +1,8 @@
+import { DATE_STRINGS, OUTPUT_FORMATS, SORT_ORDERS } from './constants';
+export declare type ValueOf<T> = T[keyof T];
 declare type GnuDateString = string;
-export declare type DateString = 'today' | 'yesterday' | 'last_7_days' | 'this_month' | 'last_month' | GnuDateString;
+declare type DateStrings = typeof DATE_STRINGS;
+export declare type DateString = ValueOf<DateStrings> | GnuDateString;
 export interface IdSearchParams {
     id_greater_than?: number;
     id_less_than?: number;
@@ -12,15 +15,16 @@ export interface UpdatedSearchParams {
     updated_after?: DateString;
     updated_before?: DateString;
 }
-export declare type SortOrder = 'ascending' | 'descending';
+declare type SortOrders = typeof SORT_ORDERS;
+export declare type SortOrder = ValueOf<SortOrders>;
 export interface OutputParamsMobile {
-    output: 'mobile';
+    output: typeof OUTPUT_FORMATS.Mobile;
 }
 export interface OutputParamsSimple {
-    output: 'simple';
+    output: typeof OUTPUT_FORMATS.Simple;
 }
 export interface OutputParamsFull {
-    output?: 'full';
+    output?: typeof OUTPUT_FORMATS.Full;
 }
 export declare type OutputParams = OutputParamsMobile | OutputParamsSimple | OutputParamsFull;
 export interface BaseResultParams {

@@ -1,16 +1,8 @@
-import { BaseResultParams, CreatedSearchParams, IdSearchParams, OutputParams, OutputParamsFull, OutputParamsMobile, OutputParamsSimple, ResponseBase, UpdatedSearchParams } from './types';
+import { BaseResultParams, CreatedSearchParams, IdSearchParams, OutputParams, OutputParamsFull, OutputParamsMobile, OutputParamsSimple, ResponseBase, UpdatedSearchParams, ValueOf } from './types';
+import { VISITOR_ACTIVITY_TYPE_NAMES } from './constants';
 import ObjectsBase from './base';
-export declare const VISITOR_ACTIVITY_TYPE_NAMES: {
-    readonly CustomRedirect: "Custom Redirect";
-    readonly Email: "Email";
-    readonly File: "File";
-    readonly Form: "Form";
-    readonly FormHandler: "FormHandler";
-    readonly LandingPage: "Landing Page";
-    readonly Visit: "Visit";
-};
 declare type VisitorActivityTypeNames = typeof VISITOR_ACTIVITY_TYPE_NAMES;
-export declare type VisitorActivityTypeName = VisitorActivityTypeNames[keyof VisitorActivityTypeNames];
+export declare type VisitorActivityTypeName = ValueOf<VisitorActivityTypeNames>;
 interface VisitorActivityBase {
     id: number;
     visitor_id?: number;

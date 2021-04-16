@@ -1,7 +1,7 @@
 import { mockAxios, onGetSpy, pardot, responseAttributes } from './lib/setup';
 import { OutputParams } from '../types';
+import { VISITOR_ACTIVITY_TYPE_NAMES } from '../constants';
 import VisitorActivities, {
-  VISITOR_ACTIVITY_TYPE_NAMES,
   VisitorActivityMobile,
   VisitorActivityQueryParams,
   VisitorActivityQueryResponseMobile,

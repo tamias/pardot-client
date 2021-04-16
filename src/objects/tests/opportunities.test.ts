@@ -1,7 +1,7 @@
 import { mockAxios, onGetSpy, onPostSpy, pardot, responseAttributes } from './lib/setup';
+import { OPPORTUNITY_STATUSES } from '../constants';
 import { OutputParams } from '../types';
 import Opportunities, {
-  OPPORTUNITY_STATUSES,
   OpportunityMobile,
   OpportunityQueryParams,
   OpportunityQueryResponseMobile,

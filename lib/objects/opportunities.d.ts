@@ -1,13 +1,9 @@
-import { BaseResultParams, Create, CreatedSearchParams, IdSearchParams, OutputParams, OutputParamsFull, OutputParamsMobile, OutputParamsSimple, ResponseBase, Update } from './types';
+import { BaseResultParams, Create, CreatedSearchParams, IdSearchParams, OutputParams, OutputParamsFull, OutputParamsMobile, OutputParamsSimple, ResponseBase, Update, ValueOf } from './types';
+import { OPPORTUNITY_STATUSES } from './constants';
 import { VisitorActivityMobile } from './visitor-activities';
 import ObjectsBase from './base';
-export declare const OPPORTUNITY_STATUSES: {
-    readonly Lost: "lost";
-    readonly Open: "open";
-    readonly Won: "won";
-};
 declare type OpportunityStatuses = typeof OPPORTUNITY_STATUSES;
-export declare type OpportunityStatus = OpportunityStatuses[keyof OpportunityStatuses];
+export declare type OpportunityStatus = ValueOf<OpportunityStatuses>;
 export interface OpportunityMobile {
     id: number;
     campaign_id: number;

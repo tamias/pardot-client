@@ -9,19 +9,15 @@ import {
   OutputParamsSimple,
   ResponseBase,
   Update,
+  ValueOf,
 } from './types';
+import { OPPORTUNITY_STATUSES } from './constants';
 import { VisitorActivityMobile } from './visitor-activities';
 import ObjectsBase from './base';
 
-export const OPPORTUNITY_STATUSES = {
-  Lost: 'lost',
-  Open: 'open',
-  Won: 'won',
-} as const;
-
 type OpportunityStatuses = typeof OPPORTUNITY_STATUSES;
 
-export type OpportunityStatus = OpportunityStatuses[keyof OpportunityStatuses];
+export type OpportunityStatus = ValueOf<OpportunityStatuses>;
 
 export interface OpportunityMobile {
   id: number;
