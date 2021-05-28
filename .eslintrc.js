@@ -33,6 +33,7 @@ module.exports = {
       },
     ],
     'import/no-named-as-default-member': 'error',
+    'jest/expect-expect': ['error', { assertFunctionNames: ['expect*'] }],
     'no-console': 'error',
     'no-param-reassign': 'error',
     'no-unsafe-optional-chaining': 'error',
