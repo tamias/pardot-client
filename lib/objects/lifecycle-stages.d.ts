@@ -8,7 +8,7 @@ export interface LifecycleStage {
 }
 declare type LifecycleStageSearchParams = IdSearchParams;
 interface LifecycleStageResultParams extends BaseResultParams {
-    sort_by?: 'created_at' | 'id';
+    sort_by?: 'position' | 'id';
 }
 declare type LifecycleStageQueryParams = LifecycleStageSearchParams & LifecycleStageResultParams;
 export interface LifecycleStageQueryResponse extends ResponseBase {

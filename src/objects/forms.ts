@@ -22,7 +22,7 @@ export interface Form {
 type FormSearchParams = IdSearchParams & CreatedSearchParams & UpdatedSearchParams;
 
 interface FormResultParams extends BaseResultParams {
-  sort_by?: 'created_at' | 'id';
+  sort_by?: 'created_at' | 'id' | 'updated_at';
 }
 
 type FormQueryParams = FormSearchParams & FormResultParams;

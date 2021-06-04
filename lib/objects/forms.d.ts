@@ -13,7 +13,7 @@ export interface Form {
 }
 declare type FormSearchParams = IdSearchParams & CreatedSearchParams & UpdatedSearchParams;
 interface FormResultParams extends BaseResultParams {
-    sort_by?: 'created_at' | 'id';
+    sort_by?: 'created_at' | 'id' | 'updated_at';
 }
 declare type FormQueryParams = FormSearchParams & FormResultParams;
 export interface FormQueryResponse extends ResponseBase {
