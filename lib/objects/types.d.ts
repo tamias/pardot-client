@@ -40,6 +40,6 @@ export interface ResponseAttributes {
 export interface ResponseBase {
     '@attributes': ResponseAttributes;
 }
-export declare type Update<T> = Partial<Omit<T, 'id'>>;
-export declare type Create<T, K extends keyof Update<T> = null> = Update<T> & Pick<T, K>;
+export declare type Update<ObjectType> = Partial<Omit<ObjectType, 'id'>>;
+export declare type Create<ObjectType, Required extends keyof Update<ObjectType> | null = null> = Update<ObjectType> & (Required extends keyof Update<ObjectType> ? Pick<ObjectType, Required> : {});
 export {};

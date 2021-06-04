@@ -57,8 +57,10 @@ export interface ResponseBase {
   '@attributes': ResponseAttributes;
 }
 
-export type Update<T> = Partial<Omit<T, 'id'>>;
+export type Update<ObjectType> = Partial<Omit<ObjectType, 'id'>>;
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore - allow K = null
-export type Create<T, K extends keyof Update<T> = null> = Update<T> & Pick<T, K>;
+export type Create<
+  ObjectType,
+  Required extends keyof Update<ObjectType> | null = null
+> = Update<ObjectType> &
+  (Required extends keyof Update<ObjectType> ? Pick<ObjectType, Required> : {});
