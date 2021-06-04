@@ -3,9 +3,8 @@
     "declaration": true,
     "outDir": "lib",
     "strictNullChecks": true,
-    "target": "ES5"
+    "target": "ES5",
+    "types": ["jest", "node"]
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
