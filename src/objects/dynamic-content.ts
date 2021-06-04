@@ -27,7 +27,7 @@ export interface DynamicContentItem {
 type DynamicContentSearchParams = IdSearchParams & CreatedSearchParams & UpdatedSearchParams;
 
 interface DynamicContentResultParams extends BaseResultParams {
-  sort_by?: 'created_at' | 'id';
+  sort_by?: 'created_at' | 'id' | 'updated_at';
 }
 
 type DynamicContentQueryParams = DynamicContentSearchParams & DynamicContentResultParams;

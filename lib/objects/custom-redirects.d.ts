@@ -14,7 +14,7 @@ export interface CustomRedirect {
 }
 declare type CustomRedirectSearchParams = IdSearchParams & CreatedSearchParams & UpdatedSearchParams;
 interface CustomRedirectResultParams extends BaseResultParams {
-    sort_by?: 'created_at' | 'id';
+    sort_by?: 'created_at' | 'id' | 'updated_at';
 }
 export declare type CustomRedirectQueryParams = CustomRedirectSearchParams & CustomRedirectResultParams;
 export interface CustomRedirectQueryResponse extends ResponseBase {
