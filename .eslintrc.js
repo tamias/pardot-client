@@ -9,7 +9,12 @@ module.exports = {
     'jest-formatting',
     'sort-imports-es6-autofix',
   ],
-  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:prettier/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
   /* eslint-enable sort-keys */
   rules: {
     '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],

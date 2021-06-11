@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "check": "tsc --noEmit -p tsconfig.json",
-    "lint": "eslint .",
+    "lint": "eslint --ext .ts,.js .",
     "test": "jest --coverage",
     "jest": "jest"
   },

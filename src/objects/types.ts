@@ -63,4 +63,4 @@ export type Create<
   ObjectType,
   Required extends keyof Update<ObjectType> | null = null
 > = Update<ObjectType> &
-  (Required extends keyof Update<ObjectType> ? Pick<ObjectType, Required> : {});
+  (Required extends keyof Update<ObjectType> ? Pick<ObjectType, Required> : unknown);
