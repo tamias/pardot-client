@@ -62,7 +62,7 @@ export default class PardotClient {
     getAccessToken(code: string): Promise<RawAccessToken>;
     protected convertRequestValues(data: {
         [key: string]: unknown;
-    }, isQueryRequest: boolean): {
+    }, isQueryParams: boolean): {
         [key: string]: unknown;
     };
     get axios(): AxiosInstance;

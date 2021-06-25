@@ -142,7 +142,7 @@ export default class PardotClient {
 
   protected convertRequestValues(
     data: { [key: string]: unknown },
-    isQueryRequest: boolean,
+    isQueryParams: boolean,
   ): { [key: string]: unknown } {
     // When creating or updating objects, false is stored as true,
     // presumably because the API is treating the value as a string rather than a boolean
@@ -150,8 +150,8 @@ export default class PardotClient {
     return Object.entries(data).reduce((acc, [key, value]) => {
       let updatedValue;
       if (typeof value === 'boolean') {
-        updatedValue = isQueryRequest ? value : +value;
-      } else if ((key === 'fields' || key === 'prospect_ids') && Array.isArray(value)) {
+        updatedValue = isQueryParams ? value : +value;
+      } else if (isQueryParams && Array.isArray(value)) {
         updatedValue = value.join(',');
       } else {
         updatedValue = value;
@@ -172,18 +172,14 @@ export default class PardotClient {
       this.axiosInstance = axios.create();
 
       this.axiosInstance.interceptors.request.use((config) => {
-        /* istanbul ignore next */
-        const { url = '' } = config;
         let { data, params } = config;
 
-        const isQueryRequest = /\/query/.test(url);
-
         if (data && typeof data === 'object') {
-          data = stringify(this.convertRequestValues(data, isQueryRequest));
+          data = stringify(this.convertRequestValues(data, false));
         }
 
         if (params && typeof params === 'object') {
-          params = this.convertRequestValues(params, isQueryRequest);
+          params = this.convertRequestValues(params, true);
         }
 
         return {

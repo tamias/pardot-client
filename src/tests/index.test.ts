@@ -253,7 +253,7 @@ describe('Pardot', () => {
         });
       });
 
-      it('should convert booleans in data to numbers for non-query requests', async () => {
+      it('should convert booleans in data to numbers', async () => {
         mockAxios.onPost().reply(200);
 
         const response = await pardot.axios.post('http://example.com', {
@@ -266,47 +266,10 @@ describe('Pardot', () => {
         });
       });
 
-      it('should not convert booleans in data to numbers for query requests', async () => {
-        mockAxios.onPost().reply(200);
-
-        const response = await pardot.axios.post('http://example.com/query', {
-          testFalse: false,
-          testTrue: true,
-        });
-
-        expect(response.config).toMatchObject({
-          data: 'testFalse=false&testTrue=true',
-        });
-      });
-
-      it('should convert fields array in data to comma-separated string', async () => {
-        mockAxios.onPost().reply(200);
-
-        const response = await pardot.axios.post('http://example.com', {
-          fields: ['field_1', 'field_2'],
-        });
-
-        expect(response.config).toMatchObject({
-          data: 'fields=field_1%2Cfield_2',
-        });
-      });
-
-      it('should convert prospect_ids array in data to comma-separated string', async () => {
-        mockAxios.onPost().reply(200);
-
-        const response = await pardot.axios.post('http://example.com', {
-          prospect_ids: [123, 456],
-        });
-
-        expect(response.config).toMatchObject({
-          data: 'prospect_ids=123%2C456',
-        });
-      });
-
-      it('should convert booleans in params to numbers for non-query requests', async () => {
+      it('should not convert booleans in query params to numbers', async () => {
         mockAxios.onGet().reply(200);
 
-        const response = await pardot.axios.get('http://example.com', {
+        const response = await pardot.axios.get('http://example.com/', {
           params: {
             testFalse: false,
             testTrue: true,
@@ -314,26 +277,14 @@ describe('Pardot', () => {
         });
 
         expect(response.config).toMatchObject({
-          params: { testFalse: 0, testTrue: 1 },
-        });
-      });
-
-      it('should not convert booleans in params to numbers for query requests', async () => {
-        mockAxios.onGet().reply(200);
-
-        const response = await pardot.axios.get('http://example.com/query', {
-          params: {
+          params: expect.objectContaining({
             testFalse: false,
             testTrue: true,
-          },
-        });
-
-        expect(response.config).toMatchObject({
-          params: { testFalse: false, testTrue: true },
+          }),
         });
       });
 
-      it('should convert fields array in params to comma-separated string', async () => {
+      it('should convert array in query params to comma-separated string', async () => {
         mockAxios.onGet().reply(200);
 
         const response = await pardot.axios.get('http://example.com', {
@@ -343,25 +294,21 @@ describe('Pardot', () => {
         });
 
         expect(response.config).toMatchObject({
-          params: {
+          params: expect.objectContaining({
             fields: 'field_1,field_2',
-          },
+          }),
         });
       });
 
-      it('should convert prospect_ids array in params to comma-separated string', async () => {
-        mockAxios.onGet().reply(200);
+      it('should not convert array in data to comma-separated string', async () => {
+        mockAxios.onPost().reply(200);
 
-        const response = await pardot.axios.get('http://example.com', {
-          params: {
-            prospect_ids: [123, 456],
-          },
+        const response = await pardot.axios.post('http://example.com', {
+          fields: ['field_1', 'field_2'],
         });
 
         expect(response.config).toMatchObject({
-          params: {
-            prospect_ids: '123,456',
-          },
+          data: 'fields%5B0%5D=field_1&fields%5B1%5D=field_2',
         });
       });
     });
