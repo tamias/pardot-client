@@ -78,22 +78,22 @@ export interface VisitorActivityInfo {
   app_url: string;
 }
 
-export interface VisitorActivityFullCustomRedirect extends VisitorActivityMobileCustomRedirect {
+interface VisitorActivityFullCustomRedirect extends VisitorActivityMobileCustomRedirect {
   custom_redirect: VisitorActivityInfo;
 }
-export interface VisitorActivityFullEmail extends VisitorActivityMobileEmail {
+interface VisitorActivityFullEmail extends VisitorActivityMobileEmail {
   email: VisitorActivityInfo;
 }
-export interface VisitorActivityFullFile extends VisitorActivityMobileFile {
+interface VisitorActivityFullFile extends VisitorActivityMobileFile {
   file: VisitorActivityInfo;
 }
-export interface VisitorActivityFullForm extends VisitorActivityMobileForm {
+interface VisitorActivityFullForm extends VisitorActivityMobileForm {
   form: VisitorActivityInfo;
 }
-export interface VisitorActivityFullFormHandler extends VisitorActivityMobileFormHandler {
+interface VisitorActivityFullFormHandler extends VisitorActivityMobileFormHandler {
   form_handler: VisitorActivityInfo;
 }
-export interface VisitorActivityFullLandingPage extends VisitorActivityMobileLandingPage {
+interface VisitorActivityFullLandingPage extends VisitorActivityMobileLandingPage {
   landing_page: VisitorActivityInfo;
 }
 type VisitorActivityFullVisit = VisitorActivityMobileVisit;
@@ -107,11 +107,9 @@ export type VisitorActivityFull =
   | VisitorActivityFullLandingPage
   | VisitorActivityFullVisit;
 
-type VisitorActivityType = number[];
-
 type VisitorActivitySearchParams = {
   prospect_only?: boolean;
-  type?: VisitorActivityType[];
+  type?: number | number[];
   // object types
   custom_url_only?: boolean;
   email_only?: boolean;
@@ -120,15 +118,15 @@ type VisitorActivitySearchParams = {
   form_handler_only?: boolean;
   landing_page_only?: boolean;
   // relationships
-  campaign_id?: number[];
-  custom_url_id?: number[];
-  email_id?: number[];
-  file_id?: number[];
-  form_id?: number[];
-  form_handler_id?: number[];
-  landing_page_id?: number[];
-  prospect_id?: number[];
-  visitor_id?: number[];
+  campaign_id?: number | number[];
+  custom_url_id?: number | number[];
+  email_id?: number | number[];
+  file_id?: number | number[];
+  form_id?: number | number[];
+  form_handler_id?: number | number[];
+  landing_page_id?: number | number[];
+  prospect_id?: number | number[];
+  visitor_id?: number | number[];
 } & IdSearchParams &
   CreatedSearchParams &
   UpdatedSearchParams;

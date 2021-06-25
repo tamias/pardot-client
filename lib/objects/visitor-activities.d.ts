@@ -52,45 +52,44 @@ export interface VisitorActivityInfo {
     name: string;
     app_url: string;
 }
-export interface VisitorActivityFullCustomRedirect extends VisitorActivityMobileCustomRedirect {
+interface VisitorActivityFullCustomRedirect extends VisitorActivityMobileCustomRedirect {
     custom_redirect: VisitorActivityInfo;
 }
-export interface VisitorActivityFullEmail extends VisitorActivityMobileEmail {
+interface VisitorActivityFullEmail extends VisitorActivityMobileEmail {
     email: VisitorActivityInfo;
 }
-export interface VisitorActivityFullFile extends VisitorActivityMobileFile {
+interface VisitorActivityFullFile extends VisitorActivityMobileFile {
     file: VisitorActivityInfo;
 }
-export interface VisitorActivityFullForm extends VisitorActivityMobileForm {
+interface VisitorActivityFullForm extends VisitorActivityMobileForm {
     form: VisitorActivityInfo;
 }
-export interface VisitorActivityFullFormHandler extends VisitorActivityMobileFormHandler {
+interface VisitorActivityFullFormHandler extends VisitorActivityMobileFormHandler {
     form_handler: VisitorActivityInfo;
 }
-export interface VisitorActivityFullLandingPage extends VisitorActivityMobileLandingPage {
+interface VisitorActivityFullLandingPage extends VisitorActivityMobileLandingPage {
     landing_page: VisitorActivityInfo;
 }
 declare type VisitorActivityFullVisit = VisitorActivityMobileVisit;
 export declare type VisitorActivityFull = VisitorActivityFullCustomRedirect | VisitorActivityFullEmail | VisitorActivityFullFile | VisitorActivityFullForm | VisitorActivityFullFormHandler | VisitorActivityFullLandingPage | VisitorActivityFullVisit;
-declare type VisitorActivityType = number[];
 declare type VisitorActivitySearchParams = {
     prospect_only?: boolean;
-    type?: VisitorActivityType[];
+    type?: number | number[];
     custom_url_only?: boolean;
     email_only?: boolean;
     file_only?: boolean;
     form_only?: boolean;
     form_handler_only?: boolean;
     landing_page_only?: boolean;
-    campaign_id?: number[];
-    custom_url_id?: number[];
-    email_id?: number[];
-    file_id?: number[];
-    form_id?: number[];
-    form_handler_id?: number[];
-    landing_page_id?: number[];
-    prospect_id?: number[];
-    visitor_id?: number[];
+    campaign_id?: number | number[];
+    custom_url_id?: number | number[];
+    email_id?: number | number[];
+    file_id?: number | number[];
+    form_id?: number | number[];
+    form_handler_id?: number | number[];
+    landing_page_id?: number | number[];
+    prospect_id?: number | number[];
+    visitor_id?: number | number[];
 } & IdSearchParams & CreatedSearchParams & UpdatedSearchParams;
 interface VisitorActivityResultParams extends BaseResultParams {
     sort_by?: 'created_at' | 'id' | 'prospect_id' | 'visitor_id' | 'updated_at';

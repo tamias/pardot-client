@@ -1,14 +1,6 @@
 import { BaseResultParams, CreatedSearchParams, IdSearchParams, ResponseBase } from './types';
 import ObjectsBase from './base';
 
-export interface TagObject {
-  id: number;
-  tag_id: number;
-  type: string;
-  object_id: number;
-  created_at: string;
-}
-
 type TagObjectType =
   | 'Automation'
   | 'Block'
@@ -42,6 +34,14 @@ type TagObjectType =
   | 'Social Message'
   | 'User'
   | 'Dynamic Content';
+
+export interface TagObject {
+  id: number;
+  tag_id: number;
+  type: TagObjectType;
+  object_id: number;
+  created_at: string;
+}
 
 type TagObjectSearchParams = {
   tag_id?: number;

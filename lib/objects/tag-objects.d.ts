@@ -1,13 +1,13 @@
 import { BaseResultParams, CreatedSearchParams, IdSearchParams, ResponseBase } from './types';
 import ObjectsBase from './base';
+declare type TagObjectType = 'Automation' | 'Block' | 'Campaign' | 'Competitor' | 'Prospect Custom Field' | 'Custom URL' | 'Drip Program' | 'Email' | 'Email Draft' | 'Email Template' | 'Email Template Draft' | 'File' | 'Form' | 'Form Field' | 'Form Handler' | 'Group' | 'Keyword' | 'Landing Page' | 'Layout Template' | 'List' | 'Opportunity' | 'Paid Search Campaign' | 'Personalization' | 'Profile' | 'Prospect' | 'Prospect Default Account' | 'Segmentation Rule' | 'Site' | 'Site Search' | 'Social Message' | 'User' | 'Dynamic Content';
 export interface TagObject {
     id: number;
     tag_id: number;
-    type: string;
+    type: TagObjectType;
     object_id: number;
     created_at: string;
 }
-declare type TagObjectType = 'Automation' | 'Block' | 'Campaign' | 'Competitor' | 'Prospect Custom Field' | 'Custom URL' | 'Drip Program' | 'Email' | 'Email Draft' | 'Email Template' | 'Email Template Draft' | 'File' | 'Form' | 'Form Field' | 'Form Handler' | 'Group' | 'Keyword' | 'Landing Page' | 'Layout Template' | 'List' | 'Opportunity' | 'Paid Search Campaign' | 'Personalization' | 'Profile' | 'Prospect' | 'Prospect Default Account' | 'Segmentation Rule' | 'Site' | 'Site Search' | 'Social Message' | 'User' | 'Dynamic Content';
 declare type TagObjectSearchParams = {
     tag_id?: number;
     type?: TagObjectType;
