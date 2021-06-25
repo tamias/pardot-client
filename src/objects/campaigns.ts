@@ -28,7 +28,7 @@ interface CampaignResultParams extends BaseResultParams {
 export type CampaignQueryParams = CampaignSearchParams & CampaignResultParams;
 
 export type UpdateCampaign = Update<Campaign>;
-export type CreateCampaign = Create<Campaign, 'name'>;
+export type CreateCampaign = Create<Campaign>;
 
 export interface CampaignQueryResponse extends ResponseBase {
   result: {

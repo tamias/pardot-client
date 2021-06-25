@@ -41,8 +41,11 @@ interface ProspectBase extends ProspectMobile {
     is_starred: boolean | null;
     is_archived: boolean | null;
 }
+declare type Letter = 'A' | 'B' | 'C' | 'D';
+declare type LetterModifier = '+' | '' | '-';
+export declare type LetterGrade = `${Letter}${LetterModifier}` | 'F';
 export interface ProspectSimple extends ProspectBase {
-    grade?: string | null;
+    grade?: LetterGrade | null;
     last_activity_at?: string | null;
     recent_interaction?: string | null;
     crm_lead_fid?: string | null;
@@ -62,6 +65,7 @@ export interface ProspectSimple extends ProspectBase {
     last_activity?: {
         visitor_activity: VisitorActivityMobile;
     };
+    [field: string]: unknown;
 }
 interface ProfileCriteria {
     id: number;
@@ -92,7 +96,6 @@ export interface ProspectFull extends ProspectSimple {
         list_subscription: ListSubscription | ListSubscription[];
     } | null;
 }
-export declare type LetterGrade = 'A+' | 'A' | 'A-' | 'B+' | 'B' | 'B-' | 'C+' | 'C' | 'C-' | 'D+' | 'D' | 'D-' | 'F';
 declare type ProspectSearchParams = {
     assigned?: boolean;
     assigned_to_user?: number | string;
@@ -112,7 +115,6 @@ declare type ProspectSearchParams = {
 } & IdSearchParams & CreatedSearchParams & UpdatedSearchParams;
 interface ProspectResultParams extends BaseResultParams {
     fields?: string[];
-    limit_related_records?: boolean;
     sort_by?: 'created_at' | 'id' | 'probability' | 'value';
 }
 export declare type ProspectQueryParams = ProspectSearchParams & ProspectResultParams & OutputParams;
@@ -136,6 +138,9 @@ export interface BatchResponse extends ResponseBase {
         [identifier: string]: string;
     };
 }
+export declare type ProspectReadParams = {
+    limit_related_records?: boolean;
+} & OutputParams;
 export declare type ProspectAssignParams = ({
     user_email: string;
 } | {
@@ -182,6 +187,9 @@ export default class Prospects extends ObjectsBase {
     readByFid<T extends OutputParamsMobile>(fid: number, params: T): Promise<ProspectResponseMobile>;
     readByFid<T extends OutputParamsSimple>(fid: number, params: T): Promise<ProspectResponseSimple>;
     readByFid<T extends OutputParamsFull>(fid: number, params?: T): Promise<ProspectResponseFull>;
+    updateByEmail<T extends OutputParamsMobile>(email: string, update: UpdateProspect, params: T): Promise<ProspectResponseMobile>;
+    updateByEmail<T extends OutputParamsSimple>(email: string, update: UpdateProspect, params: T): Promise<ProspectResponseSimple>;
+    updateByEmail<T extends OutputParamsFull>(email: string, update: UpdateProspect, params?: T): Promise<ProspectResponseFull>;
     updateById<T extends OutputParamsMobile>(id: number, update: UpdateProspect, params: T): Promise<ProspectResponseMobile>;
     updateById<T extends OutputParamsSimple>(id: number, update: UpdateProspect, params: T): Promise<ProspectResponseSimple>;
     updateById<T extends OutputParamsFull>(id: number, update: UpdateProspect, params?: T): Promise<ProspectResponseFull>;
@@ -197,12 +205,18 @@ export default class Prospects extends ObjectsBase {
     upsertByFid<T extends OutputParamsMobile>(fid: number, data: UpsertProspect, params: T): Promise<ProspectResponseMobile>;
     upsertByFid<T extends OutputParamsSimple>(fid: number, data: UpsertProspect, params: T): Promise<ProspectResponseSimple>;
     upsertByFid<T extends OutputParamsFull>(fid: number, data: UpsertProspect, params?: T): Promise<ProspectResponseFull>;
+    assignByEmail<T extends OutputParamsMobile & ProspectAssignParams>(email: string, params: T): Promise<ProspectResponseMobile>;
+    assignByEmail<T extends OutputParamsSimple & ProspectAssignParams>(email: string, params: T): Promise<ProspectResponseSimple>;
+    assignByEmail<T extends OutputParamsFull & ProspectAssignParams>(email: string, params: T): Promise<ProspectResponseFull>;
     assignById<T extends OutputParamsMobile & ProspectAssignParams>(id: number, params: T): Promise<ProspectResponseMobile>;
     assignById<T extends OutputParamsSimple & ProspectAssignParams>(id: number, params: T): Promise<ProspectResponseSimple>;
     assignById<T extends OutputParamsFull & ProspectAssignParams>(id: number, params: T): Promise<ProspectResponseFull>;
     assignByFid<T extends OutputParamsMobile & ProspectAssignParams>(fid: number, params: T): Promise<ProspectResponseMobile>;
     assignByFid<T extends OutputParamsSimple & ProspectAssignParams>(fid: number, params: T): Promise<ProspectResponseSimple>;
     assignByFid<T extends OutputParamsFull & ProspectAssignParams>(fid: number, params: T): Promise<ProspectResponseFull>;
+    unassignByEmail<T extends OutputParamsMobile>(email: string, params: T): Promise<ProspectResponseMobile>;
+    unassignByEmail<T extends OutputParamsSimple>(email: string, params: T): Promise<ProspectResponseSimple>;
+    unassignByEmail<T extends OutputParamsFull>(email: string, params?: T): Promise<ProspectResponseFull>;
     unassignById<T extends OutputParamsMobile>(id: number, params: T): Promise<ProspectResponseMobile>;
     unassignById<T extends OutputParamsSimple>(id: number, params: T): Promise<ProspectResponseSimple>;
     unassignById<T extends OutputParamsFull>(id: number, params?: T): Promise<ProspectResponseFull>;

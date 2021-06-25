@@ -13,7 +13,7 @@ interface CampaignResultParams extends BaseResultParams {
 }
 export declare type CampaignQueryParams = CampaignSearchParams & CampaignResultParams;
 export declare type UpdateCampaign = Update<Campaign>;
-export declare type CreateCampaign = Create<Campaign, 'name'>;
+export declare type CreateCampaign = Create<Campaign>;
 export interface CampaignQueryResponse extends ResponseBase {
     result: {
         total_results: number;

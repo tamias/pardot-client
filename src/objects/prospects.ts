@@ -57,8 +57,12 @@ interface ProspectBase extends ProspectMobile {
   is_archived: boolean | null;
 }
 
+type Letter = 'A' | 'B' | 'C' | 'D';
+type LetterModifier = '+' | '' | '-';
+export type LetterGrade = `${Letter}${LetterModifier}` | 'F';
+
 export interface ProspectSimple extends ProspectBase {
-  grade?: string | null;
+  grade?: LetterGrade | null;
   last_activity_at?: string | null;
   recent_interaction?: string | null;
   crm_lead_fid?: string | null;
@@ -74,12 +78,12 @@ export interface ProspectSimple extends ProspectBase {
     id: number;
     name: string;
   };
-  // TODO - fill out
-  assigned_to?: unknown; // user
+  assigned_to?: unknown; // TODO - user
   last_activity?: {
     visitor_activity: VisitorActivityMobile;
   };
-  // TODO - custom fields
+  // custom fields
+  [field: string]: unknown;
 }
 
 interface ProfileCriteria {
@@ -114,21 +118,6 @@ export interface ProspectFull extends ProspectSimple {
   } | null;
 }
 
-export type LetterGrade =
-  | 'A+'
-  | 'A'
-  | 'A-'
-  | 'B+'
-  | 'B'
-  | 'B-'
-  | 'C+'
-  | 'C'
-  | 'C-'
-  | 'D+'
-  | 'D'
-  | 'D-'
-  | 'F';
-
 type ProspectSearchParams = {
   assigned?: boolean;
   assigned_to_user?: number | string; // user id or email
@@ -151,7 +140,6 @@ type ProspectSearchParams = {
 
 interface ProspectResultParams extends BaseResultParams {
   fields?: string[];
-  limit_related_records?: boolean;
   sort_by?: 'created_at' | 'id' | 'probability' | 'value';
 }
 
@@ -182,6 +170,10 @@ export interface BatchResponse extends ResponseBase {
     [identifier: string]: string;
   };
 }
+
+export type ProspectReadParams = {
+  limit_related_records?: boolean;
+} & OutputParams;
 
 // assign must have exactly one of the following params
 export type ProspectAssignParams = (
@@ -290,7 +282,7 @@ export default class Prospects extends ObjectsBase {
   ): Promise<ProspectResponseSimple>;
   readByEmail<T extends OutputParamsFull>(email: string, params?: T): Promise<ProspectResponseFull>;
 
-  public async readByEmail(email: string, params?: OutputParams): Promise<ProspectResponse> {
+  public async readByEmail(email: string, params?: ProspectReadParams): Promise<ProspectResponse> {
     const url = this.parent.getApiUrl(this.objectName, ['read', 'email', email]);
 
     const response = await this.parent.axios.get<ProspectResponse>(url, { params });
@@ -302,7 +294,7 @@ export default class Prospects extends ObjectsBase {
   readById<T extends OutputParamsSimple>(id: number, params: T): Promise<ProspectResponseSimple>;
   readById<T extends OutputParamsFull>(id: number, params?: T): Promise<ProspectResponseFull>;
 
-  public async readById(id: number, params?: OutputParams): Promise<ProspectResponse> {
+  public async readById(id: number, params?: ProspectReadParams): Promise<ProspectResponse> {
     const url = this.parent.getApiUrl(this.objectName, ['read', 'id', id]);
 
     const response = await this.parent.axios.get<ProspectResponse>(url, { params });
@@ -318,6 +310,37 @@ export default class Prospects extends ObjectsBase {
     const url = this.parent.getApiUrl(this.objectName, ['read', 'fid', fid]);
 
     const response = await this.parent.axios.get<ProspectResponse>(url, { params });
+
+    return response.data;
+  }
+
+  updateByEmail<T extends OutputParamsMobile>(
+    email: string,
+    update: UpdateProspect,
+    params: T,
+  ): Promise<ProspectResponseMobile>;
+  updateByEmail<T extends OutputParamsSimple>(
+    email: string,
+    update: UpdateProspect,
+    params: T,
+  ): Promise<ProspectResponseSimple>;
+  updateByEmail<T extends OutputParamsFull>(
+    email: string,
+    update: UpdateProspect,
+    params?: T,
+  ): Promise<ProspectResponseFull>;
+
+  public async updateByEmail(
+    email: string,
+    update: UpdateProspect,
+    params?: OutputParams,
+  ): Promise<ProspectResponse> {
+    const url = this.parent.getApiUrl(this.objectName, ['update', 'email', email]);
+
+    const response = await this.parent.axios.post<ProspectResponse>(url, {
+      ...update,
+      ...params,
+    });
 
     return response.data;
   }
@@ -468,6 +491,30 @@ export default class Prospects extends ObjectsBase {
     return response.data;
   }
 
+  assignByEmail<T extends OutputParamsMobile & ProspectAssignParams>(
+    email: string,
+    params: T,
+  ): Promise<ProspectResponseMobile>;
+  assignByEmail<T extends OutputParamsSimple & ProspectAssignParams>(
+    email: string,
+    params: T,
+  ): Promise<ProspectResponseSimple>;
+  assignByEmail<T extends OutputParamsFull & ProspectAssignParams>(
+    email: string,
+    params: T,
+  ): Promise<ProspectResponseFull>;
+
+  public async assignByEmail(
+    email: string,
+    params: ProspectAssignParams,
+  ): Promise<ProspectResponse> {
+    const url = this.parent.getApiUrl(this.objectName, ['assign', 'email', email]);
+
+    const response = await this.parent.axios.post<ProspectResponse>(url, params);
+
+    return response.data;
+  }
+
   assignById<T extends OutputParamsMobile & ProspectAssignParams>(
     id: number,
     params: T,
@@ -504,6 +551,27 @@ export default class Prospects extends ObjectsBase {
 
   public async assignByFid(fid: number, params: ProspectAssignParams): Promise<ProspectResponse> {
     const url = this.parent.getApiUrl(this.objectName, ['assign', 'fid', fid]);
+
+    const response = await this.parent.axios.post<ProspectResponse>(url, params);
+
+    return response.data;
+  }
+
+  unassignByEmail<T extends OutputParamsMobile>(
+    email: string,
+    params: T,
+  ): Promise<ProspectResponseMobile>;
+  unassignByEmail<T extends OutputParamsSimple>(
+    email: string,
+    params: T,
+  ): Promise<ProspectResponseSimple>;
+  unassignByEmail<T extends OutputParamsFull>(
+    email: string,
+    params?: T,
+  ): Promise<ProspectResponseFull>;
+
+  public async unassignByEmail(email: string, params?: OutputParams): Promise<ProspectResponse> {
+    const url = this.parent.getApiUrl(this.objectName, ['unassign', 'email', email]);
 
     const response = await this.parent.axios.post<ProspectResponse>(url, params);
 

@@ -196,6 +196,34 @@ describe('Prospects', () => {
     });
   });
 
+  describe('updateByEmail', () => {
+    it('should make a post request to update a prospect by email', async () => {
+      const email = 'prospect@email.com';
+
+      mockAxios.onPost().reply<ProspectResponseMobile>(200, mockProspectResponse);
+
+      const update = {
+        company: 'Company',
+      };
+
+      const params: OutputParams = {
+        output: 'mobile',
+      };
+
+      const response = await prospects.updateByEmail(email, update, params);
+
+      expect(onPostSpy).toHaveBeenCalledWith(
+        `https://pi.pardot.com/api/prospect/version/4/do/update/email/${encodeURIComponent(email)}`,
+        {
+          ...params,
+          ...update,
+        },
+      );
+
+      expect(response).toEqual(mockProspectResponse);
+    });
+  });
+
   describe('updateById', () => {
     it('should make a post request to update a prospect by id', async () => {
       const id = 1;
@@ -336,6 +364,28 @@ describe('Prospects', () => {
     });
   });
 
+  describe('assignByEmail', () => {
+    it('should make a post request to assign a prospect by email', async () => {
+      const email = 'prospect@email.com';
+
+      mockAxios.onPost().reply<ProspectResponseMobile>(200, mockProspectResponse);
+
+      const params: ProspectAssignParams = {
+        output: 'mobile',
+        user_id: 101,
+      };
+
+      const response = await prospects.assignByEmail(email, params);
+
+      expect(onPostSpy).toHaveBeenCalledWith(
+        `https://pi.pardot.com/api/prospect/version/4/do/assign/email/${encodeURIComponent(email)}`,
+        params,
+      );
+
+      expect(response).toEqual(mockProspectResponse);
+    });
+  });
+
   describe('assignById', () => {
     it('should make a post request to assign a prospect by id', async () => {
       const id = 1;
@@ -373,6 +423,29 @@ describe('Prospects', () => {
 
       expect(onPostSpy).toHaveBeenCalledWith(
         `https://pi.pardot.com/api/prospect/version/4/do/assign/fid/${fid}`,
+        params,
+      );
+
+      expect(response).toEqual(mockProspectResponse);
+    });
+  });
+
+  describe('unassignByEmail', () => {
+    it('should make a post request to unassign a prospect by email', async () => {
+      const email = 'prospect@email.com';
+
+      mockAxios.onPost().reply<ProspectResponseMobile>(200, mockProspectResponse);
+
+      const params: OutputParams = {
+        output: 'mobile',
+      };
+
+      const response = await prospects.unassignByEmail(email, params);
+
+      expect(onPostSpy).toHaveBeenCalledWith(
+        `https://pi.pardot.com/api/prospect/version/4/do/unassign/email/${encodeURIComponent(
+          email,
+        )}`,
         params,
       );
 
