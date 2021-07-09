@@ -34,7 +34,7 @@ export interface BaseResultParams {
     sort_by?: string;
 }
 export interface ResponseAttributes {
-    status: 'ok';
+    stat: 'ok';
     version: number;
 }
 export interface ResponseBase {

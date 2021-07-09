@@ -40,7 +40,7 @@ export const onPostSpyV3 = jest.spyOn(pardotV3.axios, 'post');
 
 export const responseAttributes: ResponseBase = {
   '@attributes': {
-    status: 'ok',
+    stat: 'ok',
     version: 1,
   },
 };

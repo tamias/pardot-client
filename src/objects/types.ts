@@ -49,7 +49,7 @@ export interface BaseResultParams {
 }
 
 export interface ResponseAttributes {
-  status: 'ok';
+  stat: 'ok';
   version: number;
 }
 
