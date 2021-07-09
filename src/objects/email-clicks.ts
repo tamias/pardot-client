@@ -13,7 +13,7 @@ export interface EmailClick {
 }
 
 // TODO: API doc lists id_greater_than but not id_less_than for email clicks
-// Is that accurate or an oversight?
+//   Is that accurate or an oversight?
 type EmailClickSearchParams = {
   list_email_id?: number;
   drip_program_action_id?: number;
