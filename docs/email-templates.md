@@ -92,6 +92,8 @@ interface EmailTemplateResponse {
 }
 ```
 
+---
+
 ### listOneToOne
 
 Retrieve a list of email templates that are enabled for one-to-one emails.

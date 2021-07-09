@@ -69,6 +69,8 @@ interface CustomRedirectQueryResponse {
 }
 ```
 
+---
+
 ### read
 
 Retrieve a custom redirect by its id.

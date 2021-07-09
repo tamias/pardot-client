@@ -197,6 +197,8 @@ interface ProspectQueryResponse {
 }
 ```
 
+---
+
 ### create
 
 Create a prospect.
@@ -221,6 +223,8 @@ interface ProspectResponse {
   prospect: ProspectMobile | ProspectSimple | ProspectFull;
 }
 ```
+
+---
 
 ### readByEmail
 
@@ -253,6 +257,8 @@ interface ProspectResponse {
 }
 ```
 
+---
+
 ### readById
 
 Retrieve a prospect by its id.
@@ -283,6 +289,8 @@ interface ProspectResponse {
   prospect: ProspectMobile | ProspectSimple | ProspectFull;
 }
 ```
+
+---
 
 ### readByFid
 
@@ -315,6 +323,8 @@ interface ProspectResponse {
 }
 ```
 
+---
+
 ### updateByEmail
 
 Update a prospect by its email address.
@@ -339,6 +349,8 @@ interface ProspectResponse {
   prospect: ProspectMobile | ProspectSimple | ProspectFull;
 }
 ```
+
+---
 
 ### updateById
 
@@ -365,6 +377,8 @@ interface ProspectResponse {
 }
 ```
 
+---
+
 ### updateByFd
 
 Update a prospect by its CRM foreign id.
@@ -389,6 +403,8 @@ interface ProspectResponse {
   prospect: ProspectMobile | ProspectSimple | ProspectFull;
 }
 ```
+
+---
 
 ### upsertByEmail
 
@@ -416,6 +432,8 @@ interface ProspectResponse {
 }
 ```
 
+---
+
 ### upsertById
 
 Upsert (update or insert) a prospect by its id.
@@ -441,6 +459,8 @@ interface ProspectResponse {
 }
 ```
 
+---
+
 ### upsertByFid
 
 Upsert (update or insert) a prospect by its CRM foreign id.
@@ -465,6 +485,8 @@ interface ProspectResponse {
   prospect: ProspectMobile | ProspectSimple | ProspectFull;
 }
 ```
+
+---
 
 ### assignByEmail
 
@@ -500,6 +522,8 @@ interface ProspectResponse {
 }
 ```
 
+---
+
 ### assignById
 
 Assign a prospect to a user or group by the prospect's id.
@@ -533,6 +557,8 @@ interface ProspectResponse {
   prospect: ProspectMobile | ProspectSimple | ProspectFull;
 }
 ```
+
+---
 
 ### assignByFid
 
@@ -568,6 +594,8 @@ interface ProspectResponse {
 }
 ```
 
+---
+
 ### unassignByEmail
 
 Unassign a prospect from its user or group by the prospect's email address.
@@ -592,6 +620,8 @@ interface ProspectResponse {
 }
 ```
 
+---
+
 ### unassignById
 
 Unassign a prospect from its user or group by the prospect's id
@@ -615,6 +645,8 @@ interface ProspectResponse {
   prospect: ProspectMobile | ProspectSimple | ProspectFull;
 }
 ```
+
+---
 
 ### unassignByFid
 

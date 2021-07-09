@@ -69,6 +69,8 @@ interface ListQueryResponse {
 }
 ```
 
+---
+
 ### read
 
 Retrieve a list by its id.
@@ -90,6 +92,8 @@ interface ListResponse {
   list: List;
 }
 ```
+
+---
 
 ### update
 
@@ -114,6 +118,8 @@ interface ListResponse {
 }
 ```
 
+---
+
 ### create
 
 Create a new list.
@@ -135,6 +141,8 @@ interface CampaignResponse {
   campaign: Campaign;
 }
 ```
+
+---
 
 ### delete
 

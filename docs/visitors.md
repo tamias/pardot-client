@@ -132,6 +132,8 @@ interface VisitorQueryResponse {
 }
 ```
 
+---
+
 ### read
 
 Retrieve a visitor by its id.
@@ -155,6 +157,8 @@ interface VisitorResponse {
   visitor: VisitorMobile | VisitorSimple | VisitorFull;
 }
 ```
+
+---
 
 ### assign
 

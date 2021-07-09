@@ -99,6 +99,8 @@ interface TagObjectQueryResponse {
 }
 ```
 
+---
+
 ### read
 
 Retrieve a tag object by its id.

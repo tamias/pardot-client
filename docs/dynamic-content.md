@@ -73,6 +73,8 @@ interface DynamicContentQueryResponse {
 }
 ```
 
+---
+
 ### read
 
 Retrieve a dynamic content item by its id.

@@ -76,6 +76,8 @@ interface VisitQueryResponse {
 }
 ```
 
+---
+
 ### queryByVisitorIds
 
 Retrieve a list of visits by their visitor ids according to the parameters.
@@ -108,6 +110,8 @@ interface VisitQueryResponse {
   };
 }
 ```
+
+---
 
 ### queryByProspectIds
 

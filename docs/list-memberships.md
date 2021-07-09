@@ -67,6 +67,8 @@ interface ListMembershipQueryResponse {
 }
 ```
 
+---
+
 ### read
 
 Retrieve a list membership by list id and prospect id.
@@ -90,6 +92,8 @@ interface ListMembershipResponse {
 }
 ```
 
+---
+
 ### readById
 
 Retrieve a list membership by its id.
@@ -111,6 +115,8 @@ interface ListMembershipResponse {
   list_membership: ListMembership;
 }
 ```
+
+---
 
 ### create
 
@@ -140,6 +146,8 @@ interface ListMembershipResponse {
 }
 ```
 
+---
+
 ### update
 
 Update a list membership by list id and prospect id.
@@ -168,6 +176,8 @@ interface ListMembershipResponse {
 }
 ```
 
+---
+
 ### updateById
 
 Update a list membership by its id.
@@ -194,6 +204,8 @@ interface ListMembershipResponse {
 }
 ```
 
+---
+
 ### delete
 
 Delete a list membership by list id and prospect id.
@@ -210,6 +222,8 @@ await pardotClient.listMemberships.delete(listId, prospectId);
 #### Return
 
 No return value.
+
+---
 
 ### deleteById
 

@@ -84,6 +84,8 @@ interface ProspectAccountQueryResponse {
 }
 ```
 
+---
+
 ### describe
 
 Retrieve the field metadata for prospect accounts.
@@ -108,6 +110,8 @@ interface ProspectAccountDescribeResponse {
 }
 ```
 
+---
+
 ### read
 
 Retrieve a prospect account.
@@ -129,6 +133,8 @@ interface ProspectAccountResponse {
   prospectAccount: ProspectAccount;
 }
 ```
+
+---
 
 ### create
 
@@ -152,6 +158,8 @@ interface ProspectAccountResponse {
 }
 ```
 
+---
+
 ### update
 
 Update a prospect account.
@@ -174,6 +182,8 @@ interface ProspectAccountResponse {
   prospectAccount: ProspectAccount;
 }
 ```
+
+---
 
 ### assign
 

@@ -66,6 +66,8 @@ interface EmailResponse {
 }
 ```
 
+---
+
 ### stats
 
 Retrieve stats for an email by its id.
@@ -87,6 +89,8 @@ interface EmailStatsResponse {
   stats: EmailStats;
 }
 ```
+
+---
 
 ### sendToEmail
 
@@ -132,6 +136,8 @@ interface EmailResponse {
 }
 ```
 
+---
+
 ### sendToId
 
 Send an email to a single prospect, specified by prospect id.
@@ -156,6 +162,8 @@ interface EmailResponse {
   email: Email;
 }
 ```
+
+---
 
 ### sendToLists
 

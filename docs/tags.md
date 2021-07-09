@@ -64,6 +64,8 @@ interface TagQueryResponse {
 }
 ```
 
+---
+
 ### read
 
 Retrieve a tag by its id.

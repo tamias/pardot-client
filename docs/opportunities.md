@@ -114,6 +114,8 @@ interface OpportunityQueryResponse {
 }
 ```
 
+---
+
 ### read
 
 Retrieve an opportunity by its id.
@@ -137,6 +139,8 @@ interface OpportunityResponse {
   opportunity: OpportunityMobile | OpportunitySimple | OpportunityFull;
 }
 ```
+
+---
 
 ### createByEmail
 
@@ -167,6 +171,8 @@ interface OpportunityResponse {
 }
 ```
 
+---
+
 ### createById
 
 Create a new opportunity for the prospect with the specified id.
@@ -196,6 +202,8 @@ interface OpportunityResponse {
 }
 ```
 
+---
+
 ### update
 
 Update an opportunity.
@@ -221,6 +229,8 @@ interface OpportunityResponse {
 }
 ```
 
+---
+
 ### delete
 
 Delete an opportunity.
@@ -236,6 +246,8 @@ await pardotClient.opportunities.delete(id);
 #### Return
 
 No return value.
+
+---
 
 ### undelete
 

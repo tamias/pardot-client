@@ -63,6 +63,8 @@ interface CampaignQueryResponse {
 }
 ```
 
+---
+
 ### read
 
 Retrieve a campaign by its id.
@@ -84,6 +86,8 @@ interface CampaignResponse {
   campaign: Campaign;
 }
 ```
+
+---
 
 ### update
 
@@ -107,6 +111,8 @@ interface CampaignResponse {
   campaign: Campaign;
 }
 ```
+
+---
 
 ### create
 

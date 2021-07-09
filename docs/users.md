@@ -67,6 +67,8 @@ interface UserQueryResponse {
 }
 ```
 
+---
+
 ### readById
 
 Retrieve a user by its id.
@@ -88,6 +90,8 @@ interface UserResponse {
   user: User;
 }
 ```
+
+---
 
 ### readByEmail
 

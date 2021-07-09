@@ -182,6 +182,8 @@ interface VisitorActivityQueryResponse {
 }
 ```
 
+---
+
 ### read
 
 Retrieve a visitor activity by its id.

@@ -68,6 +68,8 @@ interface CustomFieldQueryResponse {
 }
 ```
 
+---
+
 ### read
 
 Retrieve a custom field by its id.
@@ -89,6 +91,8 @@ interface CustomFieldResponse {
   customField: CustomField;
 }
 ```
+
+---
 
 ### update
 
@@ -113,6 +117,8 @@ interface CustomFieldResponse {
 }
 ```
 
+---
+
 ### create
 
 Create a new custom field.
@@ -135,6 +141,8 @@ interface CustomFieldResponse {
   customField: CustomField;
 }
 ```
+
+---
 
 ### delete
 

@@ -63,6 +63,8 @@ interface LifecycleHistoryQueryResponse {
 }
 ```
 
+---
+
 ### read
 
 Retrieve a lifecycle history by its id.
