@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#custom-redirect
-- https://developer.pardot.com/kb/api-version-3/custom-redirects/
-- https://developer.pardot.com/kb/api-version-4/custom-redirects/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#custom-redirect
+- https://developer.salesforce.com/docs/marketing/pardot/guide/custom-redirects-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/custom-redirects-v4.html
 
 ### Version Note
 

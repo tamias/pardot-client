@@ -2,8 +2,8 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/api-version-3/email-templates/
-- https://developer.pardot.com/kb/api-version-4/email-templates/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/email-templates-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/email-templates-v4.html
 
 ### Version Note
 

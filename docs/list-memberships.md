@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#list-membership
-- https://developer.pardot.com/kb/api-version-3/list-memberships/
-- https://developer.pardot.com/kb/api-version-4/list-memberships/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#list-membership
+- https://developer.salesforce.com/docs/marketing/pardot/guide/list-memberships-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/list-memberships-v4.html
 
 ### Version Note
 

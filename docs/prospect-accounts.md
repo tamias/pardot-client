@@ -2,9 +2,9 @@
 
 ## API Reference
 
-- https://developer.pardot.com/kb/object-field-references/#prospect-account
-- https://developer.pardot.com/kb/api-version-3/prospect-accounts/
-- https://developer.pardot.com/kb/api-version-4/prospect-accounts/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#prospect-account
+- https://developer.salesforce.com/docs/marketing/pardot/guide/prospect-accounts-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/prospect-accounts-v4.html
 
 ### Version Note
 

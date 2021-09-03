@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#visitor
-- https://developer.pardot.com/kb/api-version-3/visitors/
-- https://developer.pardot.com/kb/api-version-4/visitors/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#visitor
+- https://developer.salesforce.com/docs/marketing/pardot/guide/visitors-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/visitors-v4.html
 
 ### Output Format
 
@@ -14,7 +14,7 @@ detail in the response. In order of increasing detail, the possible values are
 
 ### Version Note
 
-https://developer.pardot.com/kb/api-version-4/#visitor-api-changes
+https://developer.salesforce.com/docs/marketing/pardot/guide/transitioning-v3-v4.html#visitor-api-changes
 
 ## Object Types
 

@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#campaign
-- https://developer.pardot.com/kb/api-version-3/campaigns/
-- https://developer.pardot.com/kb/api-version-4/campaigns/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#campaign
+- https://developer.salesforce.com/docs/marketing/pardot/guide/campaigns-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/campaigns-v4.html
 
 ### Version Note
 

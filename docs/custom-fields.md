@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#custom-field
-- https://developer.pardot.com/kb/api-version-3/custom-fields/
-- https://developer.pardot.com/kb/api-version-4/custom-fields/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#custom-field
+- https://developer.salesforce.com/docs/marketing/pardot/guide/custom-fields-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/custom-fields-v4.html
 
 ### Version Note
 

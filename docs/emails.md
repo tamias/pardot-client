@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#email
-- https://developer.pardot.com/kb/api-version-3/emails/
-- https://developer.pardot.com/kb/api-version-4/emails/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#email
+- https://developer.salesforce.com/docs/marketing/pardot/guide/emails-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/emails-v4.html
 
 ### Version Note
 

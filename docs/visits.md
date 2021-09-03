@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#visit
-- https://developer.pardot.com/kb/api-version-3/visits/
-- https://developer.pardot.com/kb/api-version-4/visits/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#visit
+- https://developer.salesforce.com/docs/marketing/pardot/guide/visits-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/visits-v4.html
 
 ### Version Note
 

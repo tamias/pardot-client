@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#lifecycle-history
-- https://developer.pardot.com/kb/api-version-3/lifecycle-histories/
-- https://developer.pardot.com/kb/api-version-4/lifecycle-histories/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#lifecycle-history
+- https://developer.salesforce.com/docs/marketing/pardot/guide/lifecycle-histories-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/lifecycle-histories-v4.html
 
 ### Version Note
 

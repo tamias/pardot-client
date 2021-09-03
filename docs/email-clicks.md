@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#email-clicks
-- https://developer.pardot.com/kb/api-version-3/batch-email-clicks/
-- https://developer.pardot.com/kb/api-version-4/batch-email-clicks/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#email-clicks
+- https://developer.salesforce.com/docs/marketing/pardot/guide/batch-email-clicks-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/batch-email-clicks-v4.html
 
 ### Version Note
 

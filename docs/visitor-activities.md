@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#visitor-activity
-- https://developer.pardot.com/kb/api-version-3/visitor-activities/
-- https://developer.pardot.com/kb/api-version-4/visitor-activities/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#visitor-activity
+- https://developer.salesforce.com/docs/marketing/pardot/guide/visitor-activities-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/visitor-activities-v4.html
 
 ### Version Note
 

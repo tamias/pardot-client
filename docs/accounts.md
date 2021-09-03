@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#account
-- https://developer.pardot.com/kb/api-version-3/accounts/
-- https://developer.pardot.com/kb/api-version-4/accounts/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#account
+- https://developer.salesforce.com/docs/marketing/pardot/guide/accounts-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/accounts-v4.html
 
 ### Version Note
 

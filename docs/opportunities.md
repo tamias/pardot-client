@@ -2,13 +2,13 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#opportunity
-- https://developer.pardot.com/kb/api-version-3/opportunities/
-- https://developer.pardot.com/kb/api-version-4/opportunities/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#opportunity
+- https://developer.salesforce.com/docs/marketing/pardot/guide/opportunities-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/opportunities-v4.html
 
 ### Version Note
 
-https://developer.pardot.com/kb/api-version-4/#opportunity-api-changes
+https://developer.salesforce.com/docs/marketing/pardot/guide/transitioning-v3-v4.html#opportunity-api-changes
 
 ### Salesforce Connector Note
 

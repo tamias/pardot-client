@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#tag-object
-- https://developer.pardot.com/kb/api-version-3/tag-objects/
-- https://developer.pardot.com/kb/api-version-4/tag-objects/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#tag-object
+- https://developer.salesforce.com/docs/marketing/pardot/guide/tag-objects-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/tag-objects-v4.html
 
 ### Version Note
 

@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#user
-- https://developer.pardot.com/kb/api-version-3/users/
-- https://developer.pardot.com/kb/api-version-4/users/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#user
+- https://developer.salesforce.com/docs/marketing/pardot/guide/users-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/users-v4.html
 
 ### Version Note
 

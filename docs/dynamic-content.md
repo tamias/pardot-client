@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#dynamic-content
-- https://developer.pardot.com/kb/api-version-3/dynamic-content/
-- https://developer.pardot.com/kb/api-version-4/dynamic-content/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#dynamic-content
+- https://developer.salesforce.com/docs/marketing/pardot/guide/dynamic-content-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/dynamic-content-v4.html
 
 ### Version Note
 

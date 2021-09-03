@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#list
-- https://developer.pardot.com/kb/api-version-3/lists/
-- https://developer.pardot.com/kb/api-version-4/lists/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#list
+- https://developer.salesforce.com/docs/marketing/pardot/guide/lists-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/lists-v4.html
 
 ### Version Note
 

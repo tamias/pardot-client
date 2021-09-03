@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#form
-- https://developer.pardot.com/kb/api-version-3/forms/
-- https://developer.pardot.com/kb/api-version-4/forms/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#form
+- https://developer.salesforce.com/docs/marketing/pardot/guide/forms-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/forms-v4.html
 
 ### Version Note
 

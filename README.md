@@ -2,7 +2,7 @@
 
 pardot-client is a NodeJS library for Pardot API v3 and v4, using Salesforce single-sign on, implemented in Typescript.    
 
-https://developer.pardot.com/
+https://developer.salesforce.com/docs/marketing/pardot/overview
 
 ## Installation
 
@@ -13,7 +13,7 @@ npm install pardot-client
 ## Preparation
 
 Before using this library, you must create a connected app in Salesforce and gather the necessary information.
-See https://developer.pardot.com/kb/getting-started/
+See https://developer.salesforce.com/docs/marketing/pardot/guide/getting-started.html
 
 ## Usage
 

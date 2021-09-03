@@ -2,9 +2,9 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#lifecycle-stage
-- https://developer.pardot.com/kb/api-version-3/lifecycle-stages/
-- https://developer.pardot.com/kb/api-version-4/lifecycle-stages/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#lifecycle-stage
+- https://developer.salesforce.com/docs/marketing/pardot/guide/lifecycle-stages-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/lifecycle-stages-v4.html
 
 ### Version Note
 

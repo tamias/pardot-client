@@ -2,13 +2,13 @@
 
 ## API References
 
-- https://developer.pardot.com/kb/object-field-references/#prospect
-- https://developer.pardot.com/kb/api-version-3/prospects/
-- https://developer.pardot.com/kb/api-version-4/prospects/
+- https://developer.salesforce.com/docs/marketing/pardot/guide/object-field-reference.html#prospect
+- https://developer.salesforce.com/docs/marketing/pardot/guide/prospects-v3.html
+- https://developer.salesforce.com/docs/marketing/pardot/guide/prospects-v4.html
 
 ### Version Note
 
-https://developer.pardot.com/kb/api-version-4/#prospect-api-changes
+https://developer.salesforce.com/docs/marketing/pardot/guide/transitioning-v3-v4.html#prospect-api-changes
 
 ### Output Format
 
