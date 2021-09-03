@@ -12,8 +12,8 @@ npm install pardot-client
 
 ## Preparation
 
-Before using this library, you must create a connected app in Salesforce and gather the necessary information.
-See https://developer.salesforce.com/docs/marketing/pardot/guide/getting-started.html
+Before using this library, you must create a connected app in Salesforce and gather the necessary information, as
+documented at https://developer.salesforce.com/docs/marketing/pardot/guide/getting-started.html
 
 ## Usage
 
@@ -36,7 +36,7 @@ const pardotClientProps = {
   baseUrl: "",            // Pardot API url (optional; default = 'pi.pardot.com')
   apiVersion: 4,          // Pardot API version (3 or 4) (optional; default = 4)
   refreshCallback: (token) => {},
-                          // Cllback called when access token is refreshed (optional)
+                          // Callback called when access token is refreshed (optional)
 };
 
 const pardotClient = new PardotClient(pardotClientProps);
@@ -44,9 +44,9 @@ const pardotClient = new PardotClient(pardotClientProps);
 
 ### Implement OAuth flow
 
-1. Direct the user to the authorize URL.
-2. After the user signs in and allows access, they will be redirected to the redirect URI with a `code` parameter.
-3. Pass the code to `getAccessToken()` to request an access token.
+1. Generate an authorize URL and direct the user to it.
+3. After the user signs in and allows access, they will be redirected to the redirect URI with a `code` parameter.
+4. Pass the code to `getAccessToken()` to request an access token.
 
 ```typescript
 const authorizeUrlProps = {
@@ -91,8 +91,8 @@ const response = await pardotClient.prospects.query();
 console.log(`Number of prospects: ${response.result.total_results}`);
 ```
 
-For a successful request, the Pardot API returns a JSON response with the following structure, where the `key` property
-and the structure of ResponseData depend on the request:
+For a successful request, the Pardot API returns a JSON response with the following structure, where the actual `key`
+property and the structure of ResponseData depend on the request:
 
 ```typescript
 interface SuccessResponse {
@@ -125,8 +125,8 @@ Requests are made using [Axios](https://www.npmjs.com/package/axios), which thro
 
 #### Lists in Responses
 
-For responses that may contain a list of items, if the list contains a single item the Pardot API does not return an
-array.  For example:
+Some responses may contain a list of items.  If there would only be one item in the list, the Pardot API returns the
+item on its own not in a list.  For example:
 
 ```typescript
 const responseMany = {
@@ -149,9 +149,9 @@ This can occur at the top level of a query response, or nested within a response
 
 #### Querying dates
 
-Some query methods allow querying based on a date, such as by specifying `created_before`.  The value can be one of the
-fixed strings `'today'`, `'yesterday'`, `'last_7_days'`, `'this_month'` or `'last_month'`, or a date formatted using
-[GNU Date Input Syntax](http://www.gnu.org/software/tar/manual/html_node/Date-input-formats.html).
+Some query methods allow querying based on a date, such as by specifying a value for `created_before`.  The value can be
+one of the fixed strings `'today'`, `'yesterday'`, `'last_7_days'`, `'this_month'` or `'last_month'`, or a date
+formatted using [GNU Date Input Syntax](http://www.gnu.org/software/tar/manual/html_node/Date-input-formats.html).
 
 ## Pardot Objects
 
