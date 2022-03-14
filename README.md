@@ -119,7 +119,7 @@ interface ErrorResponse {
 
 Currently, the Pardot client simply returns that error response.  In the future, this may be changed to throw an error.
 
-Requests are made using [Axios](https://www.npmjs.com/package/axios), which throws an error in an HTTP error occurs.
+Requests are made using [Axios](https://www.npmjs.com/package/axios), which throws an error if an HTTP error occurs.
 
 ### Additional Usage Notes
 
@@ -139,13 +139,14 @@ const responseMany = {
 const responseOne = {
   "result": {
     // a single item, not in an array
-    "prospect": {"id": 1 },
+    "prospect": { "id": 1 },
   },
 };
 ```
 
 This can occur at the top level of a query response, or nested within a response, such as for
-`opportunity.opportunity_activities.visitor_activity`.
+`opportunity.opportunity_activities.visitor_activity`.  Currently, the Pardot client returns the response unchanged.
+In the future, this may be changed to wrap a single item in a list, for ease of use.
 
 #### Querying dates
 
