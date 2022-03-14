@@ -1,7 +1,7 @@
 {
   "name": "pardot-client",
   "version": "0.0.1",
-  "description": "A Pardot client for node",
+  "description": "A Pardot API client, with support for Salesforce SSO",
   "main": "lib/index",
   "typings": "lib/index",
   "scripts": {
@@ -20,7 +20,10 @@
     "type": "git",
     "url": "git+https://github.com/tamias/pardot-client.git"
   },
-  "keywords": [],
+  "keywords": [
+    "pardot",
+    "api"
+  ],
   "author": "",
   "license": "MIT",
   "bugs": {
