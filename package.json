@@ -1,7 +1,7 @@
 {
   "name": "pardot-client",
   "version": "0.0.1",
-  "description": "A Pardot API client, with support for Salesforce SSO",
+  "description": "A client for Pardot API v3 and v4, with support for Salesforce SSO",
   "main": "lib/index",
   "typings": "lib/index",
   "scripts": {
