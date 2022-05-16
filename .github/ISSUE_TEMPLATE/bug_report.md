@@ -20,6 +20,7 @@ Steps to reproduce the behavior:
 **Environment:**
 Versions:
  - pardot-client:
+ - Pardot API:
  - Node.js:
 
 **Additional context**
