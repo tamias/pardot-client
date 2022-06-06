@@ -9,16 +9,9 @@ module.exports = {
     'jest-formatting',
     'sort-imports-es6-autofix',
   ],
-  extends: [
-    'eslint:recommended',
-    'plugin:prettier/recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:jest-formatting/strict',
-  ],
+  extends: ['eslint:recommended', 'plugin:prettier/recommended', 'plugin:jest-formatting/strict'],
   /* eslint-enable sort-keys */
   rules: {
-    '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
     'arrow-body-style': ['error', 'as-needed'],
     eqeqeq: 'error',
     'import/newline-after-import': 'error',
@@ -26,7 +19,11 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['**/*.@(test|spec).@(js|ts)', '**/tests/lib/**/*.@(js|ts)'],
+        devDependencies: [
+          '**/*.@(test|spec).@(js|ts)',
+          '**/tests/lib/**/*.@(js|ts)',
+          'scripts/*.@(js|ts)',
+        ],
       },
     ],
     'import/no-named-as-default-member': 'error',
@@ -34,6 +31,7 @@ module.exports = {
     'no-console': 'error',
     'no-param-reassign': 'error',
     'no-unsafe-optional-chaining': 'error',
+    'no-unused-vars': ['error', { ignoreRestSiblings: true }],
     'no-use-before-define': 'error',
     'prettier/prettier': ['error'],
     'sort-imports-es6-autofix/sort-imports-es6': ['error', { ignoreCase: true }],
@@ -41,6 +39,18 @@ module.exports = {
     yoda: 'error',
   },
   /* eslint-disable sort-keys */
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      extends: [
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+      ],
+      rules: {
+        '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
+      },
+    },
+  ],
   ignorePatterns: ['/lib'],
   env: {
     node: true,
