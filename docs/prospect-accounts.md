@@ -36,8 +36,8 @@ interface ProspectAccountField {
     custom: boolean;
     type: string; // text, textarea, dropdown...
     has_options: boolean;
-    option?: string[]; // always present if has_options is true 
-  }
+    option?: string[]; // always present if has_options is true
+  };
 }
 ```
 

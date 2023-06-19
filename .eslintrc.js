@@ -23,6 +23,7 @@ module.exports = {
           '**/*.@(test|spec).@(js|ts)',
           '**/tests/lib/**/*.@(js|ts)',
           'scripts/*.@(js|ts)',
+          '.*.js',
         ],
       },
     ],
@@ -51,7 +52,7 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ['/lib'],
+  ignorePatterns: ['!.*', '/lib'],
   env: {
     node: true,
     jest: true,

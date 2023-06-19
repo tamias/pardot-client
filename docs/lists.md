@@ -65,7 +65,7 @@ interface ListQueryResponse {
   result: {
     total_results: number;
     list?: List | List[];
-  }
+  };
 }
 ```
 
@@ -88,7 +88,7 @@ const listResponse = await pardotClient.lists.read(id);
 A response containing a list.
 
 ```typescript
-interface ListResponse { 
+interface ListResponse {
   list: List;
 }
 ```
@@ -113,7 +113,7 @@ const listResponse = await pardotClient.lists.update(id, updateData);
 A response containing a list.
 
 ```typescript
-interface ListResponse { 
+interface ListResponse {
   list: List;
 }
 ```
