@@ -5,6 +5,7 @@
   "main": "index",
   "typings": "index",
   "scripts": {
+    "prepare": "husky install",
     "build": "tsc -p tsconfig.build.json",
     "check": "tsc --noEmit -p tsconfig.json",
     "lint": "eslint --ext .ts,.js .",
@@ -13,11 +14,6 @@
     "version": "auto-changelog -p && git add CHANGELOG.md",
     "release:prepare": "node scripts/frank-lib.js",
     "release": "npm run release:prepare && npm publish ./lib --tag latest"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm run test && npm run check && npm run build"
-    }
   },
   "repository": {
     "type": "git",
@@ -55,7 +51,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
     "fs-extra": "^10.1.0",
-    "husky": "^4.3.8",
+    "husky": "^8.0.0",
     "jest": "^27.0.4",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
