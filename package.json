@@ -10,6 +10,7 @@
     "lint": "eslint --ext .ts,.js .",
     "test": "jest --coverage",
     "jest": "jest",
+    "version": "auto-changelog -p && git add CHANGELOG.md",
     "release:prepare": "node scripts/frank-lib.js",
     "release": "npm run release:prepare && npm publish ./lib --tag latest"
   },
@@ -44,6 +45,7 @@
     "@types/simple-oauth2": "^4.1.0",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
+    "auto-changelog": "^2.4.0",
     "axios-mock-adapter": "^1.19.0",
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
