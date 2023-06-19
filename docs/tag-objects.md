@@ -95,7 +95,7 @@ interface TagObjectQueryResponse {
   result: {
     total_results: number;
     tagObject?: TagObject | TagObject[];
-  }
+  };
 }
 ```
 

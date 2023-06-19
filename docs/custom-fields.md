@@ -64,7 +64,7 @@ interface CustomFieldQueryResponse {
   result: {
     total_results: number;
     customField?: CustomField | CustomField[];
-  }
+  };
 }
 ```
 

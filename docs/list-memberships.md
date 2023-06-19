@@ -183,10 +183,7 @@ interface ListMembershipResponse {
 Update a list membership by its id.
 
 ```typescript
-const listMembershipResponse = await pardotClient.listMemberships.updateById(
-  id,
-  updateData,
-);
+const listMembershipResponse = await pardotClient.listMemberships.updateById(id, updateData);
 ```
 
 #### Parameters
